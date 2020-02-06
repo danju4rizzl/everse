@@ -1,0 +1,14 @@
+{
+  "name": "everse",
+  "version": "1.0.0",
+  "description": "A daily inspirational web-app for everyone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Danjuma Ashiwaju",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}

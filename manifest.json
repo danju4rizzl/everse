@@ -1,29 +1,35 @@
 {
-    "name": "everse",
-    "version": "1.0",
-    "description": "Build an Extension!",
-    "manifest_version": 2,
-    "background": {
-        "scripts": ["background.js"],
-        "presistent": false
-    },
-    "browser_action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "img/LOGO-16.png",
-            "32": "img/LOGO-32.png",
-            "48": "img/LOGO-48.png",
-            "128": "img/LOGO-128.png"
-        }
-    },
+  "name": "everse",
+  "version": "1.0",
+  "description": "Build an Extension!",
+  "manifest_version": 2,
 
-    "options_page": "options.html",
-    "icons": {
-        "16": "img/LOGO-16.png",
-        "32": "img/LOGO-32.png",
-        "48": "img/LOGO-48.png",
-        "128": "img/LOGO-128.png"
-    },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
 
-    "permissions": ["activeTab", "declarativeContent", "storage"]
+  "browser_action": {
+    "default_icon": {
+      "16": "img/LOGO-16.png",
+      "32": "img/LOGO-32.png",
+      "48": "img/LOGO-48.png",
+      "128": "img/LOGO-128.png"
+    }
+  },
+
+  "options_page": "options.html",
+
+  "icons": {
+    "16": "img/LOGO-16.png",
+    "32": "img/LOGO-32.png",
+    "48": "img/LOGO-48.png",
+    "128": "img/LOGO-128.png"
+  },
+
+  "chrome_url_overrides": {
+    "newtab": "home_screen.html"
+  },
+
+  "permissions": ["tabs", "storage"]
 }

@@ -1,0 +1,55 @@
+// Colors
+$-color-primary: #e74c3c;
+$-color-secondary: #3498db;
+$-color-gray: #bdc3c7;
+$-color-dark: #2c3e50;
+$-color-light: #ecf0f1;
+$-color-black: #000;
+$-color-white: #fff;
+// Defaults
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-weight: 400;
+  // This defines what 1rem is
+  font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
+  line-height: 1.7;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.main {
+  background: linear-gradient(
+    to bottom,
+    rgba($-color-black, 0.5),
+    rgba($-color-black, 0.5)
+  );
+  // url('https://source.unsplash.com/daily?sky');
+  //   url('https://source.unsplash.com/random?nature');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100vh;
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: $-color-light;
+  }
+}
+
+.verse {
+  &__content {
+    font-size: 2.9rem;
+  }
+  &__title {
+    font-size: 1.8rem;
+  }
+  &__book {
+    font-size: 2rem;
+  }
+}

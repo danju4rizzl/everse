@@ -4,11 +4,23 @@
   "description": "A daily inspirational web-app for everyone",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "parcel home_screen.html",
+    "build": "parcel build home_screen.html"
   },
   "author": "Danjuma Ashiwaju",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.4.1"
-  }
+    "express": "^4.17.1",
+    "jquery": "^3.4.1",
+    "request": "^2.88.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danju4rizzl/everse.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/danju4rizzl/everse/issues"
+  },
+  "homepage": "https://github.com/danju4rizzl/everse#readme"
 }

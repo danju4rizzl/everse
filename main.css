@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -9,42 +10,105 @@ body {
   font-weight: 400;
   font-size: 62.5%;
   line-height: 1.7;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Alata', sans-serif;
 }
 
 .main {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5)));
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.8))), url("https://source.unsplash.com/daily?nature&hills");
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url("https://source.unsplash.com/daily?nature&hills");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
+}
+
+.main__controls {
+  position: absolute;
+  right: 0;
 }
 
 .main__inner {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: -ms-grid;
+  display: grid;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
   height: 100%;
   color: #ecf0f1;
+  padding: 0 20vmin;
 }
 
-.verse__content {
-  font-size: 2.9rem;
+.controller {
+  background: #ecf0f1;
+  -webkit-clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+          clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  border-bottom-left-radius: 5px;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  width: 4rem;
+  height: 3rem;
+  color: rebeccapurple;
+}
+
+.controller:hover {
+  width: 10rem;
+}
+
+.controller .icons {
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  grid-auto-flow: column;
+  gap: 0.5rem;
+  color: #000;
+  width: 50px;
+  height: 50px;
+  margin: auto 0.5rem;
+}
+
+.verse {
+  text-align: center;
 }
 
 .verse__title {
-  font-size: 1.8rem;
+  font-size: 8vmin;
+  letter-spacing: 1.5px;
+  position: relative;
+}
+
+.verse__title::after {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+          transform: translate(-50%);
+  width: 40vmin;
+  height: 1%;
+  background-color: rgba(189, 195, 199, 0.2);
+}
+
+.verse__content {
+  font-size: 2.5rem;
+  line-height: 1.1em;
+  letter-spacing: 1.8px;
+  font-weight: 600;
 }
 
 .verse__book {
+  text-align: right;
   font-size: 2rem;
+  font-weight: 900;
+}
+
+.verse__book::before {
+  content: '- ';
 }
 /*# sourceMappingURL=main.css.map */

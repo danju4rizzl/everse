@@ -1,21 +1,35 @@
-const content = document.querySelector('.verse__content');
-const book = document.querySelector('.verse_book');
+const DomStrings = {
+  content: document.querySelector('.verse__content'),
+  book: document.querySelector('.verse__book'),
+};
 
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const api_url =
-  'http://www.ourmanna.com/verses/api/get?format=text&order=random';
+const url = 'https://beta.ourmanna.com/api/v1/get/?format=json';
 
 function createNode(element) {
   return document.createElement(element);
 }
-
 function append(parent, el) {
   return parent.appendChild(el);
 }
 
-fetch(proxyUrl + api_url)
-  .then((response) => response.json())
-  .then((data) => console.log(data.body))
-  .catch(function () {
-    console.error();
-  });
+function print_verse_content(content) {
+  return (DomStrings.content.textContent = content);
+}
+
+function print_verse_book(book) {
+  return (DomStrings.book.textContent = book);
+}
+
+(() => {
+  axios
+    .get(proxyUrl + url)
+    .then(function (response) {
+      let { text, reference, version } = response.data.verse.details;
+      print_verse_content(text);
+      print_verse_book(reference);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+})();

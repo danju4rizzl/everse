@@ -4,8 +4,8 @@
   "description": "A daily inspirational web-app for everyone",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel home_screen.html",
-    "build": "parcel build home_screen.html"
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "author": "Danjuma Ashiwaju",
   "license": "ISC",

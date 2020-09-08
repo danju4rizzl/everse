@@ -64,8 +64,6 @@ p {
 
 .container > div:hover:not(:last-child) {
   opacity: 0.8;
-  -webkit-filter: blur(5);
-          filter: blur(5);
   cursor: pointer;
 }
 
@@ -79,6 +77,26 @@ p {
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
   grid-column: 2 / 3;
+  position: relative;
+}
+
+.container > div:nth-of-type(2) .icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  font-size: 1.5rem;
+  opacity: 0;
+  -webkit-transition: all 0.8s ease-in-out;
+  transition: all 0.8s ease-in-out;
+}
+
+.container > div:nth-of-type(2) .icon > i {
+  color: #bdc3c7;
+}
+
+.container > div:nth-of-type(2):hover .icon {
+  opacity: 1;
 }
 
 .container > div:nth-of-type(3) {
@@ -148,5 +166,27 @@ p {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+@-webkit-keyframes display-icon {
+  from {
+    display: none;
+    -webkit-transition: all 8s ease;
+    transition: all 8s ease;
+  }
+  to {
+    display: block;
+  }
+}
+
+@keyframes display-icon {
+  from {
+    display: none;
+    -webkit-transition: all 8s ease;
+    transition: all 8s ease;
+  }
+  to {
+    display: block;
+  }
 }
 /*# sourceMappingURL=main.css.map */

@@ -1,7 +1,7 @@
 {
   "name": "everse",
   "version": "1.0",
-  "description": "Build an Extension!",
+  "description": "A daily companion in your browser",
   "manifest_version": 2,
 
   "background": {
@@ -18,8 +18,6 @@
     }
   },
 
-  "options_page": "options.html",
-
   "icons": {
     "16": "img/LOGO-16.png",
     "32": "img/LOGO-32.png",
@@ -28,7 +26,7 @@
   },
 
   "chrome_url_overrides": {
-    "newtab": "home_screen.html"
+    "newtab": "index.html"
   },
 
   "permissions": ["tabs", "storage"]

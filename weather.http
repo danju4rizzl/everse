@@ -1,0 +1,2 @@
+GET api.openweathermap.org/data/2.5/weather?q=London&appid=8633abd41d2939308a4bdf453fbdcbe9
+GET api.openweathermap.org/data/2.5/weather?q=Tokio&appid=8633abd41d2939308a4bdf453fbdcbe9

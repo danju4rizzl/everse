@@ -115,8 +115,8 @@ function print_weather(weatherDisplay) {
 }
 
 function print_covid() {
-  const { confirmed, box, deaths, recovered } = domStrings.covidBox;
-  const { proxyUrl, covidUrl } = appConfig;
+  const { confirmed, deaths, recovered } = domStrings.covidBox;
+  const { covidUrl } = appConfig;
 
   axios
     .get(covidUrl)
@@ -162,7 +162,7 @@ function saveContents(itemObject, verse, book) {
   book.textContent = storedVerseOfTheDay.book;
 }
 
-// We use the iffi to call all the functions
+// We use this to call all the functions
 (async () => {
   await setInterval(() => {
     print_date(domStrings.timeBox);

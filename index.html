@@ -29,13 +29,16 @@
           <div class="icon">
             <i class="fas fa-cog"></i>
           </div>
-          <h2>-- &deg;</h2>
+          <h2 id="temperature">--°</h2>
           <!-- <input type="text" placeholder="Enter You location" /> -->
           <p id="location">--</p>
         </div>
-        <div class="bg1">
-          <h2><i class="fas fa-bed"></i></h2>
-          <p>Sleep Keep</p>
+        <div class="bg1" id="covid">
+          <!-- <h2><i class="fas fa-bed"></i></h2> -->
+          <p id="deaths">--</p>
+          <p id="confirmed">--</p>
+          <p id="recovered">--</p>
+          <p>Covid Info</p>
         </div>
 
         <div class="bg1">
@@ -50,8 +53,8 @@
         <div class="bg2">
           <div class="verse">
             <h2 class="verse__title">Verse of the day</h2>
-            <p class="verse__content"></p>
-            <p class="verse__book">Matt 1:12</p>
+            <p class="verse__content">--</p>
+            <p class="verse__book">--</p>
           </div>
         </div>
       </div>
@@ -70,6 +73,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
   </body>
 </html>

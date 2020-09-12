@@ -1,3 +1,6 @@
+/*
+This holds the entire elements to be used in the DOM
+*/
 const domStrings = {
   verseBox: {
     verseContent: document.querySelector('.verse__content'),
@@ -10,8 +13,8 @@ const domStrings = {
   },
   timeBox: {
     box: document.querySelector('#dateTime'),
-    date: document.querySelector('#date'),
-    time: document.querySelector('#time'),
+    currentDate: document.querySelector('#date'),
+    currentTime: document.querySelector('#time'),
   },
   covidBox: {
     box: document.querySelector('#covid'),
@@ -21,6 +24,9 @@ const domStrings = {
   },
 };
 
+/*
+ App setting 
+*/
 const appConfig = {
   proxyUrl: 'https://cors-anywhere.herokuapp.com/',
   ourmannaUrl: 'https://beta.ourmanna.com/api/v1/get/?format=json',
@@ -30,6 +36,9 @@ const appConfig = {
   openWeatherMapUnits: 'metric',
 };
 
+/*
+To handle the verse of the day
+*/
 function print_verse() {
   const { verseContent, verseBook } = domStrings.verseBox;
   const { proxyUrl, ourmannaUrl } = appConfig;
@@ -43,35 +52,72 @@ function print_verse() {
         verse: text,
         book: reference,
       };
-
-      saveContents(verseInfo, verseContent, verseBook);
     })
     .catch(function (error) {
       console.log(error);
     });
 }
 
-function print_date(timeBox) {
+/*
+To handle the current date
+*/
+function print_date() {
+  const { box, currentTime, currentDate } = domStrings.timeBox;
+  let session;
   let date = new Date();
-  let d = date.getDate();
-  let dDay = date.getMonth();
+  let month = date.getMonth();
   let dYear = date.getFullYear();
+  let d = date.getDate();
   let h = date.getHours(); // 0 - 23
   let m = date.getMinutes(); // 0 - 59
   let s = date.getSeconds(); // 0 - 59
-  let session;
 
   const addZero = (val) => (val < 10 ? `0${val}` : val);
 
-  let timeUI = `${h}:${addZero(m)}`;
-  let dateUI = `${addZero(dDay)}-${addZero(d)}-${dYear}`;
+  let timeUI = `${h}:${addZero(m)} ${h < 12 ? 'AM' : 'PM'}`;
+  let dateUI = `${addZero(month)}-${addZero(d)}-${dYear}`;
+  let time = `${dYear}-${month}-${d}`;
 
-  session = h < 12 ? 'am' : 'pm';
-
-  timeBox.date.textContent = dateUI;
-  timeBox.time.textContent = timeUI;
+  currentDate.textContent = dateUI;
+  currentTime.textContent = timeUI;
+  return time;
+  // console.log( `${dYear}-${m}-${d}`)
 }
 
+/*
+To handle the Covid-19 update according to the value (current date) from print_date()
+*/
+function print_covid() {
+  const { confirmed, deaths, recovered } = domStrings.covidBox;
+  const { covidUrl } = appConfig;
+
+  axios
+    .get(covidUrl)
+    .then(function (response) {
+      const covidLocation = response.data['South Africa'];
+
+      const filtered = covidLocation.filter((item) => {
+        const { confirmed: confirm, deaths: death, recovered: recover } = item;
+
+        const filteredDay = item.date;
+        if (filteredDay === print_date()) {
+          console.log(item);
+          confirmed.textContent = `Cases: ${confirm}`;
+          deaths.textContent = `Death: ${death}`;
+          recovered.textContent = `Recovered: ${recover} `;
+        }
+
+        return [];
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+}
+
+/*
+To handle the weather of the user
+*/
 function print_weather(weatherDisplay) {
   const {
     proxyUrl,
@@ -114,60 +160,13 @@ function print_weather(weatherDisplay) {
   });
 }
 
-function print_covid() {
-  const { confirmed, deaths, recovered } = domStrings.covidBox;
-  const { covidUrl } = appConfig;
-
-  axios
-    .get(covidUrl)
-    .then(function (response) {
-      const covidLocation = response.data['South Africa'];
-
-      const filtered = covidLocation.filter((item) => {
-        // console.log(item.date.length - 1);
-        // item.filter((day) => day.date.length - 1);
-        const { confirmed: confirm, deaths: death, recovered: recover } = item;
-        const filteredDay = item.date;
-        if (filteredDay === getToday()) {
-          console.log(item);
-          confirmed.textContent = `Cases: ${confirm}`;
-          deaths.textContent = `Death: ${death}`;
-          recovered.textContent = `Recovered: ${recover} `;
-        }
-
-        return [];
-      });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-}
-
-function getToday() {
-  let date = new Date();
-  let d = date.getDate();
-  let m = date.getMonth();
-  let dYear = date.getFullYear();
-
-  return `${dYear}-${m}-${d}`;
-}
-
-function saveContents(itemObject, verse, book) {
-  localStorage.setItem('verseOfTheDay', JSON.stringify(itemObject));
-
-  const localVerse = localStorage.getItem('verseOfTheDay');
-  const storedVerseOfTheDay = JSON.parse(localVerse);
-
-  verse.textContent = storedVerseOfTheDay.verse;
-  book.textContent = storedVerseOfTheDay.book;
-}
-
 // We use this to call all the functions
 (async () => {
   await setInterval(() => {
     print_date(domStrings.timeBox);
   }, 1000);
-  await print_weather(domStrings.weatherBox.box);
-  await print_verse();
+  // await print_weather(domStrings.weatherBox.box);
+  // await print_verse();
   await print_covid();
+  localStorage.clear();
 })();

@@ -40,18 +40,15 @@ const appConfig = {
 To handle the verse of the day
 */
 function print_verse() {
+  const { ourmannaUrl } = appConfig;
   const { verseContent, verseBook } = domStrings.verseBox;
-  const { proxyUrl, ourmannaUrl } = appConfig;
 
   axios
     .get(ourmannaUrl)
     .then(function (response) {
       let { text, reference, version } = response.data.verse.details;
-
-      const verseInfo = {
-        verse: text,
-        book: reference,
-      };
+      verseContent.textContent = text;
+      verseBook.textContent = reference;
     })
     .catch(function (error) {
       console.log(error);
@@ -62,26 +59,23 @@ function print_verse() {
 To handle the current date
 */
 function print_date() {
-  const { box, currentTime, currentDate } = domStrings.timeBox;
-  let session;
+  const { currentTime, currentDate } = domStrings.timeBox;
+
   let date = new Date();
   let month = date.getMonth();
   let dYear = date.getFullYear();
   let d = date.getDate();
   let h = date.getHours(); // 0 - 23
   let m = date.getMinutes(); // 0 - 59
-  let s = date.getSeconds(); // 0 - 59
+  // let s = date.getSeconds(); // 0 - 59
 
   const addZero = (val) => (val < 10 ? `0${val}` : val);
 
-  let timeUI = `${h}:${addZero(m)} ${h < 12 ? 'AM' : 'PM'}`;
-  let dateUI = `${addZero(month)}-${addZero(d)}-${dYear}`;
   let time = `${dYear}-${month}-${d}`;
 
-  currentDate.textContent = dateUI;
-  currentTime.textContent = timeUI;
+  currentTime.textContent = `${h}:${addZero(m)} ${h < 12 ? 'AM' : 'PM'}`;
+  currentDate.textContent = `${addZero(month)}-${addZero(d)}-${dYear}`;
   return time;
-  // console.log( `${dYear}-${m}-${d}`)
 }
 
 /*
@@ -118,9 +112,8 @@ function print_covid() {
 /*
 To handle the weather of the user
 */
-function print_weather(weatherDisplay) {
+function print_weather() {
   const {
-    proxyUrl,
     openWeatherMapApiKey,
     openWeatherMapLocation,
     openWeatherMapUnits,
@@ -142,31 +135,48 @@ function print_weather(weatherDisplay) {
   axios
     .request(options)
     .then((response) => {
-      // console.log(response.data);
-
       let weatherLocation = response.data.name;
       let weatherTemperature = `${Math.round(response.data.main.temp)}°`;
 
       location.textContent = weatherLocation;
       temp.textContent = weatherTemperature;
+
+      const weatherObject = {
+        currentWeatherLocation: weatherLocation,
+        currentWeatherTemperature: weatherTemperature,
+      };
     })
     .catch((error) => {
       console.error(error);
     });
-
-  weatherDisplay.addEventListener('click', (e) => {
-    e.preventDefault();
-    console.log('submitted', e.target.value);
-  });
 }
 
 // We use this to call all the functions
 (async () => {
   await setInterval(() => {
-    print_date(domStrings.timeBox);
+    //     print_date();
   }, 1000);
-  // await print_weather(domStrings.weatherBox.box);
+  // await print_weather();
   // await print_verse();
-  await print_covid();
-  localStorage.clear();
+  // await print_covid();
+  // localStorage.clear();
+  if (localStorage.length <= 0) {
+    await print_date();
+  }
+  if (localStorage.length > 0) {
+    // getContents(print_weather);
+  }
 })();
+
+// Save the value
+function storeContents(item, itemObject) {
+  localStorage.setItem(item, JSON.stringify(itemObject));
+}
+
+function getContents(item) {
+  console.log(item());
+  let savedValues;
+  if (localStorage.getItem(item)) {
+    let savedValues = JSON.parse(localStorage.getItem(item));
+  }
+}

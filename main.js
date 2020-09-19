@@ -22,6 +22,9 @@ const domStrings = {
     recovered: document.querySelector('#recovered'),
     deaths: document.querySelector('#deaths'),
   },
+  todoBox: {
+    todoInput: document.querySelector('.todo__input'),
+  },
 };
 
 /*
@@ -47,13 +50,30 @@ function print_verse() {
     .get(ourmannaUrl)
     .then(function (response) {
       let { text, reference, version } = response.data.verse.details;
-      verseContent.textContent = text;
-      verseBook.textContent = reference;
+      const verseObj = {
+        verse: text,
+        book: reference,
+      };
+
+      let updateDailyVerse = storeContents('Current_verse', verseObj);
+      // STOPED hERE*******
+      for (const item in updateDailyVerse) {
+        if (updateDailyVerse.hasOwnProperty(item)) {
+          const savedVerse = updateDailyVerse['verse'];
+          const savedBook = updateDailyVerse['book'];
+
+          verseContent.textContent = savedVerse;
+          verseBook.textContent = savedBook;
+        }
+      }
     })
     .catch(function (error) {
       console.log(error);
     });
 }
+
+addZero = (val) => (val < 10 ? `0${val}` : val);
+addElementToDom = (element, value) => (element.textContent = value);
 
 /*
 To handle the current date
@@ -67,14 +87,20 @@ function print_date() {
   let d = date.getDate();
   let h = date.getHours(); // 0 - 23
   let m = date.getMinutes(); // 0 - 59
-  // let s = date.getSeconds(); // 0 - 59
-
-  const addZero = (val) => (val < 10 ? `0${val}` : val);
+  let s = date.getSeconds(); // 0 - 59
 
   let time = `${dYear}-${month}-${d}`;
 
-  currentTime.textContent = `${h}:${addZero(m)} ${h < 12 ? 'AM' : 'PM'}`;
-  currentDate.textContent = `${addZero(month)}-${addZero(d)}-${dYear}`;
+  let timeObj = {
+    currentTime: `${h}:${addZero(m)} ${h < 12 ? 'AM' : 'PM'}`,
+    currentDate: `${addZero(month)}-${addZero(d)}-${dYear}`,
+  };
+
+  let updatedTimeValues = storeContents('Current_Time', timeObj);
+  // console.log(updatedTimeValues);
+  currentTime.textContent = updatedTimeValues.currentTime;
+  currentDate.textContent = updatedTimeValues.currentDate;
+
   return time;
 }
 
@@ -90,15 +116,21 @@ function print_covid() {
     .then(function (response) {
       const covidLocation = response.data['South Africa'];
 
-      const filtered = covidLocation.filter((item) => {
+      covidLocation.filter((item) => {
         const { confirmed: confirm, deaths: death, recovered: recover } = item;
-
         const filteredDay = item.date;
+
         if (filteredDay === print_date()) {
-          console.log(item);
-          confirmed.textContent = `Cases: ${confirm}`;
-          deaths.textContent = `Death: ${death}`;
-          recovered.textContent = `Recovered: ${recover} `;
+          const covidObj = {
+            confirm,
+            death,
+            recover,
+          };
+          const covidUpdate = storeContents('Current_covid', covidObj);
+          // console.log(covidUpdate);
+          confirmed.textContent = `Cases: ${covidUpdate.confirm}`;
+          deaths.textContent = `Death: ${covidUpdate.death}`;
+          recovered.textContent = `Recovered: ${covidUpdate.recover} `;
         }
 
         return [];
@@ -138,13 +170,14 @@ function print_weather() {
       let weatherLocation = response.data.name;
       let weatherTemperature = `${Math.round(response.data.main.temp)}°`;
 
-      location.textContent = weatherLocation;
-      temp.textContent = weatherTemperature;
-
       const weatherObject = {
-        currentWeatherLocation: weatherLocation,
-        currentWeatherTemperature: weatherTemperature,
+        weatherLocation,
+        weatherTemperature,
       };
+      const weatherUpdate = storeContents('Current_weather', weatherObject);
+      // console.log(weatherUpdate);
+      location.textContent = weatherUpdate.weatherLocation;
+      temp.textContent = weatherUpdate.weatherTemperature;
     })
     .catch((error) => {
       console.error(error);
@@ -153,30 +186,113 @@ function print_weather() {
 
 // We use this to call all the functions
 (async () => {
-  await setInterval(() => {
-    //     print_date();
-  }, 1000);
-  // await print_weather();
-  // await print_verse();
-  // await print_covid();
   // localStorage.clear();
   if (localStorage.length <= 0) {
-    await print_date();
+    runApp();
   }
-  if (localStorage.length > 0) {
-    // getContents(print_weather);
-  }
+  //  else runApp();
+  // else runApp();
+
+  // if (localStorage.length > 0) {
+  //   await print_date();
+  //   // getContents(print_weather);
+  // }
 })();
+
+function runApp() {
+  print_verse();
+  print_weather();
+  print_covid();
+  setInterval(() => {
+    print_date();
+  }, 1000);
+}
 
 // Save the value
 function storeContents(item, itemObject) {
-  localStorage.setItem(item, JSON.stringify(itemObject));
-}
-
-function getContents(item) {
-  console.log(item());
   let savedValues;
+  localStorage.setItem(item, JSON.stringify(itemObject));
+
   if (localStorage.getItem(item)) {
     let savedValues = JSON.parse(localStorage.getItem(item));
+    return savedValues;
+  }
+  return savedValues;
+}
+
+// TODO LIST
+/*
+REMEMBER to add key event on enter 
+REMEMBER to add make the list scrollbar so users can scroll in the list 
+*/
+
+// Create a "close" button and append it to each list item
+const todoItem = document.getElementsByTagName('LI');
+
+for (i = 0; i < todoItem.length; i++) {
+  let span = document.createElement('SPAN');
+  let txt = document.createTextNode('\u00D7');
+
+  span.className = 'close';
+  span.appendChild(txt);
+  todoItem[i].appendChild(span);
+}
+
+// Click on a close button to hide the current list item
+const close = document.getElementsByClassName('close');
+
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function () {
+    const div = this.parentElement;
+    div.style.display = 'none';
+  };
+}
+
+// Add a "checked" symbol when clicking on a list item
+const list = document.querySelector('ul');
+list.addEventListener(
+  'click',
+  function (e) {
+    if (e.target.tagName === 'LI') {
+      e.target.classList.toggle('checked');
+    }
+  },
+  false
+);
+
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  const li = document.createElement('li');
+  var inputValue = document.getElementById('myInput').value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert('You must write something!');
+  } else {
+    document.getElementById('myUL').appendChild(li);
+  }
+  document.getElementById('myInput').value = '';
+
+  var span = document.createElement('SPAN');
+  var txt = document.createTextNode('\u00D7');
+  span.className = 'close';
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function () {
+      var div = this.parentElement;
+      div.style.display = 'none';
+    };
   }
 }
+
+function handleKeyboard(e) {
+  domStrings.todoBox.todoInput.addEventListener('keydown', function (e) {
+    console.log('clicked');
+    if (e.keyCode == 13) {
+      newElement();
+    }
+  });
+}
+handleKeyboard();

@@ -62,11 +62,6 @@ p {
   transition: all 0.5s ease-in;
 }
 
-.container > div:hover:not(:last-child) {
-  opacity: 0.8;
-  cursor: pointer;
-}
-
 .container > div:nth-of-type(1) {
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
@@ -161,8 +156,8 @@ p {
 
 .bg1,
 .bg2 {
-  background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("https://source.unsplash.com/daily?nature&hills");
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://source.unsplash.com/daily?nature&hills");
+  background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("https://source.unsplash.com/daily?nature&peace");
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://source.unsplash.com/daily?nature&peace");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -188,5 +183,155 @@ p {
   to {
     display: block;
   }
+}
+
+/***********TODO LIST ************/
+.todo {
+  display: -ms-grid;
+  display: grid;
+  width: 55%;
+  gap: 1.3rem;
+  /* Style the list box*/
+  /* Style the list items */
+  /* Set all odd list items to a different color (zebra-stripes) */
+  /* Darker background-color on hover */
+  /* When clicked on, add a background color and strike out text */
+  /* Add a "checked" mark when clicked on */
+  /* Style the close button */
+  /* Style the header */
+  /* Clear floats after the header */
+  /* Style the input */
+  /* Style the "Add" button */
+}
+
+.todo ul {
+  max-height: 90px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.todo ul::-webkit-scrollbar {
+  width: 10px;
+}
+
+.todo ul::-webkit-scrollbar-track {
+  background: rgba(189, 195, 199, 0.5);
+}
+
+.todo ul::-webkit-scrollbar-thumb {
+  background: #333;
+}
+
+.todo ul::-webkit-scrollbar-thumb:hover {
+  background: rgba(51, 51, 51, 0.5);
+}
+
+.todo ul li {
+  cursor: pointer;
+  position: relative;
+  list-style: none;
+  font-size: 18px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  /* make the list items unselectable */
+}
+
+.todo ul li:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.todo ul li:hover {
+  -webkit-transform: translateX(5px);
+          transform: translateX(5px);
+}
+
+.todo ul li {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.todo ul li.checked {
+  text-decoration: line-through;
+  color: rgba(189, 195, 199, 0.5);
+}
+
+.todo ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 15%;
+  left: 5%;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+.todo .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 16px;
+}
+
+.todo .close:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.todo .header {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.todo .header:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.todo input {
+  background: none;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #bdc3c7;
+  width: 100%;
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.todo input::-webkit-input-placeholder {
+  color: #ecf0f1;
+}
+
+.todo input:-ms-input-placeholder {
+  color: #ecf0f1;
+}
+
+.todo input::-ms-input-placeholder {
+  color: #ecf0f1;
+}
+
+.todo input::placeholder {
+  color: #ecf0f1;
+}
+
+.todo .addBtn {
+  padding: 10px;
+  width: 25%;
+  background: #d9d9d9;
+  color: #555;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.todo .addBtn:hover {
+  background-color: #bbb;
 }
 /*# sourceMappingURL=main.css.map */

@@ -185,153 +185,252 @@ p {
   }
 }
 
-/***********TODO LIST ************/
 .todo {
   display: -ms-grid;
   display: grid;
-  width: 55%;
+  width: 85%;
   gap: 1.3rem;
-  /* Style the list box*/
-  /* Style the list items */
-  /* Set all odd list items to a different color (zebra-stripes) */
-  /* Darker background-color on hover */
-  /* When clicked on, add a background color and strike out text */
-  /* Add a "checked" mark when clicked on */
-  /* Style the close button */
-  /* Style the header */
-  /* Clear floats after the header */
-  /* Style the input */
-  /* Style the "Add" button */
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  /* todo-form */
+  /* todo-items */
+  /* each li with class="item" */
+  /* item style end */
+  /* applied when the todo item is checked */
 }
 
-.todo ul {
-  max-height: 90px;
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
-.todo ul::-webkit-scrollbar {
-  width: 10px;
-}
-
-.todo ul::-webkit-scrollbar-track {
-  background: rgba(189, 195, 199, 0.5);
-}
-
-.todo ul::-webkit-scrollbar-thumb {
-  background: #333;
-}
-
-.todo ul::-webkit-scrollbar-thumb:hover {
-  background: rgba(51, 51, 51, 0.5);
-}
-
-.todo ul li {
-  cursor: pointer;
-  position: relative;
-  list-style: none;
-  font-size: 18px;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  /* make the list items unselectable */
-}
-
-.todo ul li:nth-child(odd) {
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.todo ul li:hover {
-  -webkit-transform: translateX(5px);
-          transform: translateX(5px);
-}
-
-.todo ul li {
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-}
-
-.todo ul li.checked {
-  text-decoration: line-through;
-  color: rgba(189, 195, 199, 0.5);
-}
-
-.todo ul li.checked::before {
-  content: '';
-  position: absolute;
-  border-style: solid;
-  border-width: 0 2px 2px 0;
-  top: 15%;
-  left: 5%;
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-  height: 15px;
-  width: 7px;
-}
-
-.todo .close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 0 16px;
-}
-
-.todo .close:hover {
-  background-color: #f44336;
-  color: white;
-}
-
-.todo .header {
-  text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.todo .header:after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-.todo input {
+.todo .todo-input {
   background: none;
   border: none;
   outline: none;
   border-bottom: 1px solid #bdc3c7;
-  width: 100%;
   color: #fff;
   font-size: 1.5rem;
   text-align: center;
 }
 
-.todo input::-webkit-input-placeholder {
+.todo .todo-input::-webkit-input-placeholder {
   color: #ecf0f1;
 }
 
-.todo input:-ms-input-placeholder {
+.todo .todo-input:-ms-input-placeholder {
   color: #ecf0f1;
 }
 
-.todo input::-ms-input-placeholder {
+.todo .todo-input::-ms-input-placeholder {
   color: #ecf0f1;
 }
 
-.todo input::placeholder {
+.todo .todo-input::placeholder {
   color: #ecf0f1;
 }
 
-.todo .addBtn {
-  padding: 10px;
-  width: 25%;
-  background: #d9d9d9;
-  color: #555;
+.todo .todo-items {
+  max-height: 90px;
+  max-width: 350px;
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.todo .todo-items::-webkit-scrollbar {
+  width: 10px;
+}
+
+.todo .todo-items::-webkit-scrollbar-track {
+  background: rgba(189, 195, 199, 0.5);
+}
+
+.todo .todo-items::-webkit-scrollbar-thumb {
+  background: #333;
+}
+
+.todo .todo-items::-webkit-scrollbar-thumb:hover {
+  background: rgba(51, 51, 51, 0.5);
+}
+
+.todo .item {
   cursor: pointer;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-  border-radius: 0;
+  list-style: none;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  font-size: 1.1rem;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 1rem;
+  grid-auto-flow: column;
+  gap: 1.2rem;
 }
 
-.todo .addBtn:hover {
-  background-color: #bbb;
+.todo .item:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.4);
 }
+
+.todo .item:hover {
+  -webkit-transform: translateX(3px);
+          transform: translateX(3px);
+}
+
+.todo .item:first-child {
+  border-top-left-radius: 7px;
+}
+
+.todo .item:last-child {
+  border-bottom-left-radius: 7px;
+}
+
+.todo .checkbox {
+  text-decoration: line-through;
+  color: rgba(189, 195, 199, 0.5);
+}
+
+.todo .delete-button {
+  background-color: transparent;
+  color: #ecf0f1;
+  border: none;
+  outline: none;
+  padding: 2px 5px;
+  font-size: 1.1rem;
+  font-weight: 550;
+  width: 3rem;
+  line-height: 24px;
+}
+
+.todo .delete-button:hover {
+  background-color: #e74c3c;
+  color: #ecf0f1;
+}
+
+.todo .checked {
+  text-decoration: line-through;
+  color: rgba(189, 195, 199, 0.1);
+}
+
+/***********TODO LIST ************/
+/*
+.todo {
+  display: grid;
+  width: 55%;
+  gap: 1.3rem;
+
+  ul {
+    max-height: 90px;
+    overflow: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
+      &-track {
+        background: rgba($-color-gray, 0.5);
+      }
+      &-thumb {
+        background: $-color-dark;
+        // border-radius: 10px;
+        &:hover {
+          background: rgba($-color-dark, 0.5);
+        }
+      }
+    }
+  }
+
+  ul li {
+    cursor: pointer;
+    position: relative;
+    list-style: none;
+    font-size: 18px;
+    transition: 0.2s;
+
+  }
+
+  ul li:nth-child(odd) {
+    background: rgba($-color-black, 0.4);
+  }
+
+  ul li:hover {
+    transform: translateX(5px);
+  }
+
+  ul li {
+    background: rgba($-color-black, 0.6);
+    color: $-color-white;
+  }
+
+  ul li.checked {
+    text-decoration: line-through;
+    color: rgba($-color-gray, 0.5);
+  }
+
+  ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 15%;
+    left: 5%;
+    transform: rotate(45deg);
+    height: 15px;
+    width: 7px;
+  }
+
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 16px;
+  }
+
+  .close:hover {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .header {
+    text-align: center;
+    display: flex;
+  }
+
+  .header:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  input {
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid $-color-gray;
+    width: 100%;
+    color: $-color-white;
+    font-size: 1.5rem;
+    text-align: center;
+
+    &::placeholder {
+      color: $-color-light;
+    }
+  }
+
+  .addBtn {
+    padding: 10px;
+    width: 25%;
+    background: #d9d9d9;
+    color: #555;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 0;
+  }
+
+  .addBtn:hover {
+    background-color: #bbb;
+  }
+}
+*/
 /*# sourceMappingURL=main.css.map */

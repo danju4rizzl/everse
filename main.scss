@@ -167,13 +167,125 @@ p {
   }
 }
 
+// final todo
+.todo {
+  display: grid;
+  width: 85%;
+  gap: 1.3rem;
+  justify-content: center;
+  /* todo-form */
+
+  .todo-form {
+    // width: 100%;
+  }
+
+  .todo-input {
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid $-color-gray;
+    color: $-color-white;
+    font-size: 1.5rem;
+    text-align: center;
+
+    &::placeholder {
+      color: $-color-light;
+    }
+  }
+
+  /* todo-items */
+  .todo-items {
+    max-height: 90px;
+    max-width: 350px;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
+      &-track {
+        background: rgba($-color-gray, 0.5);
+      }
+      &-thumb {
+        background: $-color-dark;
+        // border-radius: 10px;
+        &:hover {
+          background: rgba($-color-dark, 0.5);
+        }
+      }
+    }
+  }
+
+  /* each li with class="item" */
+  .item {
+    cursor: pointer;
+    list-style: none;
+    color: $-color-white;
+    background: rgba($-color-black, 0.6);
+    font-size: 1.1rem;
+    transition: 0.2s;
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    grid-auto-flow: column;
+    gap: 1.2rem;
+
+    &:nth-child(odd) {
+      background: rgba($-color-black, 0.4);
+    }
+
+    &:hover {
+      transform: translateX(3px);
+    }
+  }
+
+  .item:first-child {
+    border-top-left-radius: 7px;
+  }
+
+  .item:last-child {
+    border-bottom-left-radius: 7px;
+  }
+
+  /* item style end */
+
+  .checkbox {
+    // margin-right: 10px;
+    text-decoration: line-through;
+    color: rgba($-color-gray, 0.5);
+  }
+
+  .delete-button {
+    background-color: transparent;
+    color: $-color-light;
+    border: none;
+    outline: none;
+    padding: 2px 5px;
+    font-size: 1.1rem;
+    font-weight: 550;
+    width: 3rem;
+    line-height: 24px;
+
+    &:hover {
+      background-color: $-color-primary;
+      color: $-color-light;
+    }
+  }
+
+  /* applied when the todo item is checked */
+  .checked {
+    text-decoration: line-through;
+    color: rgba($-color-gray, 0.1);
+  }
+}
+
 /***********TODO LIST ************/
+/*
 .todo {
   display: grid;
   width: 55%;
   gap: 1.3rem;
 
-  /* Style the list box*/
   ul {
     max-height: 90px;
     overflow: hidden;
@@ -193,7 +305,6 @@ p {
     }
   }
 
-  /* Style the list items */
   ul li {
     cursor: pointer;
     position: relative;
@@ -201,15 +312,12 @@ p {
     font-size: 18px;
     transition: 0.2s;
 
-    /* make the list items unselectable */
   }
 
-  /* Set all odd list items to a different color (zebra-stripes) */
   ul li:nth-child(odd) {
     background: rgba($-color-black, 0.4);
   }
 
-  /* Darker background-color on hover */
   ul li:hover {
     transform: translateX(5px);
   }
@@ -219,13 +327,11 @@ p {
     color: $-color-white;
   }
 
-  /* When clicked on, add a background color and strike out text */
   ul li.checked {
     text-decoration: line-through;
     color: rgba($-color-gray, 0.5);
   }
 
-  /* Add a "checked" mark when clicked on */
   ul li.checked::before {
     content: '';
     position: absolute;
@@ -238,7 +344,6 @@ p {
     width: 7px;
   }
 
-  /* Style the close button */
   .close {
     position: absolute;
     right: 0;
@@ -251,20 +356,17 @@ p {
     color: white;
   }
 
-  /* Style the header */
   .header {
     text-align: center;
     display: flex;
   }
 
-  /* Clear floats after the header */
   .header:after {
     content: '';
     display: table;
     clear: both;
   }
 
-  /* Style the input */
   input {
     background: none;
     border: none;
@@ -280,7 +382,6 @@ p {
     }
   }
 
-  /* Style the "Add" button */
   .addBtn {
     padding: 10px;
     width: 25%;
@@ -295,3 +396,4 @@ p {
     background-color: #bbb;
   }
 }
+*/

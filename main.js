@@ -184,30 +184,6 @@ function print_weather() {
     });
 }
 
-// We use this to call all the functions
-(async () => {
-  // localStorage.clear();
-  if (localStorage.length <= 0) {
-    runApp();
-  }
-  //  else runApp();
-  // else runApp();
-
-  // if (localStorage.length > 0) {
-  //   await print_date();
-  //   // getContents(print_weather);
-  // }
-})();
-
-function runApp() {
-  print_verse();
-  print_weather();
-  print_covid();
-  setInterval(() => {
-    print_date();
-  }, 1000);
-}
-
 // Save the value
 function storeContents(item, itemObject) {
   let savedValues;
@@ -221,78 +197,125 @@ function storeContents(item, itemObject) {
 }
 
 // TODO LIST
-/*
-REMEMBER to add key event on enter 
-REMEMBER to add make the list scrollbar so users can scroll in the list 
-*/
+const todoForm = document.querySelector('.todo-form');
 
-// Create a "close" button and append it to each list item
-const todoItem = document.getElementsByTagName('LI');
+const todoInput = document.querySelector('.todo-input');
 
-for (i = 0; i < todoItem.length; i++) {
-  let span = document.createElement('SPAN');
-  let txt = document.createTextNode('\u00D7');
+const todoItemsList = document.querySelector('.todo-items');
 
-  span.className = 'close';
-  span.appendChild(txt);
-  todoItem[i].appendChild(span);
-}
+function handleTodo() {
+  let todos = [];
 
-// Click on a close button to hide the current list item
-const close = document.getElementsByClassName('close');
+  todoForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    addTodo(todoInput.value);
+  });
 
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function () {
-    const div = this.parentElement;
-    div.style.display = 'none';
-  };
-}
+  // function to add todo
+  function addTodo(item) {
+    if (item !== '') {
+      const todo = {
+        id: Date.now(),
+        name: item,
+        completed: false,
+      };
 
-// Add a "checked" symbol when clicking on a list item
-const list = document.querySelector('ul');
-list.addEventListener(
-  'click',
-  function (e) {
-    if (e.target.tagName === 'LI') {
-      e.target.classList.toggle('checked');
+      todos.unshift(todo);
+      addToLocalStorage(todos);
+
+      todoInput.value = '';
     }
-  },
-  false
-);
-
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-  const li = document.createElement('li');
-  var inputValue = document.getElementById('myInput').value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert('You must write something!');
-  } else {
-    document.getElementById('myUL').appendChild(li);
   }
-  document.getElementById('myInput').value = '';
 
-  var span = document.createElement('SPAN');
-  var txt = document.createTextNode('\u00D7');
-  span.className = 'close';
-  span.appendChild(txt);
-  li.appendChild(span);
+  // function to render given todos to screen
+  function renderTodos(todos) {
+    todoItemsList.innerHTML = '';
 
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
-      var div = this.parentElement;
-      div.style.display = 'none';
-    };
+    todos.forEach(function (item) {
+      const checked = item.completed ? 'checked' : null;
+
+      const li = document.createElement('li');
+      li.setAttribute('class', 'item');
+      li.setAttribute('data-key', item.id);
+
+      if (item.completed === true) {
+        li.classList.add('checked');
+      }
+
+      li.innerHTML = `
+      <input type="checkbox" class="checkbox" ${checked}>
+      ${item.name}
+      <button class="delete-button">X</button>
+    `;
+      todoItemsList.append(li);
+    });
   }
-}
 
-function handleKeyboard(e) {
-  domStrings.todoBox.todoInput.addEventListener('keydown', function (e) {
-    console.log('clicked');
-    if (e.keyCode == 13) {
-      newElement();
+  // function to add todos to local storage
+  function addToLocalStorage(todos) {
+    localStorage.setItem('todos', JSON.stringify(todos));
+
+    renderTodos(todos);
+  }
+
+  // function helps to get everything from local storage
+  function getFromLocalStorage() {
+    const reference = localStorage.getItem('todos');
+    if (reference) {
+      todos = JSON.parse(reference);
+      renderTodos(todos);
+    }
+  }
+
+  // toggle the value to completed and not completed
+  function toggle(id) {
+    todos.forEach(function (item) {
+      if (item.id == id) {
+        item.completed = !item.completed;
+      }
+    });
+
+    addToLocalStorage(todos);
+  }
+
+  // deletes a todo from todos array, then updates localstorage and renders updated list to screen
+  function deleteTodo(id) {
+    todos = todos.filter(function (item) {
+      return item.id != id;
+    });
+
+    addToLocalStorage(todos);
+  }
+
+  // after that addEventListener <ul> with class=todoItems. Because we need to listen for click event in all delete-button and checkbox
+  todoItemsList.addEventListener('click', function (event) {
+    if (event.target.type === 'checkbox') {
+      toggle(event.target.parentElement.getAttribute('data-key'));
+    }
+
+    if (event.target.classList.contains('delete-button')) {
+      deleteTodo(event.target.parentElement.getAttribute('data-key'));
     }
   });
+
+  getFromLocalStorage();
 }
-handleKeyboard();
+
+function runApp() {
+  print_verse();
+  print_weather();
+  print_covid();
+  setInterval(() => {
+    print_date();
+  }, 1000);
+  // initially get everything from localStorage
+  handleTodo();
+}
+
+// We use this to call all the functions
+(async () => {
+  // localStorage.clear();
+  if (localStorage.length <= 0) {
+    runApp();
+  } else runApp();
+})();

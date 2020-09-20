@@ -23,7 +23,9 @@ const domStrings = {
     deaths: document.querySelector('#deaths'),
   },
   todoBox: {
-    todoInput: document.querySelector('.todo__input'),
+    todoForm: document.querySelector('.todo-form'),
+    todoInput: document.querySelector('.todo-input'),
+    todoItemsList: document.querySelector('.todo-items'),
   },
 };
 
@@ -184,26 +186,12 @@ function print_weather() {
     });
 }
 
-// Save the value
-function storeContents(item, itemObject) {
-  let savedValues;
-  localStorage.setItem(item, JSON.stringify(itemObject));
-
-  if (localStorage.getItem(item)) {
-    let savedValues = JSON.parse(localStorage.getItem(item));
-    return savedValues;
-  }
-  return savedValues;
-}
-
-// TODO LIST
-const todoForm = document.querySelector('.todo-form');
-
-const todoInput = document.querySelector('.todo-input');
-
-const todoItemsList = document.querySelector('.todo-items');
+/*
+To handle the todo widget
+*/
 
 function handleTodo() {
+  const { todoForm, todoInput, todoItemsList } = domStrings.todoBox;
   let todos = [];
 
   todoForm.addEventListener('submit', function (event) {
@@ -253,14 +241,14 @@ function handleTodo() {
 
   // function to add todos to local storage
   function addToLocalStorage(todos) {
-    localStorage.setItem('todos', JSON.stringify(todos));
+    localStorage.setItem('Current_todos', JSON.stringify(todos));
 
     renderTodos(todos);
   }
 
   // function helps to get everything from local storage
   function getFromLocalStorage() {
-    const reference = localStorage.getItem('todos');
+    const reference = localStorage.getItem('Current_todos');
     if (reference) {
       todos = JSON.parse(reference);
       renderTodos(todos);
@@ -301,6 +289,18 @@ function handleTodo() {
   getFromLocalStorage();
 }
 
+// Save the value
+function storeContents(item, itemObject) {
+  let savedValues;
+  localStorage.setItem(item, JSON.stringify(itemObject));
+
+  if (localStorage.getItem(item)) {
+    let savedValues = JSON.parse(localStorage.getItem(item));
+    return savedValues;
+  }
+  return savedValues;
+}
+
 function runApp() {
   print_verse();
   print_weather();
@@ -308,7 +308,6 @@ function runApp() {
   setInterval(() => {
     print_date();
   }, 1000);
-  // initially get everything from localStorage
   handleTodo();
 }
 
@@ -317,5 +316,7 @@ function runApp() {
   // localStorage.clear();
   if (localStorage.length <= 0) {
     runApp();
-  } else runApp();
+    return;
+  }
+  runApp();
 })();

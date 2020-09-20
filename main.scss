@@ -58,11 +58,6 @@ p {
     transition: all 0.5s ease-in;
   }
   & > div {
-    &:hover:not(:last-child) {
-      // opacity: 0.8;
-      // cursor: pointer;
-    }
-
     &:nth-of-type(1) {
       grid-column: 1 / 2;
     }
@@ -70,9 +65,8 @@ p {
     &:nth-of-type(2) {
       grid-column: 2 / 3;
       position: relative;
+
       .icon {
-        // display: flex;
-        // justify-content: flex-end;
         position: absolute;
         top: 0;
         right: 0;
@@ -240,11 +234,11 @@ p {
   }
 
   .item:first-child {
-    border-top-left-radius: 7px;
+    border-top-left-radius: 2px;
   }
 
   .item:last-child {
-    border-bottom-left-radius: 7px;
+    border-bottom-left-radius: 2px;
   }
 
   /* item style end */
@@ -278,122 +272,3 @@ p {
     color: rgba($-color-gray, 0.1);
   }
 }
-
-/***********TODO LIST ************/
-/*
-.todo {
-  display: grid;
-  width: 55%;
-  gap: 1.3rem;
-
-  ul {
-    max-height: 90px;
-    overflow: hidden;
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-      width: 10px;
-      &-track {
-        background: rgba($-color-gray, 0.5);
-      }
-      &-thumb {
-        background: $-color-dark;
-        // border-radius: 10px;
-        &:hover {
-          background: rgba($-color-dark, 0.5);
-        }
-      }
-    }
-  }
-
-  ul li {
-    cursor: pointer;
-    position: relative;
-    list-style: none;
-    font-size: 18px;
-    transition: 0.2s;
-
-  }
-
-  ul li:nth-child(odd) {
-    background: rgba($-color-black, 0.4);
-  }
-
-  ul li:hover {
-    transform: translateX(5px);
-  }
-
-  ul li {
-    background: rgba($-color-black, 0.6);
-    color: $-color-white;
-  }
-
-  ul li.checked {
-    text-decoration: line-through;
-    color: rgba($-color-gray, 0.5);
-  }
-
-  ul li.checked::before {
-    content: '';
-    position: absolute;
-    border-style: solid;
-    border-width: 0 2px 2px 0;
-    top: 15%;
-    left: 5%;
-    transform: rotate(45deg);
-    height: 15px;
-    width: 7px;
-  }
-
-  .close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 0 16px;
-  }
-
-  .close:hover {
-    background-color: #f44336;
-    color: white;
-  }
-
-  .header {
-    text-align: center;
-    display: flex;
-  }
-
-  .header:after {
-    content: '';
-    display: table;
-    clear: both;
-  }
-
-  input {
-    background: none;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid $-color-gray;
-    width: 100%;
-    color: $-color-white;
-    font-size: 1.5rem;
-    text-align: center;
-
-    &::placeholder {
-      color: $-color-light;
-    }
-  }
-
-  .addBtn {
-    padding: 10px;
-    width: 25%;
-    background: #d9d9d9;
-    color: #555;
-    cursor: pointer;
-    transition: 0.3s;
-    border-radius: 0;
-  }
-
-  .addBtn:hover {
-    background-color: #bbb;
-  }
-}
-*/

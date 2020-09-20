@@ -3,6 +3,7 @@
         "appid",
         "everse",
         "ourmanna",
-        "restclient"
+        "restclient",
+        "todos"
     ]
 }

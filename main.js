@@ -37,8 +37,9 @@ const appConfig = {
   ourmannaUrl: 'https://beta.ourmanna.com/api/v1/get/?format=json',
   covidUrl: 'https://pomber.github.io/covid19/timeseries.json',
   openWeatherMapApiKey: '8633abd41d2939308a4bdf453fbdcbe9',
-  openWeatherMapLocation: 'Cape Town',
+  openWeatherMapLocation: 'New York',
   openWeatherMapUnits: 'metric',
+  ipApiUrl: `http://ip-api.com/json`,
 };
 
 /*
@@ -105,19 +106,18 @@ function print_date() {
 
   return time;
 }
-
+function getCity() {}
 /*
 To handle the Covid-19 update according to the value (current date) from print_date()
 */
-function print_covid() {
+function print_covid(usersCountry) {
   const { confirmed, deaths, recovered } = domStrings.covidBox;
   const { covidUrl } = appConfig;
 
   axios
     .get(covidUrl)
     .then(function (response) {
-      const covidLocation = response.data['South Africa'];
-
+      const covidLocation = response.data[usersCountry];
       covidLocation.filter((item) => {
         const { confirmed: confirm, deaths: death, recovered: recover } = item;
         const filteredDay = item.date;
@@ -146,7 +146,7 @@ function print_covid() {
 /*
 To handle the weather of the user
 */
-function print_weather() {
+function print_weather(userCity) {
   const {
     openWeatherMapApiKey,
     openWeatherMapLocation,
@@ -159,11 +159,11 @@ function print_weather() {
     method: 'GET',
     url: `https://api.openweathermap.org/data/2.5/weather`,
     params: {
-      q: openWeatherMapLocation,
+      q: userCity,
       appid: openWeatherMapApiKey,
       units: openWeatherMapUnits,
     },
-    headers: { 'user-agent': 'vscode-restclient' },
+    // headers: { 'user-agent': 'vscode-restclient' },
   };
 
   axios
@@ -292,23 +292,72 @@ function handleTodo() {
 // Save the value
 function storeContents(item, itemObject) {
   let savedValues;
+
   localStorage.setItem(item, JSON.stringify(itemObject));
 
   if (localStorage.getItem(item)) {
     let savedValues = JSON.parse(localStorage.getItem(item));
     return savedValues;
   }
+
   return savedValues;
+}
+
+function handleLocation() {
+  // if ('geolocation' in navigator) {
+  //   navigator.geolocation.getCurrentPosition(
+  //     function success(position) {
+  //       console.log(
+  //         'latitude',
+  //         position.coords.latitude,
+  //         'longitude',
+  //         position.coords.longitude
+  //       );
+  //     },
+  //     function error(error_message) {
+  //       console.log(
+  //         'An error has occured whale retrieving location',
+  //         error_message
+  //       );
+  //     }
+  //   );
+  // } else {
+  //   console.log('geolocation is not enabled on this browser');
+  // }
+
+  return ipLookUp();
+}
+function ipLookUp() {
+  const options = {
+    method: 'GET',
+    url: appConfig.ipApiUrl,
+
+    // headers: { 'user-agent': 'vscode-restclient' },
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      let { city, country } = response.data;
+      print_weather(city);
+      print_covid(country);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
 }
 
 function runApp() {
   print_verse();
-  print_weather();
-  print_covid();
   setInterval(() => {
     print_date();
   }, 1000);
   handleTodo();
+  handleLocation();
 }
 
 // We use this to call all the functions

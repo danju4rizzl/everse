@@ -45,7 +45,7 @@ const appConfig = {
 /*
 To handle the verse of the day
 */
-function print_verse() {
+function verseWidget() {
   const { ourmannaUrl } = appConfig;
   const { verseContent, verseBook } = domStrings.verseBox;
 
@@ -75,15 +75,10 @@ function print_verse() {
     });
 }
 
-addZero = (val) => (val < 10 ? `0${val}` : val);
-addElementToDom = (element, value) => (element.textContent = value);
-
 /*
 To handle the current date
 */
-function print_date() {
-  const { currentTime, currentDate } = domStrings.timeBox;
-
+function dateWidget() {
   let date = new Date();
   let month = date.getMonth();
   let dYear = date.getFullYear();
@@ -91,6 +86,9 @@ function print_date() {
   let h = date.getHours(); // 0 - 23
   let m = date.getMinutes(); // 0 - 59
   let s = date.getSeconds(); // 0 - 59
+  const { currentTime, currentDate } = domStrings.timeBox;
+
+  addZero = (val) => (val < 10 ? `0${val}` : val);
 
   let time = `${dYear}-${month}-${d}`;
 
@@ -106,11 +104,11 @@ function print_date() {
 
   return time;
 }
-function getCity() {}
+
 /*
 To handle the Covid-19 update according to the value (current date) from print_date()
 */
-function print_covid(usersCountry) {
+function covidWidget(usersCountry) {
   const { confirmed, deaths, recovered } = domStrings.covidBox;
   const { covidUrl } = appConfig;
 
@@ -125,7 +123,7 @@ function print_covid(usersCountry) {
         const { confirmed: confirm, deaths: death, recovered: recover } = item;
         const filteredDay = item.date;
 
-        if (filteredDay === print_date()) {
+        if (filteredDay === dateWidget()) {
           const covidObj = {
             confirm,
             death,
@@ -149,7 +147,7 @@ function print_covid(usersCountry) {
 /*
 To handle the weather of the user
 */
-function print_weather(userCity) {
+function weatherWidget(userCity) {
   const {
     openWeatherMapApiKey,
     openWeatherMapLocation,
@@ -192,8 +190,7 @@ function print_weather(userCity) {
 /*
 To handle the todo widget
 */
-
-function handleTodo() {
+function todoWidget() {
   const { todoForm, todoInput, todoItemsList } = domStrings.todoBox;
   let todos = [];
 
@@ -306,6 +303,7 @@ function storeContents(item, itemObject) {
   return savedValues;
 }
 
+// Handle User Location
 function handleLocation() {
   // if ('geolocation' in navigator) {
   //   navigator.geolocation.getCurrentPosition(
@@ -330,20 +328,20 @@ function handleLocation() {
 
   return ipLookUp();
 }
+
+// Handle User ip-location
 function ipLookUp() {
   const options = {
     method: 'GET',
     url: appConfig.ipApiUrl,
-
-    // headers: { 'user-agent': 'vscode-restclient' },
   };
 
   axios
     .request(options)
     .then(function (response) {
       let { city, country } = response.data;
-      print_weather(city);
-      print_covid(country);
+      weatherWidget(city);
+      covidWidget(country);
     })
     .catch(function (error) {
       // handle error
@@ -353,13 +351,36 @@ function ipLookUp() {
       // always executed
     });
 }
+// const quickLinks = ['amazon.com', 'facebook.com', 'twitter.com', 'youtube.com'];
+const quickLinks = ['amazon.com', 'facebook.com', 'twitter.com', 'youtube.com'];
 
+function quickLinkWidget(links) {
+  const ulParent = document.querySelector('.quick-link__list');
+  /* 
+  const li = links.map(
+    (link) =>
+    `<li class="quick-link__item"><a href="http://www.${link}" class="quick-link__link"><img src="./img/links/${link}.svg" alt="everse quick link icon ${link}" class="quick-link__img"></a></li>`
+    );
+    */
+  const li = links.map(
+    (link) =>
+      `<li class="quick-link__item"><a href="http://www.${link}" class="quick-link__link"><img src="./img/links/${link}.svg" alt="everse quick link icon ${link}" class="quick-link__img"></a></li>`
+  );
+
+  ulParent.innerHTML = li;
+  console.log(li);
+  console.log(ulParent);
+}
+
+quickLinkWidget(quickLinks);
+
+// handles ALL UI function calls
 function runApp() {
-  print_verse();
+  verseWidget();
   setInterval(() => {
-    print_date();
+    dateWidget();
   }, 1000);
-  handleTodo();
+  todoWidget();
   handleLocation();
 }
 

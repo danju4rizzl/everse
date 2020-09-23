@@ -117,7 +117,10 @@ function print_covid(usersCountry) {
   axios
     .get(covidUrl)
     .then(function (response) {
-      const covidLocation = response.data[usersCountry];
+      const country = usersCountry === 'United States' ? 'US' : usersCountry;
+
+      const covidLocation = response.data[country];
+
       covidLocation.filter((item) => {
         const { confirmed: confirm, deaths: death, recovered: recover } = item;
         const filteredDay = item.date;
@@ -364,8 +367,8 @@ function runApp() {
 (async () => {
   // localStorage.clear();
   if (localStorage.length <= 0) {
-    runApp();
+    // runApp();
     return;
   }
-  runApp();
+  // runApp();
 })();

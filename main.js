@@ -43,6 +43,19 @@ const appConfig = {
 };
 
 /*
+Default Quick Links
+*/
+const quickLinks = [
+  'amazon.com',
+  'facebook.com',
+  'twitter.com',
+  'youtube.com',
+  'gmail.com',
+  'google.com',
+  'web.whatsapp.com',
+];
+
+/*
 To handle the verse of the day
 */
 function verseWidget() {
@@ -351,28 +364,37 @@ function ipLookUp() {
       // always executed
     });
 }
-// const quickLinks = ['amazon.com', 'facebook.com', 'twitter.com', 'youtube.com'];
-const quickLinks = ['amazon.com', 'facebook.com', 'twitter.com', 'youtube.com'];
 
 function quickLinkWidget(links) {
   const ulParent = document.querySelector('.quick-link__list');
-  /* 
-  const li = links.map(
-    (link) =>
-    `<li class="quick-link__item"><a href="http://www.${link}" class="quick-link__link"><img src="./img/links/${link}.svg" alt="everse quick link icon ${link}" class="quick-link__img"></a></li>`
-    );
-    */
-  const li = links.map(
-    (link) =>
-      `<li class="quick-link__item"><a href="http://www.${link}" class="quick-link__link"><img src="./img/links/${link}.svg" alt="everse quick link icon ${link}" class="quick-link__img"></a></li>`
-  );
 
-  ulParent.innerHTML = li;
-  console.log(li);
-  console.log(ulParent);
+  for (let item = 0; item < links.length; item++) {
+    const el = links[item];
+    const addBtn = 0;
+    let link = `<li class="quick-link__item"><a href="http://www.${el}" class="quick-link__link"><img src="./img/links/${el}.svg" alt="everse quick link icon ${el}" class="quick-link__img"></a></li>`;
+
+    ulParent.innerHTML += link;
+  }
+
+  let createLink = `<li class="quick-link__item quick-link__item--plus"><a href="#" class="quick-link__link"><img src="./img/links/plus.svg" alt="everse quick link icon plus new" class="quick-link__img"></a></li>`;
+
+  ulParent.innerHTML += createLink;
+  ulParent
+    .querySelector('.quick-link__item--plus')
+    .addEventListener('click', function (e) {
+      e.preventDefault();
+      console.log('prevented');
+      toggleWidgetDisplay();
+    });
 }
 
-quickLinkWidget(quickLinks);
+// Stopped here 🔥
+function toggleWidgetDisplay() {
+  const main = document.querySelector('#quickLinks');
+  const c = main.children;
+  c[0].classList.toggle('toggledWidget');
+  c[1].classList.toggle('toggledWidget');
+}
 
 // handles ALL UI function calls
 function runApp() {
@@ -380,6 +402,7 @@ function runApp() {
   setInterval(() => {
     dateWidget();
   }, 1000);
+  quickLinkWidget(quickLinks);
   todoWidget();
   handleLocation();
 }
@@ -388,8 +411,28 @@ function runApp() {
 (async () => {
   // localStorage.clear();
   if (localStorage.length <= 0) {
-    // runApp();
+    runApp();
     return;
   }
-  // runApp();
+  runApp();
 })();
+
+/*
+ *** Gets the fave icon
+ */
+
+const getFavicon = function () {
+  var favicon = undefined;
+  var nodeList = document.getElementsByTagName('link');
+  for (var i = 0; i < nodeList.length; i++) {
+    if (
+      nodeList[i].getAttribute('rel') == 'icon' ||
+      nodeList[i].getAttribute('rel') == 'shortcut icon'
+    ) {
+      favicon = nodeList[i].getAttribute('href');
+    }
+  }
+  return favicon;
+};
+
+console.log(getFavicon());

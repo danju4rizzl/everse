@@ -160,7 +160,19 @@ p {
     display: block;
   }
 }
+@mixin everse-input {
+  background: none;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid $-color-gray;
+  color: $-color-white;
+  font-size: 1.5rem;
+  text-align: center;
 
+  &::placeholder {
+    color: $-color-light;
+  }
+}
 // todo
 .todo {
   display: grid;
@@ -174,17 +186,7 @@ p {
   }
 
   .todo-input {
-    background: none;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid $-color-gray;
-    color: $-color-white;
-    font-size: 1.5rem;
-    text-align: center;
-
-    &::placeholder {
-      color: $-color-light;
-    }
+    @include everse-input();
   }
 
   /* todo-items */
@@ -278,6 +280,10 @@ p {
   width: 100%;
   height: 100%;
   padding: 1rem;
+  max-width: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &__list {
     display: grid;
@@ -318,4 +324,14 @@ p {
       height: 2rem;
     }
   }
+  &__form {
+  }
+  &__input {
+    @include everse-input();
+  }
+}
+
+.toggledWidget {
+  display: none;
+  background-color: $-color-gray;
 }

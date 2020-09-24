@@ -319,6 +319,16 @@ p {
   width: 100%;
   height: 100%;
   padding: 1rem;
+  max-width: 20rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .quick-link__list {
@@ -364,5 +374,36 @@ p {
 .quick-link__img--light {
   width: 2rem;
   height: 2rem;
+}
+
+.quick-link__input {
+  background: none;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #bdc3c7;
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.quick-link__input::-webkit-input-placeholder {
+  color: #ecf0f1;
+}
+
+.quick-link__input:-ms-input-placeholder {
+  color: #ecf0f1;
+}
+
+.quick-link__input::-ms-input-placeholder {
+  color: #ecf0f1;
+}
+
+.quick-link__input::placeholder {
+  color: #ecf0f1;
+}
+
+.toggledWidget {
+  display: none;
+  background-color: #bdc3c7;
 }
 /*# sourceMappingURL=main.css.map */

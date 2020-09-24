@@ -371,7 +371,7 @@ function quickLinkWidget(links) {
   for (let item = 0; item < links.length; item++) {
     const el = links[item];
     const addBtn = 0;
-    let link = `<li class="quick-link__item"><a href="http://www.${el}" class="quick-link__link"><img src="./img/links/${el}.svg" alt="everse quick link icon ${el}" class="quick-link__img"></a></li>`;
+    let link = `<li class="quick-link__item"><a href="http://${el}" class="quick-link__link"><img src="./img/links/${el}.svg" alt="everse quick link icon ${el}" class="quick-link__img"></a></li>`;
 
     ulParent.innerHTML += link;
   }

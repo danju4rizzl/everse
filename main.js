@@ -62,30 +62,25 @@ function verseWidget() {
   const { ourmannaUrl } = appConfig;
   const { verseContent, verseBook } = domStrings.verseBox;
 
+  function renderVerse(verseOfTheDay) {
+    for (const item in verseOfTheDay) {
+      if (verseOfTheDay.hasOwnProperty(item)) {
+        verseContent.textContent = verseOfTheDay['text'];
+        verseBook.textContent = verseOfTheDay['reference'];
+      }
+    }
+  }
+
   axios
     .get(ourmannaUrl)
     .then(function (response) {
       let { text, reference, version } = response.data.verse.details;
-      const verseObj = {
-        verse: text,
-        book: reference,
-      };
-
-      let updateDailyVerse = storeContents('Current_verse', verseObj);
-      // STOPED hERE*******
-      for (const item in updateDailyVerse) {
-        if (updateDailyVerse.hasOwnProperty(item)) {
-          const savedVerse = updateDailyVerse['verse'];
-          const savedBook = updateDailyVerse['book'];
-
-          verseContent.textContent = savedVerse;
-          verseBook.textContent = savedBook;
-        }
-      }
+      addToLocalStorage('Current_verse', { text, reference }, renderVerse);
     })
     .catch(function (error) {
       console.log(error);
     });
+  getFromLocalStorage('Current_verse', {}, renderVerse);
 }
 
 /*
@@ -200,6 +195,21 @@ function weatherWidget(userCity) {
     });
 }
 
+// function to add todos to local storage
+function addToLocalStorage(key, item, fn) {
+  localStorage.setItem(key, JSON.stringify(item));
+  fn(item);
+}
+
+// function helps to get everything from local storage
+function getFromLocalStorage(key, item, fn) {
+  const reference = localStorage.getItem(key);
+  if (reference) {
+    item = JSON.parse(reference);
+    fn(item);
+  }
+}
+
 /*
 To handle the todo widget
 */
@@ -208,6 +218,8 @@ function todoWidget() {
   let todos = [];
 
   todoForm.addEventListener('submit', function (event) {
+    console.log('clicked');
+
     event.preventDefault();
     addTodo(todoInput.value);
   });
@@ -222,7 +234,7 @@ function todoWidget() {
       };
 
       todos.unshift(todo);
-      addToLocalStorage(todos);
+      addToLocalStorage('Current_todos', todos, renderTodos);
 
       todoInput.value = '';
     }
@@ -252,22 +264,6 @@ function todoWidget() {
     });
   }
 
-  // function to add todos to local storage
-  function addToLocalStorage(todos) {
-    localStorage.setItem('Current_todos', JSON.stringify(todos));
-
-    renderTodos(todos);
-  }
-
-  // function helps to get everything from local storage
-  function getFromLocalStorage() {
-    const reference = localStorage.getItem('Current_todos');
-    if (reference) {
-      todos = JSON.parse(reference);
-      renderTodos(todos);
-    }
-  }
-
   // toggle the value to completed and not completed
   function toggle(id) {
     todos.forEach(function (item) {
@@ -276,7 +272,7 @@ function todoWidget() {
       }
     });
 
-    addToLocalStorage(todos);
+    addToLocalStorage('Current_todos', todos, renderTodos);
   }
 
   // deletes a todo from todos array, then updates localstorage and renders updated list to screen
@@ -285,7 +281,7 @@ function todoWidget() {
       return item.id != id;
     });
 
-    addToLocalStorage(todos);
+    addToLocalStorage('Current_todos', todos, renderTodos);
   }
 
   // after that addEventListener <ul> with class=todoItems. Because we need to listen for click event in all delete-button and checkbox
@@ -299,7 +295,7 @@ function todoWidget() {
     }
   });
 
-  getFromLocalStorage();
+  getFromLocalStorage('Current_todos', todos, renderTodos);
 }
 
 // Save the value

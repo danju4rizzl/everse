@@ -325,9 +325,11 @@ p {
     }
   }
   &__form {
+    display: none; // REMEMBER to remove this line
   }
   &__input {
     @include everse-input();
+    margin: 1.2rem auto;
   }
 }
 

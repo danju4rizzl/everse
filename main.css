@@ -17,17 +17,13 @@ body {
 }
 
 h2 {
-  font-size: 3.4rem;
+  font-size: 1.4rem;
   font-weight: 300;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 
-h2 span {
-  font-size: 2rem;
-}
-
 p {
-  font-size: 1.4rem;
+  font-size: 1.8vmin;
 }
 
 .container {
@@ -120,7 +116,6 @@ p {
 }
 
 .container > div:nth-of-type(6) .verse__title {
-  font-size: 3.4rem;
   letter-spacing: 1.5px;
   position: relative;
 }
@@ -132,13 +127,12 @@ p {
   left: 50%;
   -webkit-transform: translate(-50%);
           transform: translate(-50%);
-  width: 40vmin;
+  width: 2vmin;
   height: 1%;
   background-color: rgba(189, 195, 199, 0.2);
 }
 
 .container > div:nth-of-type(6) .verse__content {
-  font-size: 2.3rem;
   line-height: 1.1em;
   letter-spacing: 1.8px;
   font-weight: 600;
@@ -146,7 +140,6 @@ p {
 
 .container > div:nth-of-type(6) .verse__book {
   text-align: right;
-  font-size: 1.4rem;
   font-weight: 300;
 }
 
@@ -206,7 +199,6 @@ p {
   outline: none;
   border-bottom: 1px solid #bdc3c7;
   color: #fff;
-  font-size: 1.5rem;
   text-align: center;
 }
 
@@ -255,7 +247,6 @@ p {
   list-style: none;
   color: #fff;
   background: rgba(0, 0, 0, 0.6);
-  font-size: 1.1rem;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   display: -ms-grid;
@@ -299,7 +290,6 @@ p {
   border: none;
   outline: none;
   padding: 2px 5px;
-  font-size: 1.1rem;
   font-weight: 550;
   width: 3rem;
   line-height: 24px;
@@ -386,7 +376,6 @@ p {
   outline: none;
   border-bottom: 1px solid #bdc3c7;
   color: #fff;
-  font-size: 1.5rem;
   text-align: center;
   margin: 1.2rem auto;
 }

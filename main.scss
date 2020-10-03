@@ -276,21 +276,34 @@ p {
   align-items: center;
 
   &__list {
-    display: grid;
-    grid-auto-flow: column;
-    gap: 0.8rem;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    // display: grid;
+    // grid-auto-flow: column;
+    // gap: 0.8rem;
+    // grid-template-columns: repeat(4, 1fr);
+    // grid-template-rows: repeat(3, 1fr);
   }
 
   &__item {
-    background-color: rgba($-color-dark, 0.1);
-    width: 4rem;
-    height: 4rem;
-    display: grid;
-    align-items: center;
+    background-color: rgba($-color-dark, 0.5);
+    width: 3rem;
+    height: 3rem;
+    display: inline-block;
+    margin: 5px;
+
+    padding: 0.5rem;
+
     cursor: pointer;
     transition: all 8ms linear;
+
+    &--new {
+      background-color: rgba($-color-dark, 0.5);
+      & > a {
+        color: $-color-white;
+        text-decoration: none;
+        font-size: 2rem;
+        line-height: 1;
+      }
+    }
 
     &:hover {
       background-color: rgba($-color-dark, 0.2);
@@ -302,7 +315,6 @@ p {
 
   &__link {
     // background-color: green;
-    padding: 0.7rem;
   }
 
   &__img {
@@ -315,7 +327,6 @@ p {
     }
   }
   &__form {
-    display: none; // REMEMBER to remove this line
   }
   &__input {
     @include everse-input();

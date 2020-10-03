@@ -27,6 +27,18 @@ const domStrings = {
     todoInput: document.querySelector('.todo-input'),
     todoItemsList: document.querySelector('.todo-items'),
   },
+  quickLinkBox: {
+    main: document.querySelector('#quickLinks'),
+    quickLinksList: document.querySelector('.quick-link__list'),
+    quickLinkNameInput: document.querySelector(
+      '.quick-link__form input[type=text]'
+    ),
+    quickLinkUrlInput: document.querySelector(
+      '.quick-link__form input[type=url]'
+    ),
+    quickLinkAddBtn: document.querySelector('.quick-link__button--add'),
+    quickLinkCancelBtn: document.querySelector('.quick-link__button--cancel'),
+  },
 };
 
 /*
@@ -54,7 +66,7 @@ const quickLinks = [
   'google.com',
   'web.whatsapp.com',
 ];
-
+const userQuickLinks = [];
 /*
 To handle the verse of the day
 */
@@ -361,33 +373,69 @@ function ipLookUp() {
     });
 }
 
-function quickLinkWidget(links) {
-  const ulParent = document.querySelector('.quick-link__list');
+function quickLinkWidget(listItems) {
+  const {
+    main,
+    quickLinksList,
+    quickLinkNameInput,
+    quickLinkUrlInput,
+    quickLinkAddBtn,
+    quickLinkCancelBtn,
+  } = domStrings.quickLinkBox;
 
-  for (let item = 0; item < links.length; item++) {
-    const el = links[item];
-    const addBtn = 0;
-    let link = `<li class="quick-link__item"><a href="http://${el}" class="quick-link__link"><img src="./img/links/${el}.svg" alt="everse quick link icon ${el}" class="quick-link__img"></a></li>`;
+  function renderItems(listItems) {
+    for (let item = 0; item < listItems.length; item++) {
+      let el = listItems[item];
+      quickLinksList.innerHTML += allLink(el);
+    }
+    quickLinksList.innerHTML += addLinkButton();
+  }
+  let allLink = (el) =>
+    `<li class="quick-link__item"><a href="http://${el}" class="quick-link__link"><img src="http://www.google.com/s2/favicons?domain=https://${el}" alt="everse quick link icon ${el}" class="quick-link__img"></a></li>`;
 
-    ulParent.innerHTML += link;
+  let addLinkButton = () =>
+    `<li class="quick-link__item quick-link__item--plus" title="Create new Link"><img src="./img/links/plus.svg" alt="everse quick link icon plus new" class="quick-link__img"></li>`;
+
+  let newLinkButton = (url, name) =>
+    `<li class="quick-link__item quick-link__item--new"><a href="http://${url}" class="quick-link__link"><img src="http://www.google.com/s2/favicons?domain=https://${url}" alt="everse quick link icon ${name}" class="quick-link__img"></a></li>`;
+  renderItems(quickLinks);
+  toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
+  toggleDisplay(quickLinkCancelBtn);
+
+  quickLinkAddBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    handleNewLinks();
+  });
+  function toggleDisplay(el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      // console.log('prevented');
+      toggleForm(main);
+    });
   }
 
-  let createLink = `<li class="quick-link__item quick-link__item--plus"><a href="#" class="quick-link__link"><img src="./img/links/plus.svg" alt="everse quick link icon plus new" class="quick-link__img"></a></li>`;
+  function handleNewLinks() {
+    let urlName = quickLinkNameInput.value;
+    let urlLink = quickLinkUrlInput.value;
 
-  ulParent.innerHTML += createLink;
-  ulParent
-    .querySelector('.quick-link__item--plus')
-    .addEventListener('click', function (e) {
-      e.preventDefault();
-      console.log('prevented');
-      toggleWidgetDisplay();
-    });
+    // ${urlName[0].toUpperCase()} to get the first alphabet of urlName
+    if (urlLink === '' || urlName === '') return;
+    else {
+      listItems.push(urlLink);
+      quickLinkNameInput.value = '';
+      quickLinkUrlInput.value = '';
+      toggleForm(main);
+      // renderItems(listItems);
+      // quickLinksList.innerHTML = '';
+    }
+
+    // quickLinksList.innerHTML += newLinkButton(urlLink, urlName);
+    // addLinkButton();
+  }
 }
 
-// Stopped here 🔥
-function toggleWidgetDisplay() {
-  const main = document.querySelector('#quickLinks');
-  const c = main.children;
+function toggleForm(el) {
+  const c = el.children;
   c[0].classList.toggle('toggledWidget');
   c[1].classList.toggle('toggledWidget');
 }
@@ -407,10 +455,12 @@ function runApp() {
 (async () => {
   // localStorage.clear();
   if (localStorage.length <= 0) {
-    runApp();
+    // runApp();
     return;
   }
-  runApp();
+  verseWidget();
+  quickLinkWidget(quickLinks);
+  // runApp();
 })();
 
 /*
@@ -418,9 +468,9 @@ function runApp() {
  */
 
 const getFavicon = function () {
-  var favicon = undefined;
-  var nodeList = document.getElementsByTagName('link');
-  for (var i = 0; i < nodeList.length; i++) {
+  let favicon = undefined;
+  let nodeList = document.getElementsByTagName('link');
+  for (let i = 0; i < nodeList.length; i++) {
     if (
       nodeList[i].getAttribute('rel') == 'icon' ||
       nodeList[i].getAttribute('rel') == 'shortcut icon'
@@ -430,5 +480,3 @@ const getFavicon = function () {
   }
   return favicon;
 };
-
-console.log(getFavicon());

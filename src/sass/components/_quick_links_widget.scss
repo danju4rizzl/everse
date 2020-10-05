@@ -1,0 +1,69 @@
+// QuickLinks
+.quick-link {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  max-width: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__list {
+    // display: grid;
+    // grid-auto-flow: column;
+    // gap: 0.8rem;
+    // grid-template-columns: repeat(4, 1fr);
+    // grid-template-rows: repeat(3, 1fr);
+    // @include canScroll(70%, 150px);
+  }
+
+  &__item {
+    background-color: rgba($-color-dark, 0.5);
+    width: 3rem;
+    height: 3rem;
+    display: inline-block;
+    margin: 5px;
+
+    padding: 0.5rem;
+
+    cursor: pointer;
+    transition: all 8ms linear;
+
+    &--new {
+      background-color: rgba($-color-dark, 0.5);
+      & > a {
+        color: $-color-white;
+        text-decoration: none;
+        font-size: 2rem;
+        line-height: 1;
+      }
+    }
+
+    &:hover {
+      background-color: rgba($-color-dark, 0.2);
+      transform: translateY(1px);
+    }
+    &:hover .quick-link__link {
+    }
+  }
+
+  &__link {
+    // background-color: green;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+
+    &--light {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+  &__form {
+  }
+  &__input {
+    @include everse-input();
+    margin: 1.2rem auto;
+  }
+}

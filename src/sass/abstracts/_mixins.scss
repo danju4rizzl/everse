@@ -1,0 +1,34 @@
+@mixin everse-input {
+  background: none;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid $-color-gray;
+  color: $-color-white;
+  text-align: center;
+
+  &::placeholder {
+    color: $-color-light;
+  }
+}
+
+@mixin canScroll($maxHeight, $maWidth) {
+  max-height: $maxHeight;
+  max-width: $maWidth;
+  overflow: auto;
+  overflow-x: hidden;
+  // visibility: hidden;
+  width: 100%;
+  &::-webkit-scrollbar {
+    width: 10px;
+    &-track {
+      background: rgba($-color-gray, 0.5);
+    }
+    &-thumb {
+      background: $-color-dark;
+      // border-radius: 10px;
+      &:hover {
+        background: rgba($-color-dark, 0.5);
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+// todo
+.todo {
+  display: grid;
+  width: 85%;
+  gap: 1.3rem;
+  justify-content: center;
+  /* todo-form */
+
+  .todo-form {
+    // width: 100%;
+  }
+
+  .todo-input {
+    @include everse-input();
+  }
+
+  /* todo-items */
+  .todo-items {
+    @include canScroll(90px, 350px);
+  }
+
+  /* each li with class="item" */
+  .item {
+    cursor: pointer;
+    list-style: none;
+    color: $-color-white;
+    background: rgba($-color-black, 0.6);
+    transition: 0.2s;
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1rem;
+    grid-auto-flow: column;
+    gap: 1.2rem;
+
+    &:nth-child(odd) {
+      background: rgba($-color-black, 0.4);
+    }
+
+    &:hover {
+      transform: translateX(3px);
+    }
+  }
+
+  .item:first-child {
+    border-top-left-radius: 2px;
+  }
+
+  .item:last-child {
+    border-bottom-left-radius: 2px;
+  }
+
+  /* item style end */
+
+  .checkbox {
+    // margin-right: 10px;
+    text-decoration: line-through;
+    color: rgba($-color-gray, 0.5);
+  }
+
+  .delete-button {
+    background-color: transparent;
+    color: $-color-light;
+    border: none;
+    outline: none;
+    padding: 2px 5px;
+    font-weight: 550;
+    width: 3rem;
+    line-height: 24px;
+
+    &:hover {
+      background-color: $-color-primary;
+      color: $-color-light;
+    }
+  }
+
+  /* applied when the todo item is checked */
+  .checked {
+    text-decoration: line-through;
+    color: rgba($-color-gray, 0.1);
+  }
+}

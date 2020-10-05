@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Everse</title>
+    <link rel="shortcut icon" href="./img/LOGO-32.png" type="image/x-icon" />
+
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+
+    <!-- <link rel="stylesheet" href="main.css" /> -->
+  </head>
+  <body>
+    <main class="main">
+      <div class="container">
+        <div class="bg1" id="dateTime">
+          <h2 id="time"><span>--</span></h2>
+          <p id="date">--</p>
+        </div>
+
+        <div class="bg1" id="weather">
+          <h2 id="temperature">--°</h2>
+
+          <p id="location">--</p>
+        </div>
+
+        <div class="bg1">
+          <div id="covid">
+            <p id="deaths">--</p>
+            <p id="confirmed">--</p>
+            <p id="recovered">--</p>
+            <p>Covid Info</p>
+          </div>
+        </div>
+
+        <div class="bg1">
+          <div id="quickLinks" class="quick-link">
+            <ul class="quick-link__list"></ul>
+
+            <form action="" class="quick-link__form toggledWidget">
+              <input type="text" placeholder="Name" class="quick-link__input" />
+
+              <input type="url" placeholder="Url" class="quick-link__input" />
+
+              <div class="quick-link__controls">
+                <button
+                  type="button"
+                  class="quick-link__button quick-link__button--cancel"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  class="quick-link__button quick-link__button--add"
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="bg1">
+          <!-- TODO LIST START -->
+
+          <div class="todo">
+            <form class="todo-form">
+              <input
+                type="text"
+                class="todo-input"
+                placeholder="Add a Todo..."
+              />
+            </form>
+
+            <ul class="todo-items"></ul>
+          </div>
+          <!-- TODO LIST END -->
+        </div>
+
+        <div class="bg2" id="verse">
+          <div class="verse">
+            <h2 class="verse__title">Verse of the day</h2>
+            <p class="verse__content">--</p>
+            <p class="verse__book">--</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>

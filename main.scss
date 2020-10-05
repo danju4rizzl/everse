@@ -153,6 +153,7 @@ p {
     display: block;
   }
 }
+
 @mixin everse-input {
   background: none;
   border: none;
@@ -165,6 +166,28 @@ p {
     color: $-color-light;
   }
 }
+
+@mixin canScroll($maxHeight, $maWidth) {
+  max-height: $maxHeight;
+  max-width: $maWidth;
+  overflow: auto;
+  visibility: hidden;
+  width: 100%;
+  &::-webkit-scrollbar {
+    width: 10px;
+    &-track {
+      background: rgba($-color-gray, 0.5);
+    }
+    &-thumb {
+      background: $-color-dark;
+      // border-radius: 10px;
+      &:hover {
+        background: rgba($-color-dark, 0.5);
+      }
+    }
+  }
+}
+
 // todo
 .todo {
   display: grid;
@@ -183,24 +206,7 @@ p {
 
   /* todo-items */
   .todo-items {
-    max-height: 90px;
-    max-width: 350px;
-    width: 100%;
-    overflow: hidden;
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-      width: 10px;
-      &-track {
-        background: rgba($-color-gray, 0.5);
-      }
-      &-thumb {
-        background: $-color-dark;
-        // border-radius: 10px;
-        &:hover {
-          background: rgba($-color-dark, 0.5);
-        }
-      }
-    }
+    @include canScroll(90px, 350px);
   }
 
   /* each li with class="item" */
@@ -281,6 +287,7 @@ p {
     // gap: 0.8rem;
     // grid-template-columns: repeat(4, 1fr);
     // grid-template-rows: repeat(3, 1fr);
+    // @include canScroll(70%, 150px);
   }
 
   &__item {

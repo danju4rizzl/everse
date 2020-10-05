@@ -221,9 +221,9 @@ p {
 .todo .todo-items {
   max-height: 90px;
   max-width: 350px;
+  overflow: auto;
+  visibility: hidden;
   width: 100%;
-  overflow: hidden;
-  overflow-y: scroll;
 }
 
 .todo .todo-items::-webkit-scrollbar {

@@ -405,6 +405,10 @@ function quickLinkWidget(listItems) {
   quickLinkAddBtn.addEventListener('click', function (e) {
     e.preventDefault();
     handleNewLinks();
+    quickLinksList.innerHTML = '';
+
+    renderItems(listItems);
+    toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
   });
   function toggleDisplay(el) {
     el.addEventListener('click', function (e) {

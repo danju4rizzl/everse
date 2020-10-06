@@ -1,5 +1,5 @@
 import './main.scss';
-const axios = require('axios').default;
+import axios from 'axios';
 import { domStrings, appConfig } from './appSettings';
 import { verseWidget } from './widgets/verseWidget';
 import { todoWidget } from './widgets/todoWidget';
@@ -54,13 +54,12 @@ function ipLookUp() {
     });
 }
 
-ipLookUp();
-
 // handles ALL UI function calls
 function runApp() {
   verseWidget();
   quickLinkWidget(quickLinks);
   todoWidget();
+  ipLookUp();
 
   setInterval(() => {
     dateWidget();

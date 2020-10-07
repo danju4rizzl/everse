@@ -5,7 +5,7 @@ dist/*
 node_modules/
 *.log
 .env
-
+*.zip
 # OS generated files
 .DS_Store
 .DS_Store?

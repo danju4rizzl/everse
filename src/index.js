@@ -1,6 +1,6 @@
 import './main.scss';
 import axios from 'axios';
-import { domStrings, appConfig } from './appSettings';
+import { domStrings, appConfig, quickLinks } from './appSettings';
 import { verseWidget } from './widgets/verseWidget';
 import { todoWidget } from './widgets/todoWidget';
 import { dateWidget } from './widgets/dateWidget';

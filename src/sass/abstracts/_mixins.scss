@@ -22,10 +22,11 @@
     width: 10px;
     &-track {
       background: rgba($-color-gray, 0.5);
+      border-radius: 10px;
     }
     &-thumb {
       background: $-color-dark;
-      // border-radius: 10px;
+      border-radius: 10px;
       &:hover {
         background: rgba($-color-dark, 0.5);
       }

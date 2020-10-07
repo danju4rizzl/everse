@@ -38,6 +38,7 @@ export let domStrings = {
     ),
     quickLinkAddBtn: document.querySelector('.quick-link__button--add'),
     quickLinkCancelBtn: document.querySelector('.quick-link__button--cancel'),
+    quickLinkRemoveBtn: document.querySelector('.quick-link__item-remove'),
   },
 };
 
@@ -53,3 +54,16 @@ export const appConfig = {
   openWeatherMapUnits: 'metric',
   ipApiUrl: `http://ip-api.com/json`,
 };
+
+/*
+Default Quick Links
+*/
+export const quickLinks = [
+  'amazon.com',
+  'facebook.com',
+  'twitter.com',
+  'youtube.com',
+  'gmail.com',
+  'google.com',
+  'web.whatsapp.com',
+];

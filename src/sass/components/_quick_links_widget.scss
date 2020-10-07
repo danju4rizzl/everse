@@ -9,25 +9,35 @@
   align-items: center;
 
   &__list {
-    // display: grid;
-    // grid-auto-flow: column;
-    // gap: 0.8rem;
-    // grid-template-columns: repeat(4, 1fr);
-    // grid-template-rows: repeat(3, 1fr);
-    // @include canScroll(70%, 150px);
+    @include canScroll(75%, 350px);
   }
 
   &__item {
+    border-radius: 3px;
     background-color: rgba($-color-dark, 0.5);
     width: 3rem;
     height: 3rem;
     display: inline-block;
     margin: 5px;
-
     padding: 0.5rem;
-
     cursor: pointer;
     transition: all 8ms linear;
+    position: relative;
+
+    &-remove {
+      clip-path: circle(50% at 50% 50%);
+      background-color: rgba($-color-dark, 0.95);
+      color: $-color-primary;
+
+      position: absolute;
+      top: -5px;
+      width: 15px;
+      opacity: 0;
+    }
+
+    &:hover span {
+      opacity: 1;
+    }
 
     &--new {
       background-color: rgba($-color-dark, 0.5);

@@ -1,0 +1,39 @@
+
+
+.button {
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1.5;
+  //   padding: 1em 2em;
+  letter-spacing: 0.05rem;
+
+  &:focus {
+    transform: translateY(2px);
+  }
+  &--add {
+    @include btn-border-drawing(
+      $-color-white,
+      $-color-white,
+      $-color-dark,
+      2px,
+      bottom,
+      right
+    );
+    // background-color: $-color-dark;
+  }
+  &--cancel {
+    @include btn-border-drawing(
+      $-color-white,
+      $-color-white,
+      $-color-primary,
+      2px,
+      bottom,
+      left
+    );
+    // background-color: $-color-primary;
+  }
+}

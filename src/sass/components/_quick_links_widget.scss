@@ -74,6 +74,11 @@
   }
   &__input {
     @include everse-input();
-    margin: 1.2rem auto;
+    margin: 0.8rem auto;
+  }
+  &__controls{
+    display: flex;
+    justify-content: space-around;
+    padding:0 3.5rem;
   }
 }

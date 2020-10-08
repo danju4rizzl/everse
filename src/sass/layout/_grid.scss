@@ -3,9 +3,12 @@
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
   grid-gap: 10px;
+  height: 100vh;
 
   & > div {
-    height: 190px;
+    max-height: 100vh;
+    min-height: 190px;
+    // height: 100%;
     background-size: cover;
     background-attachment: fixed;
 

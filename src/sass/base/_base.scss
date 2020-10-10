@@ -12,6 +12,7 @@ body {
   font-family: $-font-primary;
   background: $-color-dark;
   color: $-color-white;
+  user-select: none;
 }
 
 .bg1,

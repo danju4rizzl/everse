@@ -59,11 +59,8 @@ function runApp() {
   verseWidget();
   quickLinkWidget(quickLinks);
   todoWidget();
-  ipLookUp();
-
-  setInterval(() => {
-    dateWidget();
-  }, 1000);
+  dateWidget();
+  // ipLookUp();
 }
 
 // localStorage.clear();

@@ -26,7 +26,7 @@ export function dateWidget() {
 
     let updatedTimeValues = storeContents('Current_Time', timeObj);
     // console.log(updatedTimeValues);
-    console.log(s);
+    // console.log(s);
     currentTime.textContent = updatedTimeValues.currentTime;
     currentDate.textContent = updatedTimeValues.currentDate;
     return dateFormated;

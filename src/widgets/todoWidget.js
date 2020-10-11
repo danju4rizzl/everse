@@ -63,7 +63,7 @@ export function todoWidget() {
     addToLocalStorage('Current_todos', todos, renderTodos);
   }
 
-  // deletes a todo from todos array, then updates localstorage and renders updated list to screen
+  // deletes a todo from todos array, then updates local storage and renders updated list to screen
   function deleteTodo(id) {
     todos = todos.filter(function (item) {
       return item.id != id;

@@ -1,4 +1,6 @@
 import './main.scss';
+import '../node_modules/materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
 import axios from 'axios';
 import { domStrings, appConfig, quickLinks } from './appSettings';
 import { verseWidget } from './widgets/verseWidget';

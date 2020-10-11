@@ -61,9 +61,11 @@ Default Quick Links
 export const quickLinks = [
   'amazon.com',
   'facebook.com',
+  'netflix.com',
   'twitter.com',
   'youtube.com',
-  'gmail.com',
+  'wikipedia.org',
   'google.com',
   'web.whatsapp.com',
+  'aliexpress.com',
 ];

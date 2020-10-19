@@ -1,14 +1,17 @@
 import axios from 'axios';
 import { appConfig, domStrings } from '../appSettings';
-import { addToLocalStorage, getFromLocalStorage } from '../utils';
+import { addToLocalStorage, getFromLocalStorage, fetchData } from '../utils';
 
 /*
   To handle the verse of the day
-  */
+*/
 
-export function verseWidget() {
+export async function verseWidget() {
   const { ourmannaUrl } = appConfig;
   const { verseContent, verseBook } = domStrings.verseBox;
+
+  const dailyVerse = await fetchData(ourmannaUrl);
+  let { text, reference, version } = dailyVerse.verse.details;
 
   function renderVerse(verseOfTheDay) {
     for (const item in verseOfTheDay) {
@@ -19,14 +22,7 @@ export function verseWidget() {
     }
   }
 
-  axios
-    .get(ourmannaUrl)
-    .then(function (response) {
-      let { text, reference, version } = response.data.verse.details;
-      addToLocalStorage('Current_verse', { text, reference }, renderVerse);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  addToLocalStorage('Current_verse', { text, reference }, renderVerse);
+
   getFromLocalStorage('Current_verse', {}, renderVerse);
 }

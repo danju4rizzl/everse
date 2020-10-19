@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // function to add todos to local storage
 export function addToLocalStorage(key, item, fn) {
   localStorage.setItem(key, JSON.stringify(item));
@@ -42,4 +44,15 @@ export const getFavicon = function () {
     }
   }
   return favicon;
+};
+
+/*
+Fetch data using axios 
+*/
+export const fetchData = async (arg) => {
+  const response = await axios.get(arg);
+  if (response.data.error) {
+    return [];
+  }
+  return response.data;
 };

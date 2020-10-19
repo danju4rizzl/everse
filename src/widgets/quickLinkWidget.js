@@ -3,14 +3,17 @@ import { addToLocalStorage, getFromLocalStorage } from '../utils';
 
 export function quickLinkWidget(listItems) {
   const {
-    main,
-    quickLinksList,
+    quickLinksMain,
     quickLinkNameInput,
     quickLinkUrlInput,
     quickLinkAddBtn,
     quickLinkCancelBtn,
     quickLinkRemoveBtn,
   } = domStrings.quickLinkBox;
+
+  const quickLinksList = document.createElement('ul');
+  quickLinksList.classList.add('quick-link__list');
+  quickLinksMain.append(quickLinksList);
 
   let allLink = (el) => {
     return `<li class="quick-link__item" title="${el.toUpperCase()}"><a href="http://${el}" class="quick-link__link"><img src="http://www.google.com/s2/favicons?domain=https://${el}" alt="everse quick link icon ${el}" class="quick-link__img"></a>   <span class="quick-link__item-remove" title="DELETE">-</span></li>`;
@@ -53,8 +56,7 @@ export function quickLinkWidget(listItems) {
   function toggleDisplay(el) {
     el.addEventListener('click', function (e) {
       e.preventDefault();
-      // console.log('prevented');
-      toggleForm(main);
+      toggleForm(quickLinksMain);
     });
   }
 
@@ -68,7 +70,7 @@ export function quickLinkWidget(listItems) {
       listItems.push(urlLink);
       quickLinkNameInput.value = '';
       quickLinkUrlInput.value = '';
-      toggleForm(main);
+      toggleForm(quickLinksMain);
     }
   }
 

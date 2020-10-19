@@ -28,7 +28,7 @@ export let domStrings = {
     todoItemsList: document.querySelector('.todo-items'),
   },
   quickLinkBox: {
-    main: document.querySelector('#quickLinks'),
+    quickLinksMain: document.querySelector('#quickLinks'),
     quickLinksList: document.querySelector('.quick-link__list'),
     quickLinkNameInput: document.querySelector(
       '.quick-link__form input[type=text]'

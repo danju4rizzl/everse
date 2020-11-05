@@ -3,7 +3,7 @@ import axios from 'axios';
 import { domStrings, appConfig, quickLinks } from './appSettings';
 import { verseWidget } from './widgets/verseWidget';
 import { todoWidget } from './widgets/todoWidget';
-import { dateWidget } from './widgets/dateWidget';
+import { dateTimeWidget } from './widgets/dateTimeWidget';
 import { covidWidget } from './widgets/covidWidget';
 import { quickLinkWidget } from './widgets/quickLinkWidget';
 import { weatherWidget } from './widgets/weatherWidget';
@@ -56,11 +56,11 @@ function ipLookUp() {
 
 // handles ALL UI function calls
 function runApp() {
-  verseWidget();
-  quickLinkWidget(quickLinks);
-  todoWidget();
-  dateWidget();
-  // ipLookUp();
+  // verseWidget();
+  // quickLinkWidget(quickLinks);
+  // todoWidget();
+  dateTimeWidget();
+  ipLookUp();
 }
 
 // localStorage.clear();

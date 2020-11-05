@@ -47,6 +47,18 @@ export const getFavicon = function () {
 };
 
 /*
+Returns a formatted date string for covidWidget
+*/
+export const dateFormatted = function () {
+  let date = new Date();
+  let month = date.getMonth();
+  let dYear = date.getFullYear();
+  let d = date.getDate();
+
+  return `${dYear}-${month}-${d}`;
+};
+
+/*
 Fetch data using axios 
 */
 export const fetchData = async (arg) => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { appConfig, domStrings } from '../appSettings';
-import { dateWidget } from './dateWidget';
+import { dateFormatted } from '../utils';
 import {
   addToLocalStorage,
   getFromLocalStorage,
@@ -25,13 +25,14 @@ export function covidWidget(usersCountry) {
         const { confirmed: confirm, deaths: death, recovered: recover } = item;
         const filteredDay = item.date;
 
-        if (filteredDay === dateWidget()) {
+        if (filteredDay === dateFormatted()) {
           const covidObj = {
             confirm,
             death,
             recover,
           };
           const covidUpdate = storeContents('Current_covid', covidObj);
+
           confirmed.textContent = `Cases: ${covidUpdate.confirm}`;
           deaths.textContent = `Death: ${covidUpdate.death}`;
           recovered.textContent = `Recovered: ${covidUpdate.recover} `;

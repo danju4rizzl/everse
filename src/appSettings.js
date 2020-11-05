@@ -11,10 +11,11 @@ export let domStrings = {
     location: document.querySelector('#location'),
     temp: document.querySelector('#temperature'),
   },
-  timeBox: {
+  dateTimeBox: {
     box: document.querySelector('#dateTime'),
     currentDate: document.querySelector('#date'),
     currentTime: document.querySelector('#time'),
+    greetings: document.querySelector('#greetings'),
   },
   covidBox: {
     box: document.querySelector('#covid'),
@@ -36,8 +37,8 @@ export let domStrings = {
     quickLinkUrlInput: document.querySelector(
       '.quick-link__form input[type=url]'
     ),
-    quickLinkAddBtn: document.querySelector('.quick-link__button--add'),
-    quickLinkCancelBtn: document.querySelector('.quick-link__button--cancel'),
+    quickLinkAddBtn: document.querySelector('.btn-primary'),
+    quickLinkCancelBtn: document.querySelector('.btn-danger'),
     quickLinkRemoveBtn: document.querySelector('.quick-link__item-remove'),
   },
 };

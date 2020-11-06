@@ -47,6 +47,27 @@ export const getFavicon = function () {
 };
 
 /*
+Format months as strings
+*/
+export const formattedMonth = (arrayOfTheMonth) => {
+  let date = new Date();
+  arrayOfTheMonth = new Array();
+
+  arrayOfTheMonth[0] = 'Jan';
+  arrayOfTheMonth[1] = 'Feb';
+  arrayOfTheMonth[2] = 'Mar';
+  arrayOfTheMonth[3] = 'Apr';
+  arrayOfTheMonth[4] = 'May';
+  arrayOfTheMonth[5] = 'Jun';
+  arrayOfTheMonth[6] = 'Jul';
+  arrayOfTheMonth[7] = 'Aug';
+  arrayOfTheMonth[8] = 'Sep';
+  arrayOfTheMonth[9] = 'Oct';
+  arrayOfTheMonth[10] = 'Nov';
+  arrayOfTheMonth[11] = 'Dec';
+  return arrayOfTheMonth[date.getMonth()];
+};
+/*
 Returns a formatted date string for covidWidget
 */
 export const dateFormatted = function () {

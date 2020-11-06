@@ -45,7 +45,7 @@ function ipLookUp() {
     .request(options)
     .then(function (response) {
       let { city, country } = response.data;
-      weatherWidget(city);
+      // weatherWidget(city);
       covidWidget(country);
     })
     .catch(function (error) {
@@ -60,7 +60,7 @@ function runApp() {
   // quickLinkWidget(quickLinks);
   // todoWidget();
   dateTimeWidget();
-  ipLookUp();
+  ipLookUp(); //TOdo make ipLookUp() a utils function to call weather and / or covidWidget instead of groping it together
 }
 
 // localStorage.clear();

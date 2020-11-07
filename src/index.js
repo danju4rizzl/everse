@@ -7,6 +7,7 @@ import { dateTimeWidget } from './widgets/dateTimeWidget';
 import { covidWidget } from './widgets/covidWidget';
 import { quickLinkWidget } from './widgets/quickLinkWidget';
 import { weatherWidget } from './widgets/weatherWidget';
+import { fetchData } from './utils';
 
 // Handle User Location
 function handleLocation() {
@@ -30,38 +31,26 @@ function handleLocation() {
   // } else {
   //   console.log('geolocation is not enabled on this browser');
   // }
-
-  return ipLookUp();
+  // return ipLookUp();
 }
 
 // Handle User ip-location
-function ipLookUp() {
-  const options = {
-    method: 'GET',
-    url: appConfig.ipApiUrl,
-  };
-
-  axios
-    .request(options)
-    .then(function (response) {
-      let { city, country } = response.data;
-      // weatherWidget(city);
-      covidWidget(country);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    });
-}
 
 // handles ALL UI function calls
-function runApp() {
-  // verseWidget();
+const runApp = async () => {
+  const userIp = await fetchData('http://ip-api.com/json');
+  let { country, city } = userIp;
+
   // quickLinkWidget(quickLinks);
   // todoWidget();
+  await verseWidget();
+  await covidWidget(country);
+  await weatherWidget(city);
   dateTimeWidget();
-  ipLookUp(); //TOdo make ipLookUp() a utils function to call weather and / or covidWidget instead of groping it together
-}
+
+  //TOdo make ipLookUp() a utils function to call weather and / or covidWidget instead of groping it together
+  // ipLookUp();
+};
 
 // localStorage.clear();
 if (localStorage.length <= 0) {

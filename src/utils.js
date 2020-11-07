@@ -7,11 +7,11 @@ export function addToLocalStorage(key, item, fn) {
 }
 
 // function helps to get everything from local storage
-export function getFromLocalStorage(key, item, fn) {
-  const reference = localStorage.getItem(key);
+export function getFromLocalStorage(refKey, refItems, handleRefItems) {
+  const reference = localStorage.getItem(refKey);
   if (reference) {
-    item = JSON.parse(reference);
-    fn(item);
+    refItems = JSON.parse(reference);
+    handleRefItems(refItems);
   }
 }
 

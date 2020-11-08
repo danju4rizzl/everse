@@ -42,8 +42,8 @@ const runApp = async () => {
   // quickLinkWidget(quickLinks);
   // todoWidget();
   verseWidget();
-  await covidWidget(country);
-  await weatherWidget(city);
+  covidWidget(country);
+  weatherWidget(city);
   dateTimeWidget();
 };
 

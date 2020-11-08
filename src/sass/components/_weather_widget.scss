@@ -30,6 +30,9 @@
   &__units {
     & > p span {
       cursor: pointer;
+      &[data-unit='active'] {
+        color: rgba($-color-dark, 0.5);
+      }
     }
   }
 }

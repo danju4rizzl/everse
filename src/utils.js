@@ -78,6 +78,38 @@ export const dateFormatted = function () {
 
   return `${dYear}-${month}-${d}`;
 };
+/*
+Will compare and render the weather icons for a given weather object from openWeatherMap API.
+*/
+export const renderWeatherIcon = (apiIcon) => {
+  let iconClass;
+
+  const checkIconId = function (id) {
+    if (id >= 200 && id < 232) {
+      iconClass = 'bolt';
+    } else if (id >= 300 && id < 321) {
+      iconClass = 'cloud-sun-rain';
+    } else if (id >= 500 && id < 531) {
+      iconClass = 'cloud-showers-heavy';
+    } else if (id >= 600 && id < 622) {
+      iconClass = 'snowflake';
+    } else if (id >= 701 && id < 781) {
+      iconClass = 'wind';
+    } else if (id === 800) {
+      iconClass = 'cloud-sun';
+    } else if (id > 800 && id <= 804) {
+      iconClass = 'smog';
+    } else iconClass = 'rainbow';
+  };
+  // Check the icon identifier
+  for (let item of apiIcon) {
+    checkIconId(item.id);
+  }
+  // Create the icon
+  const iconElement = `<span class="fas fa-${iconClass}"></span>`;
+  // Add the icon to the DOM as a child of the parent element.
+  document.querySelector('.weather__temp #icon').innerHTML = iconElement;
+};
 
 /*
 Fetch data using axios 

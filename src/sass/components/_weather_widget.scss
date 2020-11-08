@@ -1,6 +1,4 @@
-#weather {
-  position: relative;
-
+.weather {
   .icon {
     position: absolute;
     top: 0;
@@ -15,5 +13,23 @@
   }
   &:hover .icon {
     opacity: 1;
+  }
+
+  &__temp {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+    & i {
+      font-size: 6vmin;
+    }
+    & > :last-child {
+      grid-column: 1/-1;
+    }
+  }
+
+  &__units {
+    & > p span {
+      cursor: pointer;
+    }
   }
 }

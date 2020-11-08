@@ -34,8 +34,6 @@ function handleLocation() {
   // return ipLookUp();
 }
 
-// Handle User ip-location
-
 // handles ALL UI function calls
 const runApp = async () => {
   const userIp = await fetchData('http://ip-api.com/json');
@@ -43,13 +41,10 @@ const runApp = async () => {
 
   // quickLinkWidget(quickLinks);
   // todoWidget();
-  await verseWidget();
+  verseWidget();
   await covidWidget(country);
   await weatherWidget(city);
   dateTimeWidget();
-
-  //TOdo make ipLookUp() a utils function to call weather and / or covidWidget instead of groping it together
-  // ipLookUp();
 };
 
 // localStorage.clear();

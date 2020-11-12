@@ -10,6 +10,8 @@ export let domStrings = {
     box: document.querySelector('#weather'),
     location: document.querySelector('#location'),
     temp: document.querySelector('#temperature'),
+    fahrenheit: document.getElementById('fahrenheit'),
+    celsius: document.getElementById('celsius'),
   },
   dateTimeBox: {
     box: document.querySelector('#dateTime'),
@@ -52,7 +54,7 @@ export const appConfig = {
   covidUrl: 'https://pomber.github.io/covid19/timeseries.json',
   openWeatherMapApiKey: '8633abd41d2939308a4bdf453fbdcbe9',
   openWeatherMapLocation: 'New York',
-  openWeatherMapUnits: 'metric',
+  openWeatherMapUnits: 'imperial',
   ipApiUrl: `http://ip-api.com/json`,
 };
 

@@ -18,7 +18,9 @@
   &__temp {
     display: grid;
     align-items: center;
+    justify-content: center;
     grid-template-columns: repeat(2, 1fr);
+
     & i {
       font-size: 6vmin;
     }
@@ -28,11 +30,13 @@
   }
 
   &__units {
-    & > p span {
-      cursor: pointer;
-      &[data-unit='active'] {
-        color: rgba($-color-dark, 0.5);
-      }
+    & > button {
+      @include transparent-button();
+      font-size: 3.2vmin;
+      margin: 0 0.2rem;
+    }
+    .is-active {
+      color: rgba($-color-dark, 0.5);
     }
   }
 }

@@ -34,7 +34,6 @@
   }
 }
 
-
 //=== Drawing effect
 
 @mixin btn-border-drawing(
@@ -99,4 +98,10 @@
     }
   }
   outline: none;
+}
+@mixin transparent-button {
+  background: transparent;
+  outline: none;
+  border: none;
+  color: inherit;
 }

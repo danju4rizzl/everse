@@ -32,7 +32,7 @@ export function dateTimeWidget() {
     `,
   };
   setInterval(() => {
-    let updatedTimeValues = storeContents('Current_Time', timeObj);
+    let updatedTimeValues = storeContents('Current_time', timeObj);
 
     currentTime.textContent = updatedTimeValues.currentTime;
     currentDate.textContent = updatedTimeValues.currentDate;

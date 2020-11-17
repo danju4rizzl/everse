@@ -105,3 +105,10 @@
   border: none;
   color: inherit;
 }
+
+@mixin hover-effect {
+  &:hover button {
+    transition: all 0.3s linear;
+    opacity: 1;
+  }
+}

@@ -6,7 +6,6 @@ import {
   renderWeatherIcon,
   storeContents,
 } from '../utils';
-import easyToggle from 'easy-toggle-state';
 
 /*
   To handle the weather of the user
@@ -18,7 +17,7 @@ export function weatherWidget(userCity) {
     openWeatherMapUnits,
   } = appConfig;
 
-  const { location, temp, celsius, fahrenheit } = domStrings.weatherBox;
+  let { location, temp, celsius, fahrenheit } = domStrings.weatherBox;
   const options = {
     method: 'GET',
     url: `https://api.openweathermap.org/data/2.5/weather`,
@@ -45,8 +44,12 @@ export function weatherWidget(userCity) {
         celsius.classList.add('is-active');
         fahrenheit.classList.remove('is-active');
 
-        weatherObject.weatherTemperature = currentCelsius;
-        temp.textContent = `${currentCelsius}°`;
+        let weatherObject = {
+          weatherLocation,
+          weatherTemperature: `${currentCelsius}°`,
+        };
+        let weatherUpdate = storeContents('Current_weather', weatherObject);
+        temp.textContent = weatherUpdate.weatherTemperature;
       });
 
       fahrenheit.addEventListener('click', () => {
@@ -54,19 +57,49 @@ export function weatherWidget(userCity) {
         celsius.classList.remove('is-active');
         temp.textContent = `${defaultUnit}°`;
 
-        weatherObject.weatherTemperature = defaultUnit;
+        let weatherObject = {
+          weatherLocation,
+          weatherTemperature: `${defaultUnit}°`,
+        };
+        let weatherUpdate = storeContents('Current_weather', weatherObject);
+        temp.textContent = weatherUpdate.weatherTemperature;
       });
 
-      let weatherObject = {
-        weatherLocation,
-        weatherTemperature,
-      };
+      // window.addEventListener('load', () => {
+      //   let weatherObject = {
+      //     weatherLocation,
+      //     weatherTemperature,
+      //   };
 
-      const weatherUpdate = storeContents('Current_weather', weatherObject);
+      //   let weatherUpdate = storeContents('Current_weather', weatherObject);
+
+      //   location.textContent = weatherUpdate.weatherLocation;
+      //   temp.textContent = weatherUpdate.weatherTemperature;
+      //   renderWeatherIcon(response.data.weather);
+      // });
+
+      function weatherLoaded() {
+        const loadedWeather = JSON.parse(
+          localStorage.getItem('Current_weather')
+        );
+        if (loadedWeather !== null) {
+          // let weatherUpdate = storeContents('Current_weather', loadedWeather);
+          location.textContent = loadedWeather.weatherLocation;
+          temp.textContent = loadedWeather.weatherTemperature;
+        } else {
+          let weatherObject = {
+            weatherLocation,
+            weatherTemperature,
+          };
+          let weatherUpdate = storeContents('Current_weather', weatherObject);
+          location.textContent = weatherUpdate.weatherLocation;
+          temp.textContent = weatherUpdate.weatherTemperature;
+        }
+      }
       renderWeatherIcon(response.data.weather);
+
+      window.onload = weatherLoaded();
       // console.log(response.data);
-      location.textContent = weatherUpdate.weatherLocation;
-      temp.textContent = weatherUpdate.weatherTemperature;
     })
     .catch((error) => {
       console.error(error);

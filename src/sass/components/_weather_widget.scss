@@ -11,9 +11,6 @@
       color: $-color-gray;
     }
   }
-  &:hover .icon {
-    opacity: 1;
-  }
 
   &__temp {
     display: grid;
@@ -34,9 +31,12 @@
       @include transparent-button();
       font-size: 3.2vmin;
       margin: 0 0.2rem;
+      opacity: 0;
     }
     .is-active {
-      color: rgba($-color-dark, 0.5);
+      opacity: 1;
+      color: rgba($-color-white, 0.5);
     }
   }
+  @include hover-effect();
 }

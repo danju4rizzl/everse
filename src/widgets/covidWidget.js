@@ -7,6 +7,10 @@ import {
   storeContents,
 } from '../utils';
 
+// ? 1)  use https://apexcharts.com/javascript-chart-demos/pie-charts/simple-donut/ to render the charts
+
+// ? 2) change the covid api to use NOVELCOVID API in postman
+
 /*
   To handle the Covid-19 update according to the value (current date) from print_date()
   */

@@ -23,7 +23,7 @@ function handleLocation() {
   //     },
   //     function error(error_message) {
   //       console.log(
-  //         'An error has occured whale retrieving location',
+  //         'An error has occurred whale retrieving location',
   //         error_message
   //       );
   //     }
@@ -35,16 +35,16 @@ function handleLocation() {
 }
 
 // handles ALL UI function calls
+
 const runApp = async () => {
   const userIp = await fetchData('http://ip-api.com/json');
   let { country, city } = userIp;
-
-  // quickLinkWidget(quickLinks);
-  // todoWidget();
   verseWidget();
+  dateTimeWidget();
+  todoWidget();
+  quickLinkWidget(quickLinks);
   covidWidget(country);
   weatherWidget(city);
-  dateTimeWidget();
 };
 
 // localStorage.clear();

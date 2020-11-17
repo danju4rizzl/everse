@@ -35,68 +35,68 @@ export function weatherWidget(userCity) {
 
       let weatherLocation = response.data.name;
       let weatherTemperature = `${defaultUnit}°`;
+      let activeWeatherUnits = false;
 
       celsius.addEventListener('click', () => {
         //! formula: (74°F − 32) × 5/9 = 23,333°C
         let isCelsius = ((defaultUnit - 32) * 5) / 9;
         const currentCelsius = Math.round(isCelsius);
-
-        celsius.classList.add('is-active');
-        fahrenheit.classList.remove('is-active');
+        toggleActive(celsius, fahrenheit);
 
         let weatherObject = {
           weatherLocation,
           weatherTemperature: `${currentCelsius}°`,
+          activeWeatherUnits: 'celsius',
         };
         let weatherUpdate = storeContents('Current_weather', weatherObject);
         temp.textContent = weatherUpdate.weatherTemperature;
       });
 
       fahrenheit.addEventListener('click', () => {
-        fahrenheit.classList.add('is-active');
-        celsius.classList.remove('is-active');
+        toggleActive(fahrenheit, celsius);
         temp.textContent = `${defaultUnit}°`;
 
         let weatherObject = {
           weatherLocation,
           weatherTemperature: `${defaultUnit}°`,
+          activeWeatherUnits,
         };
         let weatherUpdate = storeContents('Current_weather', weatherObject);
         temp.textContent = weatherUpdate.weatherTemperature;
       });
 
-      // window.addEventListener('load', () => {
-      //   let weatherObject = {
-      //     weatherLocation,
-      //     weatherTemperature,
-      //   };
-
-      //   let weatherUpdate = storeContents('Current_weather', weatherObject);
-
-      //   location.textContent = weatherUpdate.weatherLocation;
-      //   temp.textContent = weatherUpdate.weatherTemperature;
-      //   renderWeatherIcon(response.data.weather);
-      // });
-
       function weatherLoaded() {
         const loadedWeather = JSON.parse(
           localStorage.getItem('Current_weather')
         );
+
         if (loadedWeather !== null) {
           // let weatherUpdate = storeContents('Current_weather', loadedWeather);
           location.textContent = loadedWeather.weatherLocation;
           temp.textContent = loadedWeather.weatherTemperature;
+
+          loadedWeather.activeWeatherUnits === 'celsius'
+            ? toggleActive(celsius, fahrenheit)
+            : toggleActive(fahrenheit, celsius);
         } else {
           let weatherObject = {
             weatherLocation,
             weatherTemperature,
+            activeWeatherUnits,
           };
           let weatherUpdate = storeContents('Current_weather', weatherObject);
           location.textContent = weatherUpdate.weatherLocation;
           temp.textContent = weatherUpdate.weatherTemperature;
+          toggleActive(fahrenheit, celsius);
         }
       }
+
       renderWeatherIcon(response.data.weather);
+
+      function toggleActive(activeElement, inactiveElement) {
+        activeElement.classList.add('is-active');
+        inactiveElement.classList.remove('is-active');
+      }
 
       window.onload = weatherLoaded();
       // console.log(response.data);

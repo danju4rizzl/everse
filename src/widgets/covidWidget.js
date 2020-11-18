@@ -8,8 +8,6 @@ import {
   storeContents,
 } from '../utils';
 
-// ? 1)  use https://apexcharts.com/javascript-chart-demos/pie-charts/simple-donut/ to render the charts
-
 // ? 2) change the covid api to use NOVELCOVID API in postman
 
 /*
@@ -21,67 +19,100 @@ export function covidWidget(usersCountry) {
   const { covidUrl } = appConfig;
 
   axios
-    .get(covidUrl)
+    .get(
+      `https://corona.lmao.ninja/v2/countries/${usersCountry}?yesterday&strict&query `
+    )
     .then(function (response) {
-      const country = usersCountry === 'United States' ? 'US' : usersCountry;
+      console.log(response.data);
+      let {
+        country,
+        cases,
+        deaths,
+        recovered,
+        critical,
+        tests,
+      } = response.data;
 
-      const covidLocation = response.data[country];
-      covidLocation.filter((item) => {
-        const { confirmed: confirm, deaths: death, recovered: recover } = item;
-        const filteredDay = item.date;
-
-        if (filteredDay === dateFormatted()) {
-          const covidObj = {
-            confirm,
-            death,
-            recover,
-          };
-          const covidUpdate = storeContents('Current_covid', covidObj);
-
-          /**
-           * To prints out the covid info for covidWidget 
-            confirmed.textContent = `Cases: ${covidUpdate.confirm}`;
-            deaths.textContent = `Death: ${covidUpdate.death}`;
-            recovered.textContent = `Recovered: ${covidUpdate.recover} `;
-          */
-
-          renderPieChart(
-            [covidUpdate.confirm, covidUpdate.recover, covidUpdate.death],
-            ['Confirmed', 'Recovered', 'Deaths'],
-            ['#636e72', '#2d3436', '#ff5252']
-          );
-        }
-      });
+      renderPieChart(
+        [cases, recovered, deaths],
+        ['Cases', 'Recovered', 'Deaths']
+      );
     })
     .catch(function (error) {
       console.log(error);
     });
-  const renderPieChart = (statsValues, statsNames, statsColors) => {
+
+  const renderPieChart = (statsValues, statsNames) => {
     let options = {
       series: statsValues,
+      // To handle the charts canvas
       chart: {
         type: 'donut',
+        width: 300,
+        height: 200,
       },
+      // To handle the charts responsive behaviour
       responsive: [
         {
-          breakpoint: 480,
+          breakpoint: 500,
           options: {
             chart: {
-              width: 200,
+              width: 300,
             },
             legend: {
-              position: 'bottom',
+              show: true,
+              position: 'center',
+              width: undefined,
+              height: undefined,
             },
           },
         },
       ],
-      labels: statsNames,
-      //colors can be styled using hex code only
-      colors: statsColors,
 
-      legend: {
-        color: '#ffffff',
+      // To handle the charts labels/names in the chart and legend
+      labels: statsNames,
+
+      // To style the charts labels ONLY
+      dataLabels: {
+        enabled: true,
+        style: {
+          fontSize: '0.8rem',
+        },
       },
+      // To handle how the charts is being displayed
+      plotOptions: {
+        pie: {
+          size: '45%',
+          dataLabels: {
+            offset: -5,
+          },
+        },
+      },
+
+      // To handle the charts colors
+      theme: {
+        mode: 'light',
+        palette: 'palette3',
+        monochrome: {
+          enabled: true,
+          // color: '#1e272e',
+          color: '#3E7774',
+          shadeTo: 'light',
+          shadeIntensity: 0.98,
+        },
+      },
+
+      //  To handle the charts legend
+      legend: {
+        show: true,
+        position: 'bottom',
+        labels: {
+          colors: '#ffffff',
+          useSeriesColors: false,
+        },
+      },
+
+      // To handle how the charts stroke is being drawn
       stroke: {
         show: true,
         curve: 'smooth',

@@ -20,10 +20,7 @@ export let domStrings = {
     greetings: document.querySelector('#greetings'),
   },
   covidBox: {
-    box: document.querySelector('#covid'),
-    confirmed: document.querySelector('#confirmed'),
-    recovered: document.querySelector('#recovered'),
-    deaths: document.querySelector('#deaths'),
+    box: document.querySelector('.covid'),
   },
   todoBox: {
     todoForm: document.querySelector('.todo-form'),

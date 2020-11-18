@@ -1,4 +1,5 @@
 import axios from 'axios';
+import ApexCharts from 'apexcharts';
 import { appConfig, domStrings } from '../appSettings';
 import { dateFormatted } from '../utils';
 import {
@@ -37,13 +38,62 @@ export function covidWidget(usersCountry) {
           };
           const covidUpdate = storeContents('Current_covid', covidObj);
 
-          confirmed.textContent = `Cases: ${covidUpdate.confirm}`;
-          deaths.textContent = `Death: ${covidUpdate.death}`;
-          recovered.textContent = `Recovered: ${covidUpdate.recover} `;
+          /**
+           * To prints out the covid info for covidWidget 
+            confirmed.textContent = `Cases: ${covidUpdate.confirm}`;
+            deaths.textContent = `Death: ${covidUpdate.death}`;
+            recovered.textContent = `Recovered: ${covidUpdate.recover} `;
+          */
+
+          renderPieChart(
+            [covidUpdate.confirm, covidUpdate.recover, covidUpdate.death],
+            ['Confirmed', 'Recovered', 'Deaths'],
+            ['#636e72', '#2d3436', '#ff5252']
+          );
         }
       });
     })
     .catch(function (error) {
       console.log(error);
     });
+  const renderPieChart = (statsValues, statsNames, statsColors) => {
+    let options = {
+      series: statsValues,
+      chart: {
+        type: 'donut',
+      },
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: 'bottom',
+            },
+          },
+        },
+      ],
+      labels: statsNames,
+      //colors can be styled using hex code only
+      colors: statsColors,
+
+      legend: {
+        color: '#ffffff',
+      },
+      stroke: {
+        show: true,
+        curve: 'smooth',
+        lineCap: 'butt',
+        colors: undefined,
+        width: 2,
+        dashArray: 0,
+      },
+    };
+
+    let chart = new ApexCharts(document.querySelector('#chart'), options);
+
+    chart.render();
+  };
 }

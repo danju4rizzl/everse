@@ -1,0 +1,19 @@
+.covid-widget {
+  &:hover .apexcharts-legend {
+    opacity: 1;
+    transition: all 0.3s linear;
+  }
+  .apexcharts {
+    &-legend {
+      display: grid;
+      justify-content: start;
+      align-items: center;
+      opacity: 0;
+      &-text {
+        color: $-color-light !important;
+        font-size: 0.9rem !important;
+        font-family: $-font-primary !important;
+      }
+    }
+  }
+}

@@ -12,6 +12,7 @@
   "author": "Danjuma Ashiwaju",
   "license": "ISC",
   "dependencies": {
+    "apexcharts": "^3.22.2",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",

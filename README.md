@@ -44,8 +44,6 @@ Open up the FireFox Browser and go to **[about:debugging#/runtime/this-firefox](
 
 ## 👨🏾‍💻 Development:
 
-After installing the extension locally run the following command to start development on the extension.
-
 In the terminal run the following command to install all the dependencies:
 
     yarn install
@@ -65,4 +63,4 @@ or
 > This will open the browser and starts a development server with
 > hot-reload.
 
-Happy Coding 👍🏾
+## Happy Coding 👍🏾

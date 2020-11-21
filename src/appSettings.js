@@ -49,7 +49,6 @@ export const appConfig = {
   proxyUrl: 'https://cors-anywhere.herokuapp.com/',
   ourmannaUrl: 'https://beta.ourmanna.com/api/v1/get/?format=json',
   covidUrl: 'https://pomber.github.io/covid19/timeseries.json',
-  openWeatherMapApiKey: '8633abd41d2939308a4bdf453fbdcbe9',
   openWeatherMapLocation: 'New York',
   openWeatherMapUnits: 'imperial',
   ipApiUrl: `http://ip-api.com/json`,

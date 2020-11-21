@@ -16,14 +16,13 @@ export function weatherWidget(userCity) {
     openWeatherMapLocation,
     openWeatherMapUnits,
   } = appConfig;
-
   let { location, temp, celsius, fahrenheit } = domStrings.weatherBox;
   const options = {
     method: 'GET',
     url: `https://api.openweathermap.org/data/2.5/weather`,
     params: {
       q: userCity,
-      appid: openWeatherMapApiKey,
+      appid: process.env.OPEN_WEATHER_MAP_API_KEY,
       units: openWeatherMapUnits,
     },
   };

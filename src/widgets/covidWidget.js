@@ -23,7 +23,6 @@ export function covidWidget(usersCountry) {
       `https://corona.lmao.ninja/v2/countries/${usersCountry}?yesterday&strict&query `
     )
     .then(function (response) {
-      console.log(response.data);
       let {
         country,
         cases,

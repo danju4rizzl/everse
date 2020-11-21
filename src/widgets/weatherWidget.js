@@ -11,11 +11,15 @@ import {
   To handle the weather of the user
   */
 export function weatherWidget(userCity) {
-  const {
-    openWeatherMapApiKey,
-    openWeatherMapLocation,
-    openWeatherMapUnits,
-  } = appConfig;
+  /**
+   *ℹ️ To check/verify your ApiKey has been changed uncomment this console.log 
+  console.log(process.env.OPEN_WEATHER_MAP_API_KEY);
+  
+  if you get a different key ie deprecated key, simply delete the .cache folder and restart the serve.
+  */
+
+  const { openWeatherMapUnits } = appConfig;
+
   let { location, temp, celsius, fahrenheit } = domStrings.weatherBox;
   const options = {
     method: 'GET',
@@ -48,6 +52,7 @@ export function weatherWidget(userCity) {
           activeWeatherUnits: 'celsius',
         };
         let weatherUpdate = storeContents('Current_weather', weatherObject);
+
         temp.textContent = weatherUpdate.weatherTemperature;
       });
 
@@ -61,6 +66,7 @@ export function weatherWidget(userCity) {
           activeWeatherUnits,
         };
         let weatherUpdate = storeContents('Current_weather', weatherObject);
+
         temp.textContent = weatherUpdate.weatherTemperature;
       });
 
@@ -70,7 +76,6 @@ export function weatherWidget(userCity) {
         );
 
         if (loadedWeather !== null) {
-          // let weatherUpdate = storeContents('Current_weather', loadedWeather);
           location.textContent = loadedWeather.weatherLocation;
           temp.textContent = loadedWeather.weatherTemperature;
 

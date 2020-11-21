@@ -9,7 +9,7 @@ import { quickLinkWidget } from './widgets/quickLinkWidget';
 import { weatherWidget } from './widgets/weatherWidget';
 import { fetchData } from './utils';
 
-// Handle User Location
+// Handle User Geo-Location
 function handleLocation() {
   // if ('geolocation' in navigator) {
   //   navigator.geolocation.getCurrentPosition(
@@ -31,7 +31,6 @@ function handleLocation() {
   // } else {
   //   console.log('geolocation is not enabled on this browser');
   // }
-  // return ipLookUp();
 }
 
 // handles ALL UI function calls
@@ -45,6 +44,11 @@ const runApp = async () => {
   quickLinkWidget(quickLinks);
   covidWidget(country);
   weatherWidget(city);
+
+  // This will auto refresh the weatherWidget data every 1 hour
+  setInterval(() => {
+    weatherWidget(city);
+  }, 3600000);
 };
 
 // localStorage.clear();

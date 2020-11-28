@@ -35,13 +35,13 @@ function handleLocation() {
 
 // handles ALL UI function calls
 
+quickLinkWidget(quickLinks);
 const runApp = async () => {
   const userIp = await fetchData('http://ip-api.com/json');
   let { country, city } = userIp;
   verseWidget();
   dateTimeWidget();
   todoWidget();
-  quickLinkWidget(quickLinks);
   covidWidget(country);
   weatherWidget(city);
 
@@ -54,4 +54,5 @@ const runApp = async () => {
 // localStorage.clear();
 if (localStorage.length <= 0) {
   runApp();
-} else runApp();
+}
+//  else runApp();

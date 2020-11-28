@@ -1,28 +1,26 @@
 // QuickLinks
 .quick-link {
-  width: 100%;
-  height: 100%;
   padding: 1rem;
-  max-width: 20rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // max-width: 20.5rem;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
 
   &__list {
     @include canScroll(75%, 350px);
   }
 
   &__item {
-    border-radius: 3px;
+    border-radius: 50px;
     background-color: rgba($-color-dark, 0.5);
     width: 3rem;
     height: 3rem;
     display: inline-block;
     margin: 5px;
-    padding: 0.5rem;
+    padding: 0.7rem;
     cursor: pointer;
     transition: all 8ms linear;
-    position: relative;
+    // position: relative;
 
     &-remove {
       clip-path: circle(50% at 50% 50%);
@@ -41,11 +39,12 @@
 
     &--new {
       background-color: rgba($-color-dark, 0.5);
+
       & > a {
         color: $-color-white;
         text-decoration: none;
-        font-size: 2rem;
-        line-height: 1;
+        font-size: 1rem;
+        vertical-align: middle;
       }
     }
 
@@ -76,9 +75,9 @@
     @include everse-input();
     margin: 0.8rem auto;
   }
-  &__controls{
+  &__controls {
     display: flex;
     justify-content: space-around;
-    padding:0 3.5rem;
+    padding: 0 3.5rem;
   }
 }

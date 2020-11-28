@@ -14,42 +14,39 @@ export function quickLinkWidget(listItems) {
   const quickLinksList = document.createElement('ul');
   quickLinksList.classList.add('quick-link__list');
   quickLinksMain.append(quickLinksList);
+  const customLinksObject = {};
 
-  let allLink = (el) => {
-    return `<li class="quick-link__item" title="${el.toUpperCase()}"><a href="http://${el}" class="quick-link__link"><img src="http://www.google.com/s2/favicons?domain=https://${el}" alt="everse quick link icon ${el}" class="quick-link__img"></a>   <span class="quick-link__item-remove" title="DELETE">-</span></li>`;
+  let defaultLink = (url) => {
+    return `<li class="quick-link__item" title="${url.toUpperCase()}"><a href="https://${url}" class="quick-link__link"><img src="./img/links/${url}.svg" class="quick-link__img"></a>   <span class="quick-link__item-remove" title="DELETE">-</span></li>`;
   };
+
+  let newLinkButton = (newLinkObject) =>
+    `<li class="quick-link__item quick-link__item--new">
+      <a href="http://${newLinkObject.url}" class="quick-link__link">${newLinkObject.name}</a><span class="quick-link__item-remove" title="DELETE">-</span>
+     </li>
+     `;
 
   let addLinkButton = () =>
     `<li class="quick-link__item quick-link__item--plus" title="Create new Link"><img src="https://image.flaticon.com/icons/png/512/2740/2740697.png" alt="everse quick link icon plus new" class="quick-link__img"></li>`;
 
-  let newLinkButton = (url, name) =>
-    `<li class="quick-link__item quick-link__item--new"><a href="http://${url}" class="quick-link__link"><img src="http://www.google.com/s2/favicons?domain=https://${url}" alt="everse quick link icon ${name}" class="quick-link__img"></a></li>`;
-
-  function renderItems(listItems) {
-    for (let item = 0; item < listItems.length; item++) {
-      let el = listItems[item];
-      quickLinksList.innerHTML += allLink(el);
+  function renderDefault(listItems) {
+    for (let item of listItems) {
+      quickLinksList.innerHTML += defaultLink(item);
     }
-
-    quickLinksList.innerHTML += addLinkButton();
   }
 
-  function removeItems(elements) {
-    console.log(elements);
-    // elements.children()
-  }
-
-  renderItems(listItems);
+  renderDefault(listItems);
+  quickLinksList.innerHTML += addLinkButton();
   toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
   toggleDisplay(quickLinkCancelBtn);
 
   quickLinkAddBtn.addEventListener('click', function (e) {
     e.preventDefault();
     handleNewLinks();
-
     quickLinksList.innerHTML = '';
-
-    renderItems(listItems);
+    renderDefault(listItems);
+    quickLinksList.innerHTML += newLinkButton(customLinksObject);
+    quickLinksList.innerHTML += addLinkButton();
     toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
   });
 
@@ -60,18 +57,32 @@ export function quickLinkWidget(listItems) {
     });
   }
 
+  function renderCustomLinks() {
+    quickLinksList.innerHTML += newLinkButton(customLinksObject);
+    // quickLinksList.innerHTML += addLinkButton();
+  }
+
   function handleNewLinks() {
     let urlName = quickLinkNameInput.value;
     let urlLink = quickLinkUrlInput.value;
 
     // ${urlName[0].toUpperCase()} to get the first alphabet of urlName
+
     if (urlLink === '' || urlName === '') return;
-    else {
-      listItems.push(urlLink);
-      quickLinkNameInput.value = '';
-      quickLinkUrlInput.value = '';
-      toggleForm(quickLinksMain);
-    }
+
+    customLinksObject.url = urlLink;
+    customLinksObject.name = urlName[0].toUpperCase();
+
+    quickLinkNameInput.value = '';
+    quickLinkUrlInput.value = '';
+
+    toggleForm(quickLinksMain);
+
+    //  TODO get the new quicklink  icon added to the DOM
+    // 1. Remove or clear the current rendered icons
+    // 2. create another array to store the new icons
+    // 3. Add the new icon to the array
+    // 4. render the list again and with the new links from the array
   }
 
   function toggleForm(el) {

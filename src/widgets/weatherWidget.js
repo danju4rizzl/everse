@@ -54,6 +54,9 @@ export function weatherWidget(userCity) {
         let weatherUpdate = storeContents('Current_weather', weatherObject);
 
         temp.textContent = weatherUpdate.weatherTemperature;
+        setInterval(() => {
+          weatherLoaded();
+        }, 3600000);
       });
 
       fahrenheit.addEventListener('click', () => {
@@ -68,6 +71,9 @@ export function weatherWidget(userCity) {
         let weatherUpdate = storeContents('Current_weather', weatherObject);
 
         temp.textContent = weatherUpdate.weatherTemperature;
+        setInterval(() => {
+          weatherLoaded();
+        }, 3600000);
       });
 
       function weatherLoaded() {

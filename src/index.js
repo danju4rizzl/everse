@@ -35,24 +35,18 @@ function handleLocation() {
 
 // handles ALL UI function calls
 
-quickLinkWidget(quickLinks);
+quickLinkWidget();
+dateTimeWidget();
+todoWidget();
 const runApp = async () => {
   const userIp = await fetchData('http://ip-api.com/json');
   let { country, city } = userIp;
   verseWidget();
-  dateTimeWidget();
-  todoWidget();
   covidWidget(country);
   weatherWidget(city);
-
-  // This will auto refresh the weatherWidget data every 1 hour
-  setInterval(() => {
-    weatherWidget(city);
-  }, 3600000);
 };
 
 // localStorage.clear();
 if (localStorage.length <= 0) {
   runApp();
-}
-//  else runApp();
+} else runApp();

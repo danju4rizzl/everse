@@ -1,7 +1,9 @@
-import { appConfig, domStrings } from '../appSettings';
+import { appConfig, domStrings, quickLinks } from '../appSettings';
 import { addToLocalStorage, getFromLocalStorage } from '../utils';
 
-export function quickLinkWidget(listItems) {
+const listItems = quickLinks;
+
+export function quickLinkWidget() {
   const {
     quickLinksMain,
     quickLinkNameInput,
@@ -14,28 +16,74 @@ export function quickLinkWidget(listItems) {
   const quickLinksList = document.createElement('ul');
   quickLinksList.classList.add('quick-link__list');
   quickLinksMain.append(quickLinksList);
-  const customLinksObject = {};
 
   let defaultLink = (url) => {
-    return `<li class="quick-link__item" title="${url.toUpperCase()}"><a href="https://${url}" class="quick-link__link"><img src="./img/links/${url}.svg" class="quick-link__img"></a>   <span class="quick-link__item-remove" title="DELETE">-</span></li>`;
+    const quickLinkLi = document.createElement('li');
+    const quickLinkA = document.createElement('a');
+    const quickLinkImg = document.createElement('img');
+    const quickLinkSpan = document.createElement('span');
+
+    quickLinkLi.classList.add('quick-link__item');
+    quickLinkA.classList.add('quick-link__link');
+    quickLinkImg.classList.add('quick-link__img');
+    quickLinkSpan.classList.add('quick-link__item-remove');
+
+    quickLinkLi.title = url.toUpperCase();
+    quickLinkSpan.title = `DELETE`;
+
+    quickLinkA.href = `https://${url}`;
+    quickLinkImg.src = `./img/links/${url}.svg`;
+
+    quickLinkA.append(quickLinkImg);
+    quickLinkLi.append(quickLinkA);
+    quickLinkLi.append(quickLinkSpan);
+
+    return quickLinkLi;
   };
 
-  let newLinkButton = (newLinkObject) =>
-    `<li class="quick-link__item quick-link__item--new">
-      <a href="http://${newLinkObject.url}" class="quick-link__link">${newLinkObject.name}</a><span class="quick-link__item-remove" title="DELETE">-</span>
-     </li>
-     `;
+  let newLink = (url, name, bg) => {
+    const quickLinkNewLi = document.createElement('li');
+    const quickLinkNewA = document.createElement('a');
+    const quickLinkNewSpan = document.createElement('span');
+
+    quickLinkNewLi.classList.add('quick-link__item');
+
+    quickLinkNewLi.classList.add('quick-link__item--new');
+
+    quickLinkNewA.classList.add('quick-link__link');
+    quickLinkNewSpan.classList.add('quick-link__item-remove');
+
+    quickLinkNewLi.title = url.toUpperCase();
+    quickLinkNewSpan.title = `DELETE`;
+
+    quickLinkNewA.href = `https://${url}`;
+    quickLinkNewA.textContent = name.slice(0, 2).toUpperCase();
+
+    quickLinkNewLi.append(quickLinkNewA);
+    quickLinkNewLi.append(quickLinkNewSpan);
+
+    quickLinkNewLi.style.backgroundColor = bg;
+    console.log(quickLinkNewLi);
+    return quickLinkNewLi;
+
+    // `< class="quick-link__item quick-link__item--new">
+    //   <a href="http://${newLinkObject.url}" class="quick-link__link">${newLinkObject.name}</a><span class="quick-link__item-remove" title="DELETE">-</span>
+    //  </>
+    //  `;
+  };
 
   let addLinkButton = () =>
     `<li class="quick-link__item quick-link__item--plus" title="Create new Link"><img src="https://image.flaticon.com/icons/png/512/2740/2740697.png" alt="everse quick link icon plus new" class="quick-link__img"></li>`;
 
-  function renderDefault(listItems) {
-    for (let item of listItems) {
-      quickLinksList.innerHTML += defaultLink(item);
+  function renderDefaultLink(itemListArray) {
+    for (let item of itemListArray) {
+      quickLinksList.append(defaultLink(item));
     }
   }
 
-  renderDefault(listItems);
+  
+ renderDefaultLink(listItems);
+  // fetchBookmarks();
   quickLinksList.innerHTML += addLinkButton();
   toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
   toggleDisplay(quickLinkCancelBtn);
@@ -43,9 +91,8 @@ export function quickLinkWidget(listItems) {
   quickLinkAddBtn.addEventListener('click', function (e) {
     e.preventDefault();
     handleNewLinks();
-    quickLinksList.innerHTML = '';
-    renderDefault(listItems);
-    quickLinksList.innerHTML += newLinkButton(customLinksObject);
+    // fetchBookmarks();
+
     quickLinksList.innerHTML += addLinkButton();
     toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
   });
@@ -57,33 +104,50 @@ export function quickLinkWidget(listItems) {
     });
   }
 
-  function renderCustomLinks() {
-    quickLinksList.innerHTML += newLinkButton(customLinksObject);
-    // quickLinksList.innerHTML += addLinkButton();
-  }
-
   function handleNewLinks() {
     let urlName = quickLinkNameInput.value;
     let urlLink = quickLinkUrlInput.value;
 
-    // ${urlName[0].toUpperCase()} to get the first alphabet of urlName
-
     if (urlLink === '' || urlName === '') return;
 
-    customLinksObject.url = urlLink;
-    customLinksObject.name = urlName[0].toUpperCase();
-
+    storeUsersLinks(urlName, urlLink);
     quickLinkNameInput.value = '';
     quickLinkUrlInput.value = '';
-
+    fetchBookmarks();
     toggleForm(quickLinksMain);
-
-    //  TODO get the new quicklink  icon added to the DOM
-    // 1. Remove or clear the current rendered icons
-    // 2. create another array to store the new icons
-    // 3. Add the new icon to the array
-    // 4. render the list again and with the new links from the array
   }
+
+  function fetchBookmarks() {
+    let currentLink = JSON.parse(localStorage.getItem('Current_link'));
+
+    quickLinksList.innerHTML = '';
+    renderDefaultLink(listItems);
+    for (let item = 0; item < currentLink.length; item++) {
+      const { url, name, color } = currentLink[item];
+
+      quickLinksList.appendChild(newLink(url, name, color));
+    }
+  }
+
+
+  function storeUsersLinks(name, url) {
+    const userQuickLink = {
+      name,
+      url,
+      color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+    };
+
+    if (localStorage.getItem('Current_link') === null) {
+      let currentLink = [];
+      currentLink.push(userQuickLink);
+      localStorage.setItem('Current_link', JSON.stringify(currentLink));
+    } else {
+      let currentLink = JSON.parse(localStorage.getItem('Current_link'));
+      currentLink.push(userQuickLink);
+      localStorage.setItem('Current_link', JSON.stringify(currentLink));
+    }
+  }
+
 
   function toggleForm(el) {
     const c = el.children;

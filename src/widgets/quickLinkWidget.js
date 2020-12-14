@@ -53,7 +53,7 @@ export function quickLinkWidget() {
     quickLinkNewA.classList.add('quick-link__link');
     quickLinkNewSpan.classList.add('quick-link__item-remove');
 
-    quickLinkNewLi.title = url.toUpperCase();
+    quickLinkNewLi.title = name.toUpperCase();
     quickLinkNewSpan.title = `DELETE`;
 
     quickLinkNewA.href = `https://${url}`;
@@ -79,31 +79,22 @@ export function quickLinkWidget() {
     for (let item of itemListArray) {
       quickLinksList.append(defaultLink(item));
     }
+    quickLinksList.innerHTML += addLinkButton();
   }
 
-  
- renderDefaultLink(listItems);
-  // fetchBookmarks();
-  quickLinksList.innerHTML += addLinkButton();
-  toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
-  toggleDisplay(quickLinkCancelBtn);
+  if (localStorage.getItem('Current_link')) {
+    fetchBookmarks();
+  } else quickLinksList.innerHTML += addLinkButton();
 
+  //! Add new links when user clicks on "ADD" button
   quickLinkAddBtn.addEventListener('click', function (e) {
-    e.preventDefault();
     handleNewLinks();
-    // fetchBookmarks();
-
-    quickLinksList.innerHTML += addLinkButton();
     toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
+
+    e.preventDefault();
   });
 
-  function toggleDisplay(el) {
-    el.addEventListener('click', function (e) {
-      e.preventDefault();
-      toggleForm(quickLinksMain);
-    });
-  }
-
+  // ? To handle the newly added links from the user durning quickLinkAddBtn events
   function handleNewLinks() {
     let urlName = quickLinkNameInput.value;
     let urlLink = quickLinkUrlInput.value;
@@ -116,20 +107,19 @@ export function quickLinkWidget() {
     fetchBookmarks();
     toggleForm(quickLinksMain);
   }
-
+  // ! Fetch Bookmarks saved in the browsers local storage
   function fetchBookmarks() {
     let currentLink = JSON.parse(localStorage.getItem('Current_link'));
-
     quickLinksList.innerHTML = '';
-    renderDefaultLink(listItems);
+
     for (let item = 0; item < currentLink.length; item++) {
       const { url, name, color } = currentLink[item];
-
-      quickLinksList.appendChild(newLink(url, name, color));
+      quickLinksList.prepend(newLink(url, name, color));
     }
+    quickLinksList.innerHTML += addLinkButton();
   }
 
-
+  // ! Store new Bookmarks to the browsers localStorage
   function storeUsersLinks(name, url) {
     const userQuickLink = {
       name,
@@ -148,10 +138,21 @@ export function quickLinkWidget() {
     }
   }
 
+  // ! Toggles between the form and quick links list
+  function toggleDisplay(el) {
+    el.addEventListener('click', function (e) {
+      e.preventDefault();
+      toggleForm(quickLinksMain);
+    });
+  }
 
+  // ! Toggles a class between children element of a given parent
   function toggleForm(el) {
     const c = el.children;
     c[0].classList.toggle('toggledWidget');
     c[1].classList.toggle('toggledWidget');
   }
+
+  toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
+  toggleDisplay(quickLinkCancelBtn);
 }

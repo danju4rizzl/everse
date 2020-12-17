@@ -39,6 +39,7 @@ export let domStrings = {
     quickLinkAddBtn: document.querySelector('.btn-primary'),
     quickLinkCancelBtn: document.querySelector('.btn-danger'),
     quickLinkRemoveBtn: document.querySelector('.quick-link__item-remove'),
+    quickLinksCreate: document.querySelector('.quick-link__item--plus'),
   },
 };
 

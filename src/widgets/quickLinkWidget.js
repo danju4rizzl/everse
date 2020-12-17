@@ -63,7 +63,6 @@ export function quickLinkWidget() {
     quickLinkNewLi.append(quickLinkNewSpan);
 
     quickLinkNewLi.style.backgroundColor = bg;
-    console.log(quickLinkNewLi);
     return quickLinkNewLi;
 
     // `< class="quick-link__item quick-link__item--new">

@@ -7,7 +7,7 @@ import { dateTimeWidget } from './widgets/dateTimeWidget';
 import { covidWidget } from './widgets/covidWidget';
 import { quickLinkWidget } from './widgets/quickLinkWidget';
 import { weatherWidget } from './widgets/weatherWidget';
-import { fetchData } from './utils';
+import { fetchData, appIntro } from './utils';
 
 // Handle User Geo-Location
 function handleLocation() {
@@ -38,6 +38,8 @@ function handleLocation() {
 quickLinkWidget();
 dateTimeWidget();
 todoWidget();
+appIntro();
+
 const runApp = async () => {
   const userIp = await fetchData('http://ip-api.com/json');
   let { country, city } = userIp;

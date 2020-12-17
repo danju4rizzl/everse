@@ -36,3 +36,12 @@
     // background-color: $-color-primary;
   }
 }
+
+.intro-btn {
+  &--next {
+    background-color: rgba($-color-secondary, 0.9) !important;
+  }
+  &--back {
+    background-color: rgba($-color-dark, 0.8) !important;
+  }
+}

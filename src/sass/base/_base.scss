@@ -13,6 +13,35 @@ body {
   background: $-color-dark;
   color: $-color-white;
   user-select: none;
+
+  &::after {
+    opacity: 0;
+  }
+
+  .shepherd-active::after {
+    content: '';
+    display: block;
+    background-color: #000 !important;
+    opacity: 0.9;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000000;
+  }
+  .shepherd-title {
+    justify-content: center;
+  }
+  .shepherd-footer {
+    justify-content: space-around;
+    text-transform: uppercase;
+  }
+  .shepherd-element.shepherd-open,
+  .shepherd-target.shepherd-enabled {
+    z-index: 10000000;
+    position: relative;
+  }
 }
 
 .bg1,

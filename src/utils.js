@@ -1,4 +1,7 @@
 import axios from 'axios';
+import '../node_modules/shepherd.js/dist/css/shepherd.css';
+import Shepherd from 'shepherd.js';
+import { domStrings } from './appSettings';
 
 // function to add todos to local storage
 export function addToLocalStorage(key, item, fn) {
@@ -120,4 +123,147 @@ export const fetchData = async (arg) => {
     return [];
   }
   return response.data;
+};
+/*
+Handle shepherdsJS intro
+*/
+export const appIntro = () => {
+  const tour = new Shepherd.Tour({
+    defaultStepOptions: {
+      scrollTo: true,
+      useModalOverlay: true,
+      cancelIcon: {
+        enabled: true,
+      },
+    },
+  });
+
+  tour.addStep({
+    id: 'step-0',
+    title: `Welcome`,
+    text: `Thanks installing Everse. Please take a moment to get to know Everse better`,
+    attachTo: {
+      on: 'auto',
+    },
+    classes: 'step-0',
+    buttons: [
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'intro-btn intro-btn--next',
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: 'step-1',
+    title: `Adding Quick Links`,
+    text: `Here you can easily add your favorite websites by clicking the ➕ icon in the widget`,
+    attachTo: {
+      element: '.quick-link__item--plus',
+      on: 'right',
+    },
+    classes: 'step-1',
+    buttons: [
+      {
+        text: 'Back',
+        action: tour.back,
+        classes: 'intro-btn intro-btn--back',
+      },
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'intro-btn intro-btn--next',
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: 'step-2',
+    title: `Pick your temperature scale`,
+    text: `Simply click on your temperature scale to select your prefer wether setting between Fahrenheit and Celsius`,
+    attachTo: {
+      element: '.weather__units',
+      on: 'bottom',
+    },
+    classes: 'step-3',
+    buttons: [
+      {
+        text: 'Back',
+        action: tour.back,
+        classes: 'intro-btn intro-btn--back',
+      },
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'intro-btn intro-btn--next',
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: 'covid',
+    title: `Daily Covid Updates`,
+    text: `Receive daily information for Covid-19 updates for your local. You can also move the mouse to the status your most interesting in to highligh it.`,
+    attachTo: {
+      element: '#covid',
+      on: 'bottom',
+    },
+    classes: 'step-3',
+    buttons: [
+      {
+        text: 'Back',
+        action: tour.back,
+        classes: 'intro-btn intro-btn--back',
+      },
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'intro-btn intro-btn--next',
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: 'quotes',
+    title: `Daily Quotes`,
+    text: `Everse gives you daily inspirational quotes to keep you inspired to make it trough your day!`,
+    attachTo: {
+      element: '.verse',
+      on: 'top',
+    },
+    classes: 'step-4',
+    buttons: [
+      {
+        text: 'Back',
+        action: tour.back,
+        classes: 'intro-btn intro-btn--back',
+      },
+      {
+        text: 'Next',
+        action: tour.next,
+        classes: 'intro-btn intro-btn--next',
+      },
+    ],
+  });
+
+  tour.addStep({
+    id: 'tasks',
+    title: `Personal Checklist`,
+    text: `Create items to your personal checklist by clicking on the input box and start typing! once you're done press enter to save your item to the checklist.`,
+    attachTo: {
+      element: '.todo',
+      on: 'bottom',
+    },
+    classes: 'step-6',
+    buttons: [
+      {
+        text: 'Got it!',
+        action: tour.next,
+        classes: 'intro-btn intro-btn--next',
+      },
+    ],
+  });
+
+  tour.start();
 };

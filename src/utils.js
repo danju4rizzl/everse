@@ -135,6 +135,20 @@ export const appIntro = () => {
       cancelIcon: {
         enabled: true,
       },
+      when: {
+        show: function () {
+          const mainWindow = document.querySelector('.main');
+          mainWindow.style.opacity = 0.1;
+          mainWindow.style.backgroundColor = '#000';
+        },
+        destroy: function () {
+          const mainWindow = document.querySelector('.main');
+          mainWindow.style.opacity = 1;
+          mainWindow.style.backgroundColor = '';
+
+          localStorage.setItem('Current_intro', JSON.stringify('intro is off'));
+        },
+      },
     },
   });
 
@@ -265,5 +279,5 @@ export const appIntro = () => {
     ],
   });
 
-  tour.start();
+  localStorage.getItem('Current_intro') !== null ? tour.cancel() : tour.start();
 };

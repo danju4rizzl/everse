@@ -2,9 +2,9 @@
 This holds the entire elements to be used in the DOM
 */
 export let domStrings = {
-  verseBox: {
-    verseContent: document.querySelector('.verse__content'),
-    verseBook: document.querySelector('.verse__book'),
+  quoteBox: {
+    quoteContent: document.querySelector('.quote__content'),
+    quoteAuthor: document.querySelector('.quote__author'),
   },
   weatherBox: {
     box: document.querySelector('#weather'),

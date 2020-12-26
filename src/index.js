@@ -1,7 +1,7 @@
 import './main.scss';
 import axios from 'axios';
 import { domStrings, appConfig, quickLinks } from './appSettings';
-import { verseWidget } from './widgets/verseWidget';
+import { quoteWidget } from './widgets/quoteWidget';
 import { todoWidget } from './widgets/todoWidget';
 import { dateTimeWidget } from './widgets/dateTimeWidget';
 import { covidWidget } from './widgets/covidWidget';
@@ -43,7 +43,7 @@ appIntro();
 const runApp = async () => {
   const userIp = await fetchData('http://ip-api.com/json');
   let { country, city } = userIp;
-  verseWidget();
+  quoteWidget();
   covidWidget(country);
   weatherWidget(city);
 };

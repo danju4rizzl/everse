@@ -102,7 +102,7 @@ export function weatherWidget(userCity) {
       }
 
       renderWeatherIcon(response.data.weather);
-
+      weatherWidget(userCity);
       function toggleActive(activeElement, inactiveElement) {
         activeElement.classList.add('is-active');
         inactiveElement.classList.remove('is-active');

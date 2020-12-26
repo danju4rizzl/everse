@@ -1,8 +1,6 @@
 import { appConfig, domStrings, quickLinks } from '../appSettings';
 import { addToLocalStorage, getFromLocalStorage } from '../utils';
 
-const listItems = quickLinks;
-
 export function quickLinkWidget() {
   const {
     quickLinksMain,
@@ -16,30 +14,6 @@ export function quickLinkWidget() {
   const quickLinksList = document.createElement('ul');
   quickLinksList.classList.add('quick-link__list');
   quickLinksMain.append(quickLinksList);
-
-  let defaultLink = (url) => {
-    const quickLinkLi = document.createElement('li');
-    const quickLinkA = document.createElement('a');
-    const quickLinkImg = document.createElement('img');
-    const quickLinkSpan = document.createElement('span');
-
-    quickLinkLi.classList.add('quick-link__item');
-    quickLinkA.classList.add('quick-link__link');
-    quickLinkImg.classList.add('quick-link__img');
-    quickLinkSpan.classList.add('quick-link__item-remove');
-
-    quickLinkLi.title = url.toUpperCase();
-    quickLinkSpan.title = `DELETE`;
-
-    quickLinkA.href = `https://${url}`;
-    quickLinkImg.src = `./img/links/${url}.svg`;
-
-    quickLinkA.append(quickLinkImg);
-    quickLinkLi.append(quickLinkA);
-    quickLinkLi.append(quickLinkSpan);
-
-    return quickLinkLi;
-  };
 
   let newLink = (url, name, bg) => {
     const quickLinkNewLi = document.createElement('li');
@@ -74,24 +48,15 @@ export function quickLinkWidget() {
   let addLinkButton = () =>
     `<li class="quick-link__item quick-link__item--plus" title="Create new Link"><img src="https://image.flaticon.com/icons/png/512/2740/2740697.png" alt="everse quick link icon plus new" class="quick-link__img"></li>`;
 
-  function renderDefaultLink(itemListArray) {
-    for (let item of itemListArray) {
-      quickLinksList.append(defaultLink(item));
-    }
-    quickLinksList.innerHTML += addLinkButton();
-  }
-
-  if (localStorage.getItem('Current_link')) {
-    fetchBookmarks();
-  } else quickLinksList.innerHTML += addLinkButton();
-
   //! Add new links when user clicks on "ADD" button
-  quickLinkAddBtn.addEventListener('click', function (e) {
-    handleNewLinks();
-    toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
+  function creatNewLink(domElement) {
+    domElement.addEventListener('click', function (e) {
+      handleNewLinks();
+      toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
 
-    e.preventDefault();
-  });
+      e.preventDefault();
+    });
+  }
 
   // ? To handle the newly added links from the user durning quickLinkAddBtn events
   function handleNewLinks() {
@@ -104,7 +69,7 @@ export function quickLinkWidget() {
     quickLinkNameInput.value = '';
     quickLinkUrlInput.value = '';
     fetchBookmarks();
-    toggleForm(quickLinksMain);
+    toggleClass(quickLinksMain);
   }
   // ! Fetch Bookmarks saved in the browsers local storage
   function fetchBookmarks() {
@@ -141,16 +106,22 @@ export function quickLinkWidget() {
   function toggleDisplay(el) {
     el.addEventListener('click', function (e) {
       e.preventDefault();
-      toggleForm(quickLinksMain);
+      toggleClass(quickLinksMain);
     });
   }
 
   // ! Toggles a class between children element of a given parent
-  function toggleForm(el) {
+  function toggleClass(el) {
     const c = el.children;
     c[0].classList.toggle('toggledWidget');
     c[1].classList.toggle('toggledWidget');
   }
+
+  if (localStorage.getItem('Current_link')) {
+    fetchBookmarks();
+  } else quickLinksList.innerHTML += addLinkButton();
+
+  creatNewLink(quickLinkAddBtn);
 
   toggleDisplay(quickLinksList.querySelector('.quick-link__item--plus'));
   toggleDisplay(quickLinkCancelBtn);

@@ -73,7 +73,14 @@
   }
   &__input {
     @include everse-input();
+    border-radius: 0px;
+    width: 80%;
     margin: 0.8rem auto;
+    &:focus {
+      background: rgba($-color-white, 0.3);
+      color: $-color-white;
+      box-shadow: none;
+    }
   }
   &__controls {
     display: flex;

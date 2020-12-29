@@ -1,4 +1,5 @@
 import './main.scss';
+import bootstrap from 'bootstrap';
 import axios from 'axios';
 import { domStrings, appConfig, quickLinks } from './appSettings';
 import { quoteWidget } from './widgets/quoteWidget';

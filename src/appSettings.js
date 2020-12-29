@@ -49,6 +49,7 @@ export let domStrings = {
 export const appConfig = {
   proxyUrl: 'https://cors-anywhere.herokuapp.com/',
   ourmannaUrl: 'https://beta.ourmanna.com/api/v1/get/?format=json',
+  inspirationalQuoteUrl: `https://type.fit/api/quotes`,
   covidUrl: 'https://pomber.github.io/covid19/timeseries.json',
   openWeatherMapLocation: 'New York',
   openWeatherMapUnits: 'imperial',

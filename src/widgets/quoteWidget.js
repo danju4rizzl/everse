@@ -7,22 +7,34 @@ import { addToLocalStorage, getFromLocalStorage, fetchData } from '../utils';
 */
 
 export async function quoteWidget() {
-  const { ourmannaUrl } = appConfig;
+  const { ourmannaUrl, inspirationalQuoteUrl } = appConfig;
   const { quoteContent, quoteAuthor } = domStrings.quoteBox;
 
-  const dailyQuote = await fetchData(ourmannaUrl);
-  let { text, reference } = dailyQuote.verse.details;
+  const inspiredQuote = await fetchData(inspirationalQuoteUrl);
+  const bibleQuote = await fetchData(ourmannaUrl);
 
   function renderQuote(quoteOfTheDay) {
-    for (const item in quoteOfTheDay) {
-      if (quoteOfTheDay.hasOwnProperty(item)) {
-        quoteContent.textContent = quoteOfTheDay['text'];
+    Object.entries(quoteOfTheDay).forEach(([key, value]) => {
+      if (key === 'author') {
+        quoteAuthor.textContent = quoteOfTheDay['author'];
+      } else if (key === 'reference') {
         quoteAuthor.textContent = quoteOfTheDay['reference'];
+      } else {
+        quoteContent.textContent = quoteOfTheDay['text'];
       }
-    }
+    });
   }
 
-  addToLocalStorage('Current_verse', { text, reference }, renderQuote);
+  const isInspired = () => {
+    const randomQuote =
+      inspiredQuote[Math.floor(Math.random() * inspiredQuote.length)];
+    return renderQuote(randomQuote);
+  };
 
-  getFromLocalStorage('Current_verse', {}, renderQuote);
+  const isBible = () => {
+    return renderQuote(bibleQuote.verse.details);
+  };
+
+  isInspired();
+  // isBible();
 }

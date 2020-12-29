@@ -2,6 +2,10 @@
   height: 100%;
   padding: 3rem;
 
+  display: grid;
+  align-items: center;
+  align-content: center;
+
   .quote {
     &__title {
       letter-spacing: 1.5px;
@@ -32,5 +36,20 @@
         content: '- ';
       }
     }
+  }
+}
+#quote:hover #quoteSettings {
+  opacity: 1;
+}
+#quoteSettings {
+  position: absolute;
+  font-size: 1.5rem;
+  left: 95%;
+  transition: all 0.3s linear;
+  opacity: 0;
+  cursor: pointer;
+
+  .active {
+    background: rgba($-color-gray, 0.2);
   }
 }

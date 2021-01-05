@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { appConfig, domStrings } from '../appSettings';
-import { addToLocalStorage, getFromLocalStorage, fetchData } from '../utils';
+import {
+  addToLocalStorage,
+  getFromLocalStorage,
+  fetchData,
+  isActive,
+  isDisabled,
+} from '../utils';
 
 /*
   To handle the verse of the day
@@ -8,7 +14,12 @@ import { addToLocalStorage, getFromLocalStorage, fetchData } from '../utils';
 
 export async function quoteWidget() {
   const { ourmannaUrl, inspirationalQuoteUrl } = appConfig;
-  const { quoteContent, quoteAuthor } = domStrings.quoteBox;
+  const {
+    quoteContent,
+    quoteAuthor,
+    motivationalBtn,
+    spiritualityBtn,
+  } = domStrings.quoteBox;
 
   const inspiredQuote = await fetchData(inspirationalQuoteUrl);
   const bibleQuote = await fetchData(ourmannaUrl);
@@ -28,13 +39,17 @@ export async function quoteWidget() {
   const isInspired = () => {
     const randomQuote =
       inspiredQuote[Math.floor(Math.random() * inspiredQuote.length)];
+    isActive(motivationalBtn);
+    isDisabled(spiritualityBtn);
     return renderQuote(randomQuote);
   };
 
   const isBible = () => {
+    isActive(spiritualityBtn);
+    isDisabled(motivationalBtn);
     return renderQuote(bibleQuote.verse.details);
   };
 
-  isInspired();
-  // isBible();
+  spiritualityBtn.addEventListener('click', () => isBible());
+  motivationalBtn.addEventListener('click', () => isInspired());
 }

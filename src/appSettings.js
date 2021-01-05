@@ -5,6 +5,8 @@ export let domStrings = {
   quoteBox: {
     quoteContent: document.querySelector('.quote__content'),
     quoteAuthor: document.querySelector('.quote__author'),
+    spiritualityBtn: document.querySelector('.spirituality'),
+    motivationalBtn: document.querySelector('.motivational'),
   },
   weatherBox: {
     box: document.querySelector('#weather'),

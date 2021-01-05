@@ -1,3 +1,12 @@
+@keyframes rotateIcon {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
 #quote {
   height: 100%;
   padding: 3rem;
@@ -51,5 +60,16 @@
 
   .active {
     background: rgba($-color-gray, 0.2);
+  }
+
+  i:hover {
+    color: rgba($-color-gray, 0.5);
+  }
+  .dropdown-item {
+    text-align: center;
+    &:focus {
+      background: rgba($-color-gray, 0.2);
+      outline: none;
+    }
   }
 }

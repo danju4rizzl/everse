@@ -3,6 +3,18 @@ import '../node_modules/shepherd.js/dist/css/shepherd.css';
 import Shepherd from 'shepherd.js';
 import { domStrings } from './appSettings';
 
+// function to ADD bootstrap .active & .disabled classes
+export const isActive = (element) => {
+  element.classList.add('active');
+  element.classList.add('disabled');
+};
+
+// function to REMOVE bootstrap .active & .disabled classes
+export const isDisabled = (element) => {
+  element.classList.remove('active');
+  element.classList.remove('disabled');
+};
+
 // function to add todos to local storage
 export function addToLocalStorage(key, item, fn) {
   localStorage.setItem(key, JSON.stringify(item));

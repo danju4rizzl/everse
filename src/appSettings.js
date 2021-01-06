@@ -12,8 +12,8 @@ export let domStrings = {
     box: document.querySelector('#weather'),
     location: document.querySelector('#location'),
     temp: document.querySelector('#temperature'),
-    fahrenheit: document.getElementById('fahrenheit'),
-    celsius: document.getElementById('celsius'),
+    fahrenheitBtn: document.getElementById('fahrenheit'),
+    celsiusBtn: document.getElementById('celsius'),
   },
   dateTimeBox: {
     box: document.querySelector('#dateTime'),

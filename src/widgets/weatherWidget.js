@@ -1,4 +1,5 @@
 import axios from 'axios';
+import debounce from 'lodash.debounce';
 import { appConfig, domStrings } from '../appSettings';
 import {
   addToLocalStorage,
@@ -20,7 +21,7 @@ export function weatherWidget(userCity) {
 
   const { openWeatherMapUnits } = appConfig;
 
-  let { location, temp, celsius, fahrenheit } = domStrings.weatherBox;
+  let { location, temp, celsiusBtn, fahrenheitBtn } = domStrings.weatherBox;
   const options = {
     method: 'GET',
     url: `https://api.openweathermap.org/data/2.5/weather`,
@@ -35,45 +36,55 @@ export function weatherWidget(userCity) {
     .request(options)
     .then((response) => {
       const defaultUnit = Math.round(response.data.main.temp);
+      //! formula: (74°F − 32) × 5/9 = 23,333°C
+      let isCelsius = ((defaultUnit - 32) * 5) / 9;
+      const currentCelsius = Math.round(isCelsius);
+      let userLocation = response.data.name;
+      let userTemperature = `${defaultUnit}°`;
+      let userUnits = false;
 
-      let weatherLocation = response.data.name;
-      let weatherTemperature = `${defaultUnit}°`;
-      let activeWeatherUnits = false;
+      let t = response.data.weather;
+      const iconId = () => {
+        for (const i of t) {
+          return i.id;
+        }
+      };
 
-      celsius.addEventListener('click', () => {
-        //! formula: (74°F − 32) × 5/9 = 23,333°C
-        let isCelsius = ((defaultUnit - 32) * 5) / 9;
-        const currentCelsius = Math.round(isCelsius);
-        toggleActive(celsius, fahrenheit);
+      class DefaultWeatherObject {
+        constructor(userLocation, userTemperature, userUnits) {
+          this.userLocation = userLocation;
+          this.userTemperature = userTemperature;
+          this.userUnits = userUnits;
+        }
+      }
 
-        let weatherObject = {
-          weatherLocation,
-          weatherTemperature: `${currentCelsius}°`,
-          activeWeatherUnits: 'celsius',
-        };
-        let weatherUpdate = storeContents('Current_weather', weatherObject);
+      celsiusBtn.addEventListener('click', () => {
+        let celsiusObj = new DefaultWeatherObject(
+          userLocation,
+          `${currentCelsius}°`,
+          !userUnits
+        );
 
-        temp.textContent = weatherUpdate.weatherTemperature;
-        setInterval(() => {
-          weatherLoaded();
-        }, 3600000);
+        let weatherUpdate = storeContents('Current_weather', celsiusObj);
+
+        temp.textContent = weatherUpdate.userTemperature;
+
+        weatherLoaded();
+        toggleActive(celsiusBtn, fahrenheitBtn);
       });
 
-      fahrenheit.addEventListener('click', () => {
-        toggleActive(fahrenheit, celsius);
-        temp.textContent = `${defaultUnit}°`;
+      fahrenheitBtn.addEventListener('click', () => {
+        let fahrenheitObj = new DefaultWeatherObject(
+          userLocation,
+          `${defaultUnit}°`,
+          userUnits
+        );
 
-        let weatherObject = {
-          weatherLocation,
-          weatherTemperature: `${defaultUnit}°`,
-          activeWeatherUnits,
-        };
-        let weatherUpdate = storeContents('Current_weather', weatherObject);
+        let weatherUpdate = storeContents('Current_weather', fahrenheitObj);
 
-        temp.textContent = weatherUpdate.weatherTemperature;
-        setInterval(() => {
-          weatherLoaded();
-        }, 3600000);
+        temp.textContent = weatherUpdate.userTemperature;
+        weatherLoaded();
+        toggleActive(fahrenheitBtn, celsiusBtn);
       });
 
       function weatherLoaded() {
@@ -82,33 +93,38 @@ export function weatherWidget(userCity) {
         );
 
         if (loadedWeather !== null) {
-          location.textContent = loadedWeather.weatherLocation;
-          temp.textContent = loadedWeather.weatherTemperature;
+          location.textContent = loadedWeather.userLocation;
+          temp.textContent = loadedWeather.userTemperature;
 
-          loadedWeather.activeWeatherUnits === 'celsius'
-            ? toggleActive(celsius, fahrenheit)
-            : toggleActive(fahrenheit, celsius);
+          loadedWeather.userUnits
+            ? toggleActive(celsiusBtn, fahrenheitBtn)
+            : toggleActive(fahrenheitBtn, celsiusBtn);
+          renderWeatherIcon(response.data.weather);
         } else {
-          let weatherObject = {
-            weatherLocation,
-            weatherTemperature,
-            activeWeatherUnits,
-          };
-          let weatherUpdate = storeContents('Current_weather', weatherObject);
-          location.textContent = weatherUpdate.weatherLocation;
-          temp.textContent = weatherUpdate.weatherTemperature;
-          toggleActive(fahrenheit, celsius);
+          let defaultWeather = new DefaultWeatherObject(
+            userLocation,
+            userTemperature,
+            userUnits
+          );
+
+          let weatherUpdate = storeContents('Current_weather', defaultWeather);
+
+          location.textContent = weatherUpdate.userLocation;
+          temp.textContent = weatherUpdate.userTemperature;
+
+          toggleActive(fahrenheitBtn, celsiusBtn);
+          renderWeatherIcon(response.data.weather);
         }
       }
-
       renderWeatherIcon(response.data.weather);
-      function toggleActive(activeElement, inactiveElement) {
+
+      function toggleActive(activeElement, inActiveElement) {
         activeElement.classList.add('is-active');
-        inactiveElement.classList.remove('is-active');
+        inActiveElement.classList.remove('is-active');
       }
 
       window.onload = weatherLoaded();
-      // console.log(response.data);
+      // console.log(response.data.weather);
     })
     .catch((error) => {
       console.error(error);

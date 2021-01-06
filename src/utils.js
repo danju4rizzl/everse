@@ -116,13 +116,12 @@ export const renderWeatherIcon = (apiIcon) => {
       iconClass = 'smog';
     } else iconClass = 'rainbow';
   };
-  // Check the icon identifier
+
   for (let item of apiIcon) {
     checkIconId(item.id);
   }
-  // Create the icon
+
   const iconElement = `<span class="fas fa-${iconClass}"></span>`;
-  // Add the icon to the DOM as a child of the parent element.
   document.querySelector('.weather__temp #icon').innerHTML = iconElement;
 };
 

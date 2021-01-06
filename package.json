@@ -12,7 +12,7 @@
   "author": "Danjuma Ashiwaju",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "js": "^0.1.0",

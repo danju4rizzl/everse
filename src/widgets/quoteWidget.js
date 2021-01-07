@@ -1,20 +1,8 @@
-import axios from 'axios';
 import { appConfig, domStrings } from '../appSettings';
-import {
-  addToLocalStorage,
-  getFromLocalStorage,
-  storeContents,
-  fetchData,
-  isActive,
-  isDisabled,
-} from '../utils';
-
-/*
-  To handle the verse of the day
-*/
+import { storeContents, fetchData, isActive, isDisabled } from '../utils';
 
 export async function quoteWidget() {
-  const { ourmannaUrl, inspirationalQuoteUrl } = appConfig;
+  const { ourmannaAPI, inspirationalQuoteAPI } = appConfig;
   const {
     quoteContent,
     quoteAuthor,
@@ -22,8 +10,8 @@ export async function quoteWidget() {
     spiritualityBtn,
   } = domStrings.quoteBox;
 
-  const inspiredQuote = await fetchData(inspirationalQuoteUrl);
-  const bibleQuote = await fetchData(ourmannaUrl);
+  const inspiredQuote = await fetchData(inspirationalQuoteAPI);
+  const bibleQuote = await fetchData(ourmannaAPI);
 
   class DefaultQuote {
     constructor(userQuote, userStoredQuote) {
@@ -32,7 +20,6 @@ export async function quoteWidget() {
     }
   }
 
-  //Render the quote from local storage if it exists else render from the server.
   function renderQuote(quoteOfTheDay) {
     Object.entries(quoteOfTheDay).forEach(([key, value]) => {
       if (key === 'author') {
@@ -44,6 +31,10 @@ export async function quoteWidget() {
       }
     });
   }
+
+  /**
+   * To handle the Motivational quote of the day
+   **/
 
   const isInspired = () => {
     const randomQuote =
@@ -57,37 +48,31 @@ export async function quoteWidget() {
     return renderQuote(randomQuote);
   };
 
+  /**
+   * To handle the Bible quote of the day
+   **/
+
   const isBible = () => {
-    const { details } = bibleQuote.verse;
-    const selectedBible = new DefaultQuote('bible', details);
+    const { details: verseOfTheDay } = bibleQuote.verse;
+    const selectedBible = new DefaultQuote('bible', verseOfTheDay);
 
     storeContents('Current_quote', selectedBible);
 
     isActive(spiritualityBtn);
     isDisabled(motivationalBtn);
-    return renderQuote(details);
+    return renderQuote(verseOfTheDay);
   };
 
   const quoteLoaded = () => {
     const loadedQuote = JSON.parse(localStorage.getItem('Current_quote'));
-
     if (loadedQuote !== null) {
-      checkQuotes(loadedQuote.userQuote);
+      renderQuote(loadedQuote.userStoredQuote);
     } else {
       isInspired();
     }
   };
 
-  const checkQuotes = (check) => {
-    if (check === 'motivational') {
-      // Remder quoteOfTheDay from storage
-      isInspired();
-    } else {
-      isBible();
-    }
-  };
-
-  window.onload = quoteLoaded();
   spiritualityBtn.addEventListener('click', () => isBible());
   motivationalBtn.addEventListener('click', () => isInspired());
+  window.onload = quoteLoaded();
 }

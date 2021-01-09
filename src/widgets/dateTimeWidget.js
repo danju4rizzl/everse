@@ -25,17 +25,13 @@ export function dateTimeWidget() {
       return (greetings.textContent = 'Good Afternoon');
     } else return (greetings.textContent = 'Good Evening');
   };
-
-  let timeObj = {
-    currentTime: `${h}:${addZeroToElement(m)} ${h < 12 ? 'AM' : 'PM'}`,
-    currentDate: `${addZeroToElement(d)}-${months}-${dYear}
-    `,
-  };
-  setInterval(() => {
-    let updatedTimeValues = storeContents('Current_time', timeObj);
-
-    currentTime.textContent = updatedTimeValues.currentTime;
-    currentDate.textContent = updatedTimeValues.currentDate;
+  const renderDateTime = () => {
+    currentTime.textContent = `${h}:${addZeroToElement(m)} ${
+      h < 12 ? 'AM' : 'PM'
+    }`;
+    currentDate.textContent = `${addZeroToElement(d)}-${months}-${dYear}`;
     greetUsers();
-  }, 1000);
+  };
+
+  setInterval(renderDateTime, 1000);
 }

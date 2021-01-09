@@ -12,6 +12,7 @@
   "author": "Danjuma Ashiwaju",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
     "apexcharts": "^3.22.2",
     "axios": "^0.20.0",
     "bootstrap": "^5.0.0-beta1",
@@ -19,6 +20,8 @@
     "js": "^0.1.0",
     "lodash.debounce": "^4.0.8",
     "popper.js": "^1.16.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "shepherd.js": "^8.1.0",
     "widgets": "^0.3.4"
   },
@@ -35,6 +38,7 @@
     "@babel/core": "^7.0.0-0",
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.12.10",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-web-extension": "^1.6.1",
     "parcel-plugin-zip": "^1.0.6",

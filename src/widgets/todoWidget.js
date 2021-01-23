@@ -5,24 +5,26 @@ import { addToLocalStorage, getFromLocalStorage } from '../utils';
   */
 export function todoWidget() {
   const { todoForm, todoInput, todoItemsList } = domStrings.todoBox;
-  let todos = [];
+  let allTodos = [];
 
-  todoForm.addEventListener('submit', function (event) {
-    event.preventDefault();
+  todoForm.addEventListener('submit', (e) => {
+    e.preventDefault();
     addTodo(todoInput.value);
   });
 
   // function to add todo
   function addTodo(item) {
-    if (item !== '') {
+    if (item === '') {
+      return;
+    } else {
       const todo = {
         id: Date.now(),
         name: item,
         completed: false,
       };
 
-      todos.unshift(todo);
-      addToLocalStorage('Current_todos', todos, renderTodos);
+      allTodos.unshift(todo);
+      addToLocalStorage('Current_todos', allTodos, renderTodos);
 
       todoInput.value = '';
     }
@@ -30,6 +32,7 @@ export function todoWidget() {
 
   // function to render given todos to screen
   function renderTodos(todos) {
+    // !Why is this resting the list ***
     todoItemsList.innerHTML = '';
 
     todos.forEach(function (item) {
@@ -54,22 +57,22 @@ export function todoWidget() {
 
   // toggle the value to completed and not completed
   function toggle(id) {
-    todos.forEach(function (item) {
+    allTodos.forEach(function (item) {
       if (item.id == id) {
         item.completed = !item.completed;
       }
     });
 
-    addToLocalStorage('Current_todos', todos, renderTodos);
+    addToLocalStorage('Current_todos', allTodos, renderTodos);
   }
 
   // deletes a todo from todos array, then updates local storage and renders updated list to screen
   function deleteTodo(id) {
-    todos = todos.filter(function (item) {
+    allTodos = allTodos.filter(function (item) {
       return item.id != id;
     });
 
-    addToLocalStorage('Current_todos', todos, renderTodos);
+    addToLocalStorage('Current_todos', allTodos, renderTodos);
   }
 
   // after that addEventListener <ul> with class=todoItems. Because we need to listen for click event in all delete-button and checkbox
@@ -83,5 +86,5 @@ export function todoWidget() {
     }
   });
 
-  getFromLocalStorage('Current_todos', todos, renderTodos);
+  getFromLocalStorage('Current_todos', allTodos, renderTodos);
 }

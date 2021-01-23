@@ -3,11 +3,16 @@
   border: none;
   outline: none;
   border-bottom: 1px solid $-color-gray;
-  color: $-color-white;
+  color: $-color-white !important;
   text-align: center;
+  border-radius: 0;
 
   &::placeholder {
     color: $-color-light;
+  }
+  &:focus {
+    box-shadow: none;
+    background: transparent;
   }
 }
 

@@ -69,8 +69,11 @@
         <!-- TODO LIST START -->
 
         <div class="todo">
-          <form class="todo-form">
-            <input type="text" class="todo-input" placeholder="Add a Todo..." />
+          <form class="form-floating todo__form" autocomplete="off">
+            <input type="text" class="todo__input form-control" placeholder=" " id="floatingInput" />
+            <label for="floatingInput">
+              Add a Todo...
+            </label>
           </form>
 
           <ul class="todo-items"></ul>

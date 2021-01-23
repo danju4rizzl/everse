@@ -25,8 +25,8 @@ export let domStrings = {
     box: document.querySelector('.covid'),
   },
   todoBox: {
-    todoForm: document.querySelector('.todo-form'),
-    todoInput: document.querySelector('.todo-input'),
+    todoForm: document.querySelector('.todo__form'),
+    todoInput: document.querySelector('.todo__input'),
     todoItemsList: document.querySelector('.todo-items'),
   },
   quickLinkBox: {

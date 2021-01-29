@@ -16,9 +16,9 @@
   }
 }
 
-@mixin canScroll($maxHeight, $maWidth) {
+@mixin canScroll($maxHeight, $maxWidth) {
   max-height: $maxHeight;
-  max-width: $maWidth;
+  max-width: $maxWidth;
   overflow: auto;
   overflow-x: hidden;
   // visibility: hidden;

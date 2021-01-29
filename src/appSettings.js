@@ -24,11 +24,11 @@ export let domStrings = {
   covidBox: {
     box: document.querySelector('.covid'),
   },
-  todoBox: {
-    todoForm: document.querySelector('.todo__form'),
-    todoInput: document.querySelector('.todo__input'),
-    todoItemsList: document.querySelector('.todo-items'),
-  },
+  // todoBox: {
+  //   todoForm: document.querySelector('.todo__form'),
+  //   todoInput: document.querySelector('.todo__input'),
+  //   todoItemsList: document.querySelector('.todo-items'),
+  // },
   quickLinkBox: {
     quickLinksMain: document.querySelector('#quickLinks'),
     quickLinksList: document.querySelector('.quick-link__list'),

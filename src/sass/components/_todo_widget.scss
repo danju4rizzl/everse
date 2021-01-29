@@ -90,3 +90,48 @@
     @include everse-input();
   }
 }
+
+.task {
+  width: 40vw;
+  height: 10rem;
+
+  &__add {
+    display: flex;
+    align-items: center;
+  }
+  &__form {
+    width: 100%;
+  }
+  &__list {
+    @include canScroll(100px, 97%);
+    font-size: 1.2rem;
+    & > ul {
+      // display: none;
+      max-width: 30.5rem;
+      color: rgba($-color-white, 1);
+      & > li {
+        background-color: rgba($-color-dark, 0.8);
+        padding-right: 0px !important;
+      }
+    }
+  }
+  &__checkbox {
+    background-color: transparent !important;
+    border-color: rgba($-color-white, 0.8);
+    border: 1px solid rgba($-color-white, 0.8);
+    &:checked {
+      border-color: rgba($-color-white, 0.8);
+    }
+    &:focus {
+      box-shadow: none;
+      border: 1px solid rgba($-color-white, 0.8);
+    }
+    &:hover {
+      box-shadow: 0 0 0 0.1rem rgba($-color-white, 0.8);
+    }
+    &[type='checkbox'] {
+      border-radius: 0;
+      padding: 0.6rem;
+    }
+  }
+}

@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 import './main.scss';
 import bootstrap from 'bootstrap';
 import axios from 'axios';
@@ -9,6 +12,13 @@ import { covidWidget } from './widgets/covidWidget';
 import { quickLinkWidget } from './widgets/quickLinkWidget';
 import { weatherWidget } from './widgets/weatherWidget';
 import { fetchData, appIntro } from './utils';
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('task')
+);
 
 // Handle User Geo-Location
 function handleLocation() {
@@ -38,7 +48,7 @@ function handleLocation() {
 
 quickLinkWidget();
 dateTimeWidget();
-todoWidget();
+// todoWidget();
 appIntro();
 
 const runApp = async () => {
@@ -53,3 +63,8 @@ const runApp = async () => {
 if (localStorage.length <= 0) {
   runApp();
 } else runApp();
+
+// USE THIS TO LOAD REACT COMPONENTS UNTILL ENTIRE APP IS RUNNING REACT
+// ReactDOM.render(<Box />, document.getElementById('div1'));
+// ReactDOM.render(<Box />, document.getElementById('div2'));
+// ReactDOM.render(<Box />, document.getElementById('div3'));

@@ -8,7 +8,7 @@ const AddTask = ({ label, onAdd }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (!text) {
-      alert('Please add a Task');
+      alert('💁 Type in  a new task the hit enter or click the plus button.');
       return;
     }
     onAdd(text);
@@ -24,7 +24,7 @@ const AddTask = ({ label, onAdd }) => {
       >
         <input
           type="text"
-          className="todo__input form-control"
+          className="task__form-input form-control"
           placeholder=" "
           id="floatingInput"
           value={text}

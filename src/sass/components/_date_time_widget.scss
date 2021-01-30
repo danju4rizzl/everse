@@ -1,2 +1,21 @@
-#dateTime {
+.time-widget {
+  .time {
+    &__currently {
+      .hours {
+      }
+    }
+    &__info {
+      line-height: 1.1;
+      font-size: 3.5vmin;
+      .period {
+      }
+      .seconds {
+      }
+    }
+  }
+
+  .greeting {
+    &__text {
+    }
+  }
 }

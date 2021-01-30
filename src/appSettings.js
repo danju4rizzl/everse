@@ -15,12 +15,12 @@ export let domStrings = {
     fahrenheitBtn: document.getElementById('fahrenheit'),
     celsiusBtn: document.getElementById('celsius'),
   },
-  dateTimeBox: {
-    box: document.querySelector('#dateTime'),
-    currentDate: document.querySelector('#date'),
-    currentTime: document.querySelector('#time'),
-    greetings: document.querySelector('#greetings'),
-  },
+  // dateTimeBox: {
+  //   box: document.querySelector('#dateTime'),
+  //   currentDate: document.querySelector('#date'),
+  //   currentTime: document.querySelector('#time'),
+  //   greetings: document.querySelector('#greetings'),
+  // },
   covidBox: {
     box: document.querySelector('.covid'),
   },

@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import TasksWidget from './components/TasksWidget/TasksWidget';
+import TimeWidget from './components/TimeWidget/TimeWidget';
+import './fonts/Alata-Regular.ttf';
 import './main.scss';
-import bootstrap from 'bootstrap';
-import axios from 'axios';
-import { domStrings, appConfig, quickLinks } from './appSettings';
 import { quoteWidget } from './widgets/quoteWidget';
-import { todoWidget } from './widgets/todoWidget';
-import { dateTimeWidget } from './widgets/dateTimeWidget';
 import { covidWidget } from './widgets/covidWidget';
 import { quickLinkWidget } from './widgets/quickLinkWidget';
 import { weatherWidget } from './widgets/weatherWidget';
@@ -15,9 +12,16 @@ import { fetchData, appIntro } from './utils';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <TasksWidget />
   </React.StrictMode>,
   document.getElementById('task')
+);
+
+ReactDOM.render(
+  <React.StrictMode>
+    <TimeWidget />
+  </React.StrictMode>,
+  document.getElementById('time')
 );
 
 // Handle User Geo-Location
@@ -47,8 +51,6 @@ function handleLocation() {
 // handles ALL UI function calls
 
 quickLinkWidget();
-dateTimeWidget();
-// todoWidget();
 appIntro();
 
 const runApp = async () => {

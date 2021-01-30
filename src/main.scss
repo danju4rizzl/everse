@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'Alata';
+  src: local('Alata'), url(./fonts/Alata-Regular.ttf) format('truetype');
+}
 @import 'sass/abstracts/variables';
 @import 'sass/abstracts/mixins';
 @import 'sass/base/base';

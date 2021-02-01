@@ -1,90 +1,56 @@
-// QuickLinks
-.quick-link {
-  padding: 1rem;
-  // max-width: 20.5rem;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-
-  &__list {
-    @include canScroll(75%, 350px);
-  }
-
-  &__item {
-    border-radius: 50px;
-    background-color: rgba($-color-dark, 0.5);
-    width: 3rem;
-    height: 3rem;
-    display: inline-block;
-    margin: 5px;
-    padding: 0.7rem;
-    cursor: pointer;
-    transition: all 700ms linear;
-    // position: relative;
-
-    &-remove {
-      clip-path: circle(50% at 50% 50%);
-      background-color: rgba($-color-dark, 0.95);
-      color: $-color-primary;
-
-      position: absolute;
-      top: -5px;
-      width: 15px;
-      opacity: 0;
-    }
-
-    &:hover span {
-      opacity: 1;
-    }
-
-    &--new {
-      // background-color: rgba($-color-dark, 0.5);
-
-      & > a {
-        color: $-color-white;
-        text-decoration: none;
-        font-size: 1rem;
-        vertical-align: middle;
-      }
-    }
-
-    &:hover {
-      background-color: rgba($-color-dark, 0.2);
-      transform: translateY(1px);
-    }
-    &:hover .quick-link__link {
-    }
-  }
-
-  &__link {
-    // background-color: green;
-  }
-
-  &__img {
-    width: 100%;
-    height: 100%;
-
-    &--light {
-      width: 2rem;
-      height: 2rem;
-    }
+.favorites {
+  & input {
+    @include everse-input();
   }
   &__form {
   }
-  &__input {
-    @include everse-input();
-    border-radius: 0px;
-    width: 80%;
-    margin: 0.8rem auto;
-    &:focus {
-      background: rgba($-color-white, 0.3);
-      color: $-color-white;
-      box-shadow: none;
+  &__inner {
+    @include canScroll(156px, 285px);
+  }
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-type: y mandatory;
+  }
+  &__item-container {
+    &:hover .favorites__delete {
+      opacity: 1;
     }
   }
-  &__controls {
-    display: flex;
-    justify-content: space-around;
-    padding: 0 3.5rem;
+  &__item {
+    scroll-snap-align: start;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50px;
+    border: none;
+    display: grid;
+    place-items: center;
+    color: rgba($-color-white, 0.8);
+    text-shadow: 1px 1px 5px rgba($-color-black, 0.3);
+    font-size: 1.2rem;
+    text-decoration: none;
+    margin: 5px;
+    position: relative;
+    background-color: rgba($-color-dark, 0.85);
+    cursor: pointer;
+    letter-spacing: 1px;
+
+    &:hover {
+      background-color: rgba($-color-dark, 0.85);
+      color: rgba($-color-white, 1);
+      transition: all 0.3s linear;
+    }
+  }
+  &__delete {
+    position: absolute;
+    right: -5px;
+    top: -15px;
+    opacity: 0;
+    color: rgba($-color-gray, 0.8);
+    &:hover {
+      color: rgba($-color-primary, 0.8);
+    }
   }
 }

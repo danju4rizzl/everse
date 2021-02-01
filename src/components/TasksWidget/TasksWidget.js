@@ -18,8 +18,8 @@ const TasksWidget = () => {
 
   // Delete task from localStorage
   const deleteTask = (id) => {
-    const canDelete = confirm('Are you sure you want to delete this task');
-    canDelete && setTasks(tasks.filter((task) => task.id !== id));
+    const confirmDelete = confirm('Are you sure you want to delete this task');
+    confirmDelete && setTasks(tasks.filter((task) => task.id !== id));
   };
 
   // Adds new task

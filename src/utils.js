@@ -319,3 +319,12 @@ export const appIntro = () => {
 
   localStorage.getItem('Current_intro') !== null ? tour.cancel() : tour.start();
 };
+
+/*
+Checks the users input and validates errors if empty.
+*/
+export const isInputEmpty = (input, message) => {
+  if (!input) alert(`💁${message}`);
+
+  return;
+};

@@ -2,27 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TasksWidget from './components/TasksWidget/TasksWidget';
 import TimeWidget from './components/TimeWidget/TimeWidget';
+import FavoritesWidget from './components/FavoritesWidget/FavoritesWidget';
 import './fonts/Alata-Regular.ttf';
 import './main.scss';
 import { quoteWidget } from './widgets/quoteWidget';
 import { covidWidget } from './widgets/covidWidget';
-import { quickLinkWidget } from './widgets/quickLinkWidget';
 import { weatherWidget } from './widgets/weatherWidget';
 import { fetchData, appIntro } from './utils';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <TasksWidget />
-  </React.StrictMode>,
-  document.getElementById('task')
-);
-
-ReactDOM.render(
-  <React.StrictMode>
-    <TimeWidget />
-  </React.StrictMode>,
-  document.getElementById('time')
-);
+ReactDOM.render(<TasksWidget />, document.getElementById('task'));
+ReactDOM.render(<TimeWidget />, document.getElementById('time'));
+ReactDOM.render(<FavoritesWidget />, document.getElementById('favorites'));
 
 // Handle User Geo-Location
 function handleLocation() {
@@ -50,7 +40,6 @@ function handleLocation() {
 
 // handles ALL UI function calls
 
-quickLinkWidget();
 appIntro();
 
 const runApp = async () => {

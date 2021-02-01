@@ -15,34 +15,25 @@ export let domStrings = {
     fahrenheitBtn: document.getElementById('fahrenheit'),
     celsiusBtn: document.getElementById('celsius'),
   },
-  // dateTimeBox: {
-  //   box: document.querySelector('#dateTime'),
-  //   currentDate: document.querySelector('#date'),
-  //   currentTime: document.querySelector('#time'),
-  //   greetings: document.querySelector('#greetings'),
-  // },
+
   covidBox: {
     box: document.querySelector('.covid'),
   },
-  // todoBox: {
-  //   todoForm: document.querySelector('.todo__form'),
-  //   todoInput: document.querySelector('.todo__input'),
-  //   todoItemsList: document.querySelector('.todo-items'),
+
+  // quickLinkBox: {
+  //   quickLinksMain: document.querySelector('#quickLinks'),
+  //   quickLinksList: document.querySelector('.quick-link__list'),
+  //   quickLinkNameInput: document.querySelector(
+  //     '.quick-link__form input[type=text]'
+  //   ),
+  //   quickLinkUrlInput: document.querySelector(
+  //     '.quick-link__form input[type=url]'
+  //   ),
+  //   quickLinkAddBtn: document.querySelector('.btn-primary'),
+  //   quickLinkCancelBtn: document.querySelector('.btn-danger'),
+  //   quickLinkRemoveBtn: document.querySelector('.quick-link__item-remove'),
+  //   quickLinksCreate: document.querySelector('.quick-link__item--plus'),
   // },
-  quickLinkBox: {
-    quickLinksMain: document.querySelector('#quickLinks'),
-    quickLinksList: document.querySelector('.quick-link__list'),
-    quickLinkNameInput: document.querySelector(
-      '.quick-link__form input[type=text]'
-    ),
-    quickLinkUrlInput: document.querySelector(
-      '.quick-link__form input[type=url]'
-    ),
-    quickLinkAddBtn: document.querySelector('.btn-primary'),
-    quickLinkCancelBtn: document.querySelector('.btn-danger'),
-    quickLinkRemoveBtn: document.querySelector('.quick-link__item-remove'),
-    quickLinksCreate: document.querySelector('.quick-link__item--plus'),
-  },
 };
 
 /*

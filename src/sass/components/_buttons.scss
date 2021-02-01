@@ -6,7 +6,6 @@
   border: none;
   cursor: pointer;
   line-height: 1.5;
-  //   padding: 1em 2em;
   letter-spacing: 0.05rem;
 
   &:focus {
@@ -22,7 +21,6 @@
       bottom,
       right
     );
-    // background-color: $-color-dark;
   }
   &--cancel {
     @include btn-border-drawing(
@@ -33,7 +31,6 @@
       bottom,
       left
     );
-    // background-color: $-color-primary;
   }
 }
 

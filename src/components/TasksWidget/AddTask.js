@@ -26,11 +26,11 @@ const AddTask = ({ label, onAdd }) => {
           type="text"
           className="task__form-input form-control"
           placeholder=" "
-          id="floatingInput"
+          id="taskInput"
           value={text}
           onChange={(event) => setText(event.target.value)}
         />
-        <label htmlFor="floatingInput">{label}</label>
+        <label htmlFor="taskInput">{label}</label>
       </form>
       <AddButtonIcon onAdd={onSubmit} isVisible={text.length > 0 && true} />
     </div>

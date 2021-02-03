@@ -2,6 +2,30 @@ import axios from 'axios';
 import '../node_modules/shepherd.js/dist/css/shepherd.css';
 import Shepherd from 'shepherd.js';
 import { domStrings } from './appSettings';
+import { message } from 'antd';
+
+// Gets a random Item from an array
+export const getRandomItem = (data, setDataState) => {
+  const t = data[Math.floor(Math.random() * data.length)];
+  setDataState(t); //
+};
+// Shows the error popup box when there is an error
+export const showErrorMessage = (errorMessage) => {
+  message.error({
+    content: errorMessage,
+    className: 'message-box',
+    // duration: 0,
+  });
+};
+
+// Shows the success popup box
+export const showSuccessMessage = (successMessage) => {
+  message.success({
+    content: successMessage,
+    className: 'message-box',
+    // duration: 0, Set to 0 to debug the popup box
+  });
+};
 
 // function to ADD bootstrap .active & .disabled classes
 export const isActive = (element) => {

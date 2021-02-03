@@ -2,12 +2,12 @@
 This holds the entire elements to be used in the DOM
 */
 export let domStrings = {
-  quoteBox: {
-    quoteContent: document.querySelector('.quote__content'),
-    quoteAuthor: document.querySelector('.quote__author'),
-    spiritualityBtn: document.querySelector('.spirituality'),
-    motivationalBtn: document.querySelector('.motivational'),
-  },
+  // quoteBox: {
+  //   quoteContent: document.querySelector('.quote__content'),
+  //   quoteAuthor: document.querySelector('.quote__author'),
+  //   spiritualityBtn: document.querySelector('.spirituality'),
+  //   motivationalBtn: document.querySelector('.motivational'),
+  // },
   weatherBox: {
     box: document.querySelector('#weather'),
     location: document.querySelector('#location'),
@@ -19,21 +19,6 @@ export let domStrings = {
   covidBox: {
     box: document.querySelector('.covid'),
   },
-
-  // quickLinkBox: {
-  //   quickLinksMain: document.querySelector('#quickLinks'),
-  //   quickLinksList: document.querySelector('.quick-link__list'),
-  //   quickLinkNameInput: document.querySelector(
-  //     '.quick-link__form input[type=text]'
-  //   ),
-  //   quickLinkUrlInput: document.querySelector(
-  //     '.quick-link__form input[type=url]'
-  //   ),
-  //   quickLinkAddBtn: document.querySelector('.btn-primary'),
-  //   quickLinkCancelBtn: document.querySelector('.btn-danger'),
-  //   quickLinkRemoveBtn: document.querySelector('.quick-link__item-remove'),
-  //   quickLinksCreate: document.querySelector('.quick-link__item--plus'),
-  // },
 };
 
 /*

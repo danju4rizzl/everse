@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AddTask from './AddTask';
 import TaskList from './TaskList';
+import { showSuccessMessage } from '../../utils';
 import store from 'store';
 
 const TasksWidget = () => {
@@ -20,6 +21,7 @@ const TasksWidget = () => {
   const deleteTask = (id) => {
     const confirmDelete = confirm('Are you sure you want to delete this task');
     confirmDelete && setTasks(tasks.filter((task) => task.id !== id));
+    showSuccessMessage('Task has been deleted successfully.');
   };
 
   // Adds new task

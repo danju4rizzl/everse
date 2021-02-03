@@ -1,0 +1,28 @@
+.message-box {
+  .ant-message-notice-content {
+    background-color: rgba($-color-dark, 0.5);
+    color: $-color-white;
+    padding: 1.5rem;
+    // text-transform: capitalize;
+
+    &:hover {
+      background-color: rgba($-color-dark, 0.9);
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  .ant-message-custom-content .ant-message-error {
+    display: grid;
+    place-items: center;
+    grid-auto-flow: column;
+  }
+
+  .ant-message-custom-content .ant-message-success {
+    display: grid;
+    place-items: center;
+    grid-auto-flow: column;
+  }
+
+  .ant-message-success .anticon {
+    color: rgba($-color-secondary, 1);
+  }
+}

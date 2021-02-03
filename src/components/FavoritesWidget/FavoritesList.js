@@ -24,7 +24,7 @@ const FavoritesList = ({ favorites, toggleForm, onDelete }) => {
               name={name}
               url={url}
               bgColor={bgColor}
-              onDelete={(e) => onDelete(e, id)}
+              onDelete={(e) => onDelete(e, id, name)}
             />
           );
         })}

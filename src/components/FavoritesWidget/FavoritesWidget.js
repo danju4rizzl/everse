@@ -3,6 +3,7 @@ import AddButtonIcon from '../AddButtonIcon';
 import AddFavorites from './AddFavorites';
 import FavoritesList from './FavoritesList';
 import store from 'store';
+import { showSuccessMessage } from '../../utils';
 
 const FavoritesWidget = () => {
   const [toggle, setToggle] = useState(false);
@@ -22,12 +23,16 @@ const FavoritesWidget = () => {
     setToggle(!toggle);
   };
 
-  const deleteFavorites = (e, id) => {
+  const deleteFavorites = (e, id, name) => {
     e.preventDefault();
-    const confirmDelete = confirm(
-      'Are you sure you want to delete this favorite link?'
-    );
-    confirmDelete && setText(texts.filter((text) => text.id !== id));
+    const confirmDelete = confirm(`Are you sure you want to delete ${name}?`);
+
+    if (confirmDelete) {
+      setText(texts.filter((text) => text.id !== id));
+      showSuccessMessage(`Successfully deleted ${name} `);
+    }
+
+    return;
   };
 
   const addFavorite = (favorite) => {
@@ -36,7 +41,6 @@ const FavoritesWidget = () => {
     `;
     const newFavorite = { id, bgColor, favorite };
     setText([...texts, newFavorite]);
-    console.log(texts);
   };
 
   return (

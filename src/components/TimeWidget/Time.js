@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export const Time = ({ time, seconds, period }) => {
   return (
-    <div className="time d-flex align-items-center">
+    <div className="time d-flex align-items-center justify-content-center">
       <div className="time__currently mx-2">
         <h2 className="hours">
           <span>{time}</span>

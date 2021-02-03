@@ -7,10 +7,6 @@ const AddTask = ({ label, onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!text) {
-      alert('💁 Type in  a new task the hit enter or click the plus button.');
-      return;
-    }
     onAdd(text);
     setText('');
   };

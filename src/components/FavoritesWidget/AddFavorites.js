@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { isInputEmpty } from '../../utils';
+import { showSuccessMessage, showErrorMessage } from '../../utils';
 import { useSpring, animated } from 'react-spring';
 import AddButtonIcon from '../AddButtonIcon';
 import CancelButtonIcon from '../CancelButtonIcon';
@@ -16,8 +16,9 @@ const AddFavorites = ({ isToggled, onAdd }) => {
 
     if (validator.isURL(url, { require_protocol: true })) {
       setUrl(url.toLowerCase());
+      showSuccessMessage(`${name} has been successfully added`);
     } else {
-      alert('Please enter a  valid URL.');
+      showErrorMessage(`Please enter a valid URL for ${name}`);
       return;
     }
 
@@ -25,10 +26,6 @@ const AddFavorites = ({ isToggled, onAdd }) => {
     setName('');
     setUrl('');
     isToggled();
-  };
-
-  const validateInput = (name, url) => {
-    if (name && url) return true;
   };
 
   return (
@@ -63,9 +60,7 @@ const AddFavorites = ({ isToggled, onAdd }) => {
 
       <div className="favorites_form-controls my-3 d-flex justify-content-between">
         <CancelButtonIcon isVisible={true} onCancel={isToggled} />
-        {validateInput(name, url) && (
-          <AddButtonIcon isVisible={true} onAdd={onSubmit} />
-        )}
+        {name && url && <AddButtonIcon isVisible={true} onAdd={onSubmit} />}
       </div>
     </animated.form>
   );

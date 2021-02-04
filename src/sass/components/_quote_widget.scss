@@ -6,6 +6,43 @@
     transform: rotate(90deg);
   }
 }
+.quotes {
+  height: 100%;
+  display: grid;
+  place-content: center;
+  position: relative;
+  &__inner {
+    display: grid;
+    place-items: center;
+  }
+  &__today {
+  }
+  &__settings {
+    width: 100%;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // opacity: 0;
+    transition: all 0.5s linear;
+
+    & a {
+      color: $-color-white;
+      font-size: 2.5vmin;
+    }
+  }
+  &:hover .quotes__settings {
+    // opacity: 1;
+  }
+
+  &__options {
+    color: rgba($-color-dark, 1);
+  }
+  &__dropdown {
+    color: $-color-white !important;
+    // background: rgba($-color-dark, 0.2);
+  }
+}
 
 #quote {
   height: 100%;

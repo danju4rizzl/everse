@@ -2,13 +2,26 @@ import React, { useEffect, useState } from 'react';
 import VerseOfTheDay from './VerseOfTheDay';
 import QuoteOfTheDay from './QuoteOfTheDay';
 import { fetchData, getRandomItem } from '../../utils';
+import { Select } from 'antd';
+import { UpOutlined } from '@ant-design/icons';
+import QuotesHeader from './QuotesHeader';
+
+const bibleAPI = 'https://beta.ourmanna.com/api/v1/get/?format=json';
+const motivationAPI = 'https://type.fit/api/quotes';
+const { Option } = Select;
 
 const QuotesWidget = () => {
-  const bibleAPI = 'https://beta.ourmanna.com/api/v1/get/?format=json';
-  const motivationAPI = 'https://type.fit/api/quotes';
-
   const [bible, setBible] = useState([]);
   const [motivation, setMotivation] = useState([]);
+  const [mode, setMode] = useState('spirituality');
+
+  const isBibleSelected = checkBible(mode);
+
+  function handleChange(value) {
+    if (value === 'spirituality') {
+      setMode(value);
+    } else setMode('motivational');
+  }
 
   useEffect(() => {
     const getAllData = async () => {
@@ -20,16 +33,38 @@ const QuotesWidget = () => {
     getAllData();
   }, []);
 
+  console.log();
+
   return (
-    <div>
-      <div id="quoteSettings" className="quote-settings">
-        {''}
+    <div className="quotes__inner p-5">
+      <QuotesHeader mode={isBibleSelected()} />
+      <div className="quotes__today">
+        {isBibleSelected() && <VerseOfTheDay data={bible} />}
+        {!isBibleSelected() && <QuoteOfTheDay data={motivation} />}
       </div>
-      <h2>Verse of the day</h2>
-      <VerseOfTheDay data={bible} />
-      {/* <QuoteOfTheDay data={motivation} /> */}
+
+      <div className="quotes__settings ">
+        <Select
+          defaultValue={mode}
+          style={{ width: 200 }}
+          onChange={handleChange}
+          bordered={false}
+          className="quotes__options"
+          dropdownClassName="quotes__dropdown"
+        >
+          <Option value="spirituality" disabled={isBibleSelected()}>
+            Spirituality
+          </Option>
+          <Option value="Motivational" disabled={!isBibleSelected()}>
+            Motivational
+          </Option>
+        </Select>
+      </div>
     </div>
   );
 };
 
 export default QuotesWidget;
+function checkBible(mode) {
+  return () => (mode === 'spirituality' ? true : false);
+}

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const QuoteOfTheDay = ({ data }) => {
-  console.log(data);
   const { text, author } = data;
   return (
     <div>

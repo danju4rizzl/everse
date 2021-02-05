@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import VerseOfTheDay from './VerseOfTheDay';
 import QuoteOfTheDay from './QuoteOfTheDay';
+import QuotesHeader from './QuotesHeader';
 import { fetchData, getRandomItem } from '../../utils';
 import { Select } from 'antd';
 import { UpOutlined } from '@ant-design/icons';
-import QuotesHeader from './QuotesHeader';
+import store from 'store';
 
 const bibleAPI = 'https://beta.ourmanna.com/api/v1/get/?format=json';
 const motivationAPI = 'https://type.fit/api/quotes';
@@ -14,6 +15,7 @@ const QuotesWidget = () => {
   const [bible, setBible] = useState([]);
   const [motivation, setMotivation] = useState([]);
   const [mode, setMode] = useState('spirituality');
+  const storageKey = 'Current_quotes';
 
   const isBibleSelected = checkBible(mode);
 
@@ -24,16 +26,28 @@ const QuotesWidget = () => {
   }
 
   useEffect(() => {
+    const storedQuotes = store.get(storageKey);
+    console.log(storedQuotes);
+    storedQuotes && setMode(storedQuotes);
+    handleChange(storedQuotes);
+  }, []);
+
+  useEffect(() => {
+    store.set(storageKey, mode);
+  }, [mode]);
+
+  useEffect(() => {
     const getAllData = async () => {
       const bibleData = await fetchData(bibleAPI);
       const motivationData = await fetchData(motivationAPI);
+      const randomMotivationalQuote =
+        motivationData[Math.floor(Math.random() * motivationData.length)];
+
       setBible(bibleData.verse);
-      getRandomItem(motivationData, setMotivation);
+      setMotivation(randomMotivationalQuote);
     };
     getAllData();
   }, []);
-
-  console.log();
 
   return (
     <div className="quotes__inner p-5">
@@ -45,7 +59,9 @@ const QuotesWidget = () => {
 
       <div className="quotes__settings ">
         <Select
-          defaultValue={mode}
+          defaultValue={
+            store.get(storageKey) === 'spirituality' ? mode : 'motivational'
+          }
           style={{ width: 200 }}
           onChange={handleChange}
           bordered={false}
@@ -55,7 +71,7 @@ const QuotesWidget = () => {
           <Option value="spirituality" disabled={isBibleSelected()}>
             Spirituality
           </Option>
-          <Option value="Motivational" disabled={!isBibleSelected()}>
+          <Option value="motivational" disabled={!isBibleSelected()}>
             Motivational
           </Option>
         </Select>

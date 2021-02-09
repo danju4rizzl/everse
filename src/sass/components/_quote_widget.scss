@@ -37,6 +37,7 @@
 
   &__options {
     color: rgba($-color-dark, 1);
+    text-transform: capitalize;
   }
   &__dropdown {
     color: $-color-white !important;

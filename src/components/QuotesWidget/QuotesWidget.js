@@ -10,24 +10,23 @@ import store from 'store';
 const bibleAPI = 'https://beta.ourmanna.com/api/v1/get/?format=json';
 const motivationAPI = 'https://type.fit/api/quotes';
 const { Option } = Select;
+const bString = 'spirituality';
+const mString = 'motivational';
+const storageKey = 'Current_quotes';
 
 const QuotesWidget = () => {
   const [bible, setBible] = useState([]);
   const [motivation, setMotivation] = useState([]);
-  const [mode, setMode] = useState('spirituality');
-  const storageKey = 'Current_quotes';
+  const [mode, setMode] = useState(bString);
 
-  const isBibleSelected = checkBible(mode);
+  const isBibleSelected = checkSelected(mode, bString);
 
   function handleChange(value) {
-    if (value === 'spirituality') {
-      setMode(value);
-    } else setMode('motivational');
+    value === bString ? setMode(value) : setMode(mString);
   }
 
   useEffect(() => {
     const storedQuotes = store.get(storageKey);
-    console.log(storedQuotes);
     storedQuotes && setMode(storedQuotes);
     handleChange(storedQuotes);
   }, []);
@@ -59,19 +58,17 @@ const QuotesWidget = () => {
 
       <div className="quotes__settings ">
         <Select
-          defaultValue={
-            store.get(storageKey) === 'spirituality' ? mode : 'motivational'
-          }
+          defaultValue={store.get(storageKey) === bString ? mode : mString}
           style={{ width: 200 }}
           onChange={handleChange}
           bordered={false}
           className="quotes__options"
           dropdownClassName="quotes__dropdown"
         >
-          <Option value="spirituality" disabled={isBibleSelected()}>
+          <Option value={bString} disabled={isBibleSelected()}>
             Spirituality
           </Option>
-          <Option value="motivational" disabled={!isBibleSelected()}>
+          <Option value={mString} disabled={!isBibleSelected()}>
             Motivational
           </Option>
         </Select>
@@ -81,6 +78,6 @@ const QuotesWidget = () => {
 };
 
 export default QuotesWidget;
-function checkBible(mode) {
-  return () => (mode === 'spirituality' ? true : false);
+function checkSelected(mode, str) {
+  return () => (mode === str ? true : false);
 }

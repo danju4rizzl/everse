@@ -28,7 +28,7 @@ const QuotesWidget = () => {
   useEffect(() => {
     const storedQuotes = store.get(storageKey);
     storedQuotes && setMode(storedQuotes);
-    handleChange(storedQuotes);
+    // handleChange(storedQuotes);
   }, []);
 
   useEffect(() => {
@@ -48,6 +48,10 @@ const QuotesWidget = () => {
     getAllData();
   }, []);
 
+  const getLocalMode = () => {
+    return store.get(storageKey) === bString ? mode : mString;
+  };
+
   return (
     <div className="quotes__inner p-5">
       <QuotesHeader mode={isBibleSelected()} />
@@ -58,7 +62,7 @@ const QuotesWidget = () => {
 
       <div className="quotes__settings ">
         <Select
-          defaultValue={store.get(storageKey) === bString ? mode : mString}
+          defaultValue={getLocalMode}
           style={{ width: 200 }}
           onChange={handleChange}
           bordered={false}

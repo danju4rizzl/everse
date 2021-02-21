@@ -1,29 +1,28 @@
 .weather {
-  .icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    font-size: 1.5rem;
-    opacity: 0;
-    transition: all 0.8s ease-in-out;
-    & > i {
-      color: $-color-gray;
-    }
-  }
+  // .icon {
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   width: 100%;
+  //   font-size: 1.5rem;
+  //   opacity: 0;
+  //   transition: all 0.8s ease-in-out;
+  //   & > i {
+  //     color: $-color-gray;
+  //   }
+  // }
 
   &__temp {
     display: grid;
     align-items: center;
     justify-content: center;
-    grid-template-columns: repeat(2, 1fr);
 
     & i {
       font-size: 6vmin;
     }
-    & > :last-child {
-      grid-column: 1/-1;
-    }
+    // & > :last-child {
+    //   grid-column: 1/-1;
+    // }
   }
 
   &__units {
@@ -31,12 +30,12 @@
       @include transparent-button();
       font-size: 3.2vmin;
       margin: 0 0.2rem;
-      opacity: 0;
+      // opacity: 0;
     }
     .is-active {
       opacity: 1;
       color: rgba($-color-white, 0.5);
     }
   }
-  @include hover-effect();
+  // @include hover-effect();
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TasksWidget from './components/TasksWidget/TasksWidget';
 import TimeWidget from './components/TimeWidget/TimeWidget';
+import WeatherWidget from './components/WeatherWidget/WeatherWidget';
 import FavoritesWidget from './components/FavoritesWidget/FavoritesWidget';
 import QuotesWidget from './components/QuotesWidget/QuotesWidget';
 import './fonts/Alata-Regular.ttf';
@@ -9,13 +10,14 @@ import 'antd/dist/antd.css';
 import './main.scss';
 
 import { covidWidget } from './widgets/covidWidget';
-import { weatherWidget } from './widgets/weatherWidget';
+// import { weatherWidget } from './widgets/weatherWidget';
 import { fetchData, appIntro } from './utils';
 
 ReactDOM.render(<TasksWidget />, document.getElementById('task'));
 ReactDOM.render(<TimeWidget />, document.getElementById('time'));
 ReactDOM.render(<FavoritesWidget />, document.getElementById('favorites'));
 ReactDOM.render(<QuotesWidget />, document.getElementById('quotes'));
+ReactDOM.render(<WeatherWidget />, document.getElementById('weather'));
 
 // Handle User Geo-Location
 function handleLocation() {
@@ -50,7 +52,7 @@ const runApp = async () => {
   let { country, city } = userIp;
 
   covidWidget(country);
-  weatherWidget(city);
+  // weatherWidget(city);
 };
 
 // localStorage.clear();

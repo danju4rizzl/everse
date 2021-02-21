@@ -17,14 +17,17 @@
     align-items: center;
     justify-content: center;
 
-    & i {
-      font-size: 6vmin;
-    }
     // & > :last-child {
     //   grid-column: 1/-1;
     // }
   }
-
+  &__temperature {
+    display: flex;
+    align-items: center;
+    & i {
+      font-size: 3rem;
+    }
+  }
   &__units {
     & > button {
       @include transparent-button();

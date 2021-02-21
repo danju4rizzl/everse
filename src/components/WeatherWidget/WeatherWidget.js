@@ -33,8 +33,8 @@ const WeatherWidget = () => {
   return (
     <>
       <div className="weather__temp">
-        <WeatherCondition data={data} />
-        <WeatherIcon data={data} />
+        <WeatherCondition conditionData={data.weather} />
+        {/* <WeatherIcon iconData={data.weather} /> */}
         <WeatherCity city={city} />
         <WeatherUnit data={data} />
       </div>

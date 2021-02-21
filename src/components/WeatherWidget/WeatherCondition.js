@@ -1,13 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const WeatherCondition = ({ data }) => {
+const WeatherCondition = ({ conditionData }) => {
   return (
     <>
-      {data.weather.map((item) => (
-        <p>{item.main}</p>
-      ))}
+      <p>{conditionData.map((item) => item.main)}</p>
     </>
   );
 };
 
+WeatherCondition.propTypes = { condition: PropTypes.array };
 export default WeatherCondition;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   WiThunderstorm,
   WiSleet,
@@ -10,7 +11,7 @@ import {
   WiNa,
 } from 'react-icons/wi';
 
-const WeatherIcon = ({ data }) => {
+const WeatherIcon = ({ iconData }) => {
   const handleIcon = (id) => {
     if (id >= 200 && id < 232) {
       return <WiThunderstorm />;
@@ -31,7 +32,7 @@ const WeatherIcon = ({ data }) => {
 
   return (
     <>
-      {data.weather.map((item) => (
+      {iconData.map((item) => (
         <i className="weather__icon" key={item.id}>
           {handleIcon(item.id)}
         </i>
@@ -39,5 +40,5 @@ const WeatherIcon = ({ data }) => {
     </>
   );
 };
-
+WeatherIcon.propTypes = { iconData: PropTypes.array };
 export default WeatherIcon;

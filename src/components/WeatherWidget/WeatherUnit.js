@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import WeatherIcon from './WeatherIcon';
 import WeatherUnitControl from './WeatherUnitControl';
 
 const WeatherUnit = ({ data }) => {
@@ -27,10 +28,11 @@ const WeatherUnit = ({ data }) => {
   }, [userUnit]);
 
   return (
-    <>
-      <h2 className="temperature">{temperature}</h2>
+    <div className="weather__temperature">
+      <WeatherIcon iconData={data.weather} />
+      <h2 className="">{temperature}</h2>
       <WeatherUnitControl unit={userUnit} onUnitChange={handleUnit} />
-    </>
+    </div>
   );
 };
 

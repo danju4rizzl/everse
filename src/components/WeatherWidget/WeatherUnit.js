@@ -20,7 +20,7 @@ const WeatherUnit = ({ data }) => {
   const handleTemplate = (userData) => {
     const defaultUnit = Math.round(userData.main.temp);
     const celsius = getCelsius(defaultUnit);
-    setTemperature(userUnit ? `${defaultUnit}°` : `${celsius}°`);
+    setTemperature(userUnit ? `${defaultUnit}` : `${celsius}`);
   };
 
   useEffect(() => {
@@ -28,9 +28,8 @@ const WeatherUnit = ({ data }) => {
   }, [userUnit]);
 
   return (
-    <div className="weather__temperature">
-      <WeatherIcon iconData={data.weather} />
-      <h2 className="">{temperature}</h2>
+    <div className="weather__temperature d-flex align-items-center">
+      <h2 className="weather__current">{temperature}</h2>
       <WeatherUnitControl unit={userUnit} onUnitChange={handleUnit} />
     </div>
   );

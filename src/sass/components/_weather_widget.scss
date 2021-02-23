@@ -1,44 +1,51 @@
 .weather {
-  // .icon {
-  //   position: absolute;
-  //   top: 0;
-  //   right: 0;
-  //   width: 100%;
-  //   font-size: 1.5rem;
-  //   opacity: 0;
-  //   transition: all 0.8s ease-in-out;
-  //   & > i {
-  //     color: $-color-gray;
-  //   }
-  // }
-
   &__temp {
     display: grid;
     align-items: center;
     justify-content: center;
-
-    // & > :last-child {
-    //   grid-column: 1/-1;
-    // }
   }
   &__temperature {
     display: flex;
-    align-items: center;
-    & i {
-      font-size: 3rem;
-    }
   }
+  &__current {
+    min-width: 4rem;
+  }
+
   &__units {
-    & > button {
-      @include transparent-button();
-      font-size: 3.2vmin;
-      margin: 0 0.2rem;
-      // opacity: 0;
+    & li {
+      background: none;
+      border: none;
+      padding: 0 0.3rem;
+
+      & > button {
+        @include transparent-button();
+      }
     }
-    .is-active {
-      opacity: 1;
-      color: rgba($-color-white, 0.5);
+    .isActive {
+      color: $-color-white;
+      transition: all 0.3s linear;
+      font-size: 1.4rem;
+    }
+    .notActive {
+      color: $-color-gray;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s linear;
+      font-size: 0.8rem;
+    }
+
+    .divider {
+      background-color: $-color-white;
+      width: 100%;
+      margin: 0rem;
     }
   }
-  // @include hover-effect();
+  &:hover .notActive {
+    opacity: 1;
+    visibility: visible;
+  }
+  &:hover .isActive {
+    font-size: 1.2rem;
+  }
+  @include hover-effect();
 }

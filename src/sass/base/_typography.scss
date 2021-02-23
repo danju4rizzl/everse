@@ -1,5 +1,5 @@
 h2 {
-  font-size: 7.5vmin;
+  font-size: 3rem;
   font-weight: 300;
   text-shadow: 0 1px 0 rgba($-color-black, 0.4);
   margin: 0;
@@ -7,6 +7,10 @@ h2 {
 }
 
 p {
-  font-size: 3.2vmin;
+  font-size: 1.3rem;
   margin: 0;
+}
+
+.text-sm {
+  font-size: 0.8rem;
 }

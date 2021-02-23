@@ -8,7 +8,7 @@ body {
   font-weight: 400;
   // This defines what 1rem is
   font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
-  line-height: 1.7;
+  line-height: 1.4;
   font-family: $-font-primary;
   background: $-color-dark;
   color: $-color-white;
@@ -51,10 +51,10 @@ body {
       rgba($-color-black, 0.5),
       rgba($-color-black, 0.5)
     ),
-    url('https://source.unsplash.com/daily?minimalist');
-  // url('https://source.unsplash.com/daily?natural');
-  // url('https://source.unsplash.com/daily?sky&&cloud&&');
-  // url('https://source.unsplash.com/daily?space');
+    // url('https://source.unsplash.com/daily?minimalist');
+    // url('https://source.unsplash.com/daily?natural');
+    // url('https://source.unsplash.com/daily?sky&&cloud&&');
+    url('https://source.unsplash.com/daily?space');
   // url('https://source.unsplash.com/daily?spritual');
   // url('https://source.unsplash.com/daily?Inspiration');
   // url('https://source.unsplash.com/daily?success');

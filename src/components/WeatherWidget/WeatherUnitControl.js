@@ -7,25 +7,33 @@ const WeatherUnitControl = ({ unit, onUnitChange }) => {
 
   return (
     <>
-      <div className="weather__units">
-        <button
-          type="button"
-          value="fahrenheit"
-          onClick={handleClick}
-          style={{ color: unit && '#333' }}
-        >
-          F°
-        </button>
-
-        <button
-          type="button"
-          value="celsius"
-          onClick={handleClick}
-          style={{ color: !unit && '#333' }}
-        >
-          C°
-        </button>
-      </div>
+      <ul
+        className={`weather__units d-flex align-items-start ${
+          unit ? 'flex-row' : 'flex-row-reverse'
+        } list-group`}
+      >
+        <li className="list-group-item">
+          <button
+            type="button"
+            value="fahrenheit"
+            onClick={handleClick}
+            className={unit ? 'isActive' : 'notActive'}
+          >
+            °F
+          </button>
+        </li>
+        {/* <hr className="divider" /> */}
+        <li className="list-group-item">
+          <button
+            type="button"
+            value="celsius"
+            onClick={handleClick}
+            className={!unit ? 'isActive' : 'notActive'}
+          >
+            °C
+          </button>
+        </li>
+      </ul>
     </>
   );
 };

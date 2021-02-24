@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const Greeting = ({ greeting }) => {
   return (
     <div className="greeting">
-      <p className="greeting__text">{greeting}</p>
+      <p className="text-sm">{greeting}</p>
     </div>
   );
 };

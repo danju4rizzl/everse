@@ -8,8 +8,8 @@ const WeatherUnitControl = ({ unit, onUnitChange }) => {
   return (
     <>
       <ul
-        className={`weather__units d-flex align-items-start ${
-          unit ? 'flex-row' : 'flex-row-reverse'
+        className={`weather__units d-flex align-items-center pt-1 ${
+          unit ? 'flex-column' : 'flex-column-reverse'
         } list-group`}
       >
         <li className="list-group-item">

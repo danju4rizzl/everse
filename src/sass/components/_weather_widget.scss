@@ -8,7 +8,8 @@
     display: flex;
   }
   &__current {
-    min-width: 4rem;
+    min-width: 3rem;
+    padding: 0.1rem;
   }
 
   &__units {
@@ -24,14 +25,14 @@
     .isActive {
       color: $-color-white;
       transition: all 0.3s linear;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
     }
     .notActive {
       color: $-color-gray;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s linear;
-      font-size: 0.8rem;
+      font-size: 1rem;
     }
 
     .divider {
@@ -45,7 +46,7 @@
     visibility: visible;
   }
   &:hover .isActive {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   @include hover-effect();
 }

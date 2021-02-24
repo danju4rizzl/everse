@@ -7,7 +7,16 @@ const WeatherUnit = ({ data }) => {
   const [temperature, setTemperature] = useState('');
 
   const handleUnit = (selectedValue) => {
-    selectedValue === 'fahrenheit' ? setUserUnit(true) : setUserUnit(false);
+    switch (selectedValue) {
+      case 'fahrenheit':
+        setUserUnit(true);
+        break;
+      case 'celsius':
+        setUserUnit(false);
+      default:
+        break;
+    }
+
     //TODO Create a storage object to store in localStorage
   };
 
@@ -29,7 +38,7 @@ const WeatherUnit = ({ data }) => {
 
   return (
     <div className="weather__temperature d-flex align-items-center">
-      <h2 className="weather__current">{temperature}</h2>
+      <h2 className="current">{temperature}</h2>
       <WeatherUnitControl unit={userUnit} onUnitChange={handleUnit} />
     </div>
   );

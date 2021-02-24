@@ -8,7 +8,7 @@ const WeatherUnitControl = ({ unit, onUnitChange }) => {
   return (
     <>
       <ul
-        className={`weather__units d-flex align-items-center pt-1 ${
+        className={`units d-flex align-items-center pt-1 ${
           unit ? 'flex-column' : 'flex-column-reverse'
         } list-group`}
       >

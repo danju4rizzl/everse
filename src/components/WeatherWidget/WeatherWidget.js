@@ -11,8 +11,6 @@ import PulseLoader from 'react-spinners/PulseLoader';
 
 const WeatherWidget = () => {
   const [city, setCity] = useState([]);
-  const [weatherData, setWeatherData] = useState([]);
-  const [defaultUnit, setDefaultUnit] = useState(true);
 
   // Can be a string as well. Need to ensure each key-value pair ends with ;
   const override = css`
@@ -32,21 +30,15 @@ const WeatherWidget = () => {
     params: {
       q: city,
       appid: process.env.OPEN_WEATHER_MAP_API_KEY,
-      units: `${defaultUnit ? 'imperial' : 'metric'}`,
+      units: 'imperial',
     },
   };
 
   const [{ data, loading, error }, reFetchData] = useAxios(requestOptions);
 
-  // Danjuma you stopped here before going out, continue here
-  const storeUnits = () => {
-    setDefaultUnit(!defaultUnit);
-  };
-
   if (loading)
     return <PulseLoader loading={true} css={override} size={10} color="#FFF" />;
   if (error) return <p>Error!</p>;
-  console.log(data);
   return (
     <>
       <div className="weather__temp">

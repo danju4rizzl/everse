@@ -5,42 +5,44 @@
     justify-content: center;
   }
   &__temperature {
-    display: flex;
-  }
-  &__current {
-    min-width: 3rem;
-    padding: 0.1rem;
-  }
+    min-width: 7rem;
+    .current {
+      width: 60%;
+      padding: 0.1rem;
+    }
 
-  &__units {
-    & li {
-      background: none;
-      border: none;
-      padding: 0 0.3rem;
+    .units {
+      width: 40%;
+      & li {
+        background: none;
+        border: none;
+        padding: 0 0.3rem;
 
-      & > button {
-        @include transparent-button();
+        & > button {
+          @include transparent-button();
+        }
+      }
+      .isActive {
+        color: $-color-white;
+        transition: all 0.3s linear;
+        font-size: 1.5rem;
+      }
+      .notActive {
+        color: $-color-gray;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s linear;
+        font-size: 1rem;
+      }
+
+      .divider {
+        background-color: $-color-white;
+        width: 100%;
+        margin: 0rem;
       }
     }
-    .isActive {
-      color: $-color-white;
-      transition: all 0.3s linear;
-      font-size: 1.5rem;
-    }
-    .notActive {
-      color: $-color-gray;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s linear;
-      font-size: 1rem;
-    }
-
-    .divider {
-      background-color: $-color-white;
-      width: 100%;
-      margin: 0rem;
-    }
   }
+
   &:hover .notActive {
     opacity: 1;
     visibility: visible;

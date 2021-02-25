@@ -39,15 +39,15 @@ const WeatherWidget = () => {
   if (loading)
     return <PulseLoader loading={true} css={override} size={10} color="#FFF" />;
   if (error) return <p>Error!</p>;
+  console.log(data);
   return (
     <>
       <div className="weather__temp">
-        <WeatherCondition conditionData={data.weather} />
+        <WeatherCity city={city} />
         {/* <WeatherIcon iconData={data.weather} /> */}
         <WeatherUnit data={data} />
-        <WeatherCity city={city} />
+        <WeatherCondition conditionData={data.weather} />
       </div>
-      <div className="weather__info"></div>
     </>
   );
 };

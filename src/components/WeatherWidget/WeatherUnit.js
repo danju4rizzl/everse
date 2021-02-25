@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import WeatherIcon from './WeatherIcon';
 import WeatherUnitControl from './WeatherUnitControl';
+import store from 'store';
+
+const storageKey = 'Current_unit';
 
 const WeatherUnit = ({ data }) => {
-  const [userUnit, setUserUnit] = useState(true);
+  const [userUnit, setUserUnit] = useState(store.get(storageKey));
   const [temperature, setTemperature] = useState('');
 
   const handleUnit = (selectedValue) => {
@@ -29,15 +32,19 @@ const WeatherUnit = ({ data }) => {
   const handleTemplate = (userData) => {
     const defaultUnit = Math.round(userData.main.temp);
     const celsius = getCelsius(defaultUnit);
-    setTemperature(userUnit ? `${defaultUnit}` : `${celsius}`);
+    setTemperature(
+      store.get(storageKey) ? `${defaultUnit}` : `${celsius}` || userUnit
+    );
   };
 
   useEffect(() => {
+    store.set(storageKey, userUnit);
     handleTemplate(data);
   }, [userUnit]);
 
   return (
     <div className="weather__temperature d-flex align-items-center">
+      <WeatherIcon iconData={data.weather} iconSize="3rem" />
       <h2 className="current">{temperature}</h2>
       <WeatherUnitControl unit={userUnit} onUnitChange={handleUnit} />
     </div>

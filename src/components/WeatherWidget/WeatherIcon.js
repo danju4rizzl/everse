@@ -11,7 +11,7 @@ import {
   WiNa,
 } from 'react-icons/wi';
 
-const WeatherIcon = ({ iconData }) => {
+const WeatherIcon = ({ iconData, iconSize }) => {
   const handleIcon = (id) => {
     if (id >= 200 && id < 232) {
       return <WiThunderstorm />;
@@ -33,12 +33,20 @@ const WeatherIcon = ({ iconData }) => {
   return (
     <>
       {iconData.map((item) => (
-        <i className="weather__icon" key={item.id}>
+        <i
+          className="weather__icon d-flex"
+          style={{ fontSize: iconSize }}
+          key={item.id}
+        >
           {handleIcon(item.id)}
         </i>
       ))}
     </>
   );
 };
-WeatherIcon.propTypes = { iconData: PropTypes.array };
+WeatherIcon.defaultProps = { iconSize: '1rem' };
+WeatherIcon.propTypes = {
+  iconData: PropTypes.array,
+  iconSize: PropTypes.string,
+};
 export default WeatherIcon;

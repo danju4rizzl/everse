@@ -47,6 +47,7 @@ const WeatherWidget = () => {
         <WeatherUnit data={data} />
         <WeatherCity city={city} />
       </div>
+      <div className="weather__info"></div>
     </>
   );
 };

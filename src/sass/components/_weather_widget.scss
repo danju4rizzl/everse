@@ -5,7 +5,7 @@
     justify-content: center;
   }
   &__temperature {
-    min-width: 7rem;
+    min-width: 10rem;
     .current {
       width: 60%;
       padding: 0.1rem;
@@ -49,6 +49,9 @@
   }
   &:hover .isActive {
     font-size: 1rem;
+  }
+  &__icon {
+    color: currentColor;
   }
   @include hover-effect();
 }
